@@ -1,5 +1,7 @@
 package io.github.pengdst.jetpacksubmission.data.models
 
+import androidx.recyclerview.widget.DiffUtil
+
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)
  *
@@ -14,4 +16,11 @@ data class Movie(
     val language: String,
     val genre: String,
     val storyLine: String,
-)
+) {
+    companion object {
+        val diffCallback = object : DiffUtil.ItemCallback<Movie>() {
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie) = oldItem.title == newItem.title
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie) = oldItem.hashCode() == newItem.hashCode()
+        }
+    }
+}
