@@ -58,6 +58,10 @@ dependencies {
     // Lottie
     implementation "com.airbnb.android:lottie:${versions.lottie}"
 
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+
     testImplementation "junit:junit:${versions.junit}"
     androidTestImplementation "junit:junit:${versions.junit}"
     androidTestImplementation "androidx.test.ext:junit:${versions.junitExt}"
