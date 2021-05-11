@@ -49,7 +49,10 @@ dependencies {
     implementation "com.airbnb.android:lottie:${versions.lottie}"
 
     testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "junit:junit:${versions.junit}"
     androidTestImplementation "androidx.test.ext:junit:${versions.junitExt}"
+    androidTestImplementation "androidx.test:runner:${versions.androidTest}"
+    androidTestImplementation "androidx.test:rules:${versions.androidTest}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
 
 }
