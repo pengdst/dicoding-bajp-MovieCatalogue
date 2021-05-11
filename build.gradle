@@ -25,6 +25,8 @@ ext {
             "junit"           : "4.13.2",
             "espresso"        : "3.3.0",
             "androidTest"     : "1.3.0",
+            "coroutineAndroid": "1.3.9",
+            "lifecycle"       : "2.3.1",
     ]
 }
 

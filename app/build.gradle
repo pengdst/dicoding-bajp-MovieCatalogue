@@ -45,6 +45,11 @@ dependencies {
     implementation "com.google.android.material:material:${versions.material}"
     implementation "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
 
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}"
+    // Coroutine Android
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutineAndroid}"
+
     // Lottie
     implementation "com.airbnb.android:lottie:${versions.lottie}"
 
