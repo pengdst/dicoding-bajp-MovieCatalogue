@@ -2,12 +2,13 @@ package io.github.pengdst.jetpacksubmission.ui.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.github.pengdst.jetpacksubmission.R
+import io.github.pengdst.jetpacksubmission.base.BaseListAdapter
 import io.github.pengdst.jetpacksubmission.data.models.Movie
 import io.github.pengdst.jetpacksubmission.databinding.ItemMovieBinding
+import io.github.pengdst.jetpacksubmission.utils.RecyclerViewCallback
 
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -16,7 +17,8 @@ import io.github.pengdst.jetpacksubmission.databinding.ItemMovieBinding
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-class MovieAdapter : ListAdapter<Movie, MovieAdapter.ViewHolder>(Movie.diffCallback) {
+class MovieListAdapter : BaseListAdapter<Movie, MovieListAdapter.ViewHolder>(Movie.diffCallback) {
+
     class ViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
@@ -39,5 +41,8 @@ class MovieAdapter : ListAdapter<Movie, MovieAdapter.ViewHolder>(Movie.diffCallb
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            itemClickCallback?.onItemClick(it, getItem(position), position)
+        }
     }
 }
