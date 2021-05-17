@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
  * - LinkedIn https://linkedin.com/in/pengdst
  */
 data class TvShow(
+    val id: String,
     val title: String,
     val imageUrl: String,
     val releaseDate: String,

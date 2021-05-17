@@ -4,7 +4,6 @@ import android.view.View
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import io.github.pengdst.jetpacksubmission.data.models.Movie
 import io.github.pengdst.jetpacksubmission.utils.RecyclerViewCallback
 
 /**
@@ -16,11 +15,11 @@ import io.github.pengdst.jetpacksubmission.utils.RecyclerViewCallback
  */
 abstract class BaseListAdapter<Data, ViewHolder : RecyclerView.ViewHolder>(differ: DiffUtil.ItemCallback<Data>) : ListAdapter<Data, ViewHolder>(differ) {
 
-    protected var itemClickCallback: RecyclerViewCallback.OnItemClick<Movie>? = null
+    protected var itemClickCallback: RecyclerViewCallback.OnItemClick<Data>? = null
 
-    fun setOnItemClickListener(onClick: (View, Movie, Int)->Unit){
-        itemClickCallback = object : RecyclerViewCallback.OnItemClick<Movie>{
-            override fun onItemClick(view: View, data: Movie, position: Int) {
+    fun setOnItemClickListener(onClick: (View, Data, Int)->Unit){
+        itemClickCallback = object : RecyclerViewCallback.OnItemClick<Data>{
+            override fun onItemClick(view: View, data: Data, position: Int) {
                 onClick(view, data, position)
             }
         }

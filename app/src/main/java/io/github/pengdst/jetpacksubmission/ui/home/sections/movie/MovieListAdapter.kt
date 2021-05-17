@@ -1,14 +1,15 @@
-package io.github.pengdst.jetpacksubmission.ui.movie
+package io.github.pengdst.jetpacksubmission.ui.home.sections.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import io.github.pengdst.jetpacksubmission.R
 import io.github.pengdst.jetpacksubmission.base.BaseListAdapter
 import io.github.pengdst.jetpacksubmission.data.models.Movie
 import io.github.pengdst.jetpacksubmission.databinding.ItemMovieBinding
-import io.github.pengdst.jetpacksubmission.utils.RecyclerViewCallback
 
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -29,7 +30,12 @@ class MovieListAdapter : BaseListAdapter<Movie, MovieListAdapter.ViewHolder>(Mov
 
             Glide.with(binding.root)
                 .load(movie.imageUrl)
-                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_baseline_broken_image_24)
+                .transform(RoundedCorners(16))
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .override(100, 100)
+                .centerCrop()
                 .into(binding.ivMovieThumbnail)
         }
     }
