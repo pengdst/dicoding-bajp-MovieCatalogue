@@ -7,8 +7,8 @@ Home Activity Test Scenario:
 • Menampilkan data detail movie
     ◦ Memberi action click pada data pertama di rv_movies.
     ◦ Memastikan iv_backdrop dalam keadaan tampil.
-    ◦ Memastikan iv_thumbnail dalam keadaan tampil.
     ◦ Memastikan iv_backdrop swipe up agar view dibawahnya tampil.
+    ◦ Memastikan iv_thumbnail dalam keadaan tampil.
     ◦ Memastikan tv_title dalam keadaan tampil.
     ◦ Memastikan tv_storyline dalam keadaan tampil.
     ◦ Memastikan tv_genre dalam keadaan tampil.
@@ -28,8 +28,8 @@ Home Activity Test Scenario:
 • Menampilkan data detail tv show
     ◦ Memberi action click pada data pertama di rv_tv_shows.
     ◦ Memastikan iv_backdrop dalam keadaan tampil.
-    ◦ Memastikan iv_thumbnail dalam keadaan tampil.
     ◦ Memastikan iv_backdrop swipe up agar view dibawahnya tampil.
+    ◦ Memastikan iv_thumbnail dalam keadaan tampil.
     ◦ Memastikan tv_title dalam keadaan tampil.
     ◦ Memastikan tv_storyline dalam keadaan tampil.
     ◦ Memastikan tv_genre dalam keadaan tampil.
