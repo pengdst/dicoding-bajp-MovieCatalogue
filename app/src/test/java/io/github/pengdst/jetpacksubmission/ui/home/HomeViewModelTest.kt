@@ -26,6 +26,7 @@ class HomeViewModelTest : TestCase() {
     fun testGetMovies() {
         val movies = viewModel.getMovies()
         Assert.assertNotNull(movies)
+        Assert.assertNotEquals(0, movies.size)
         Assert.assertEquals(DataStore.movies.size, movies.size)
     }
 
@@ -33,6 +34,7 @@ class HomeViewModelTest : TestCase() {
     fun testGetTvShowList() {
         val tvShow = viewModel.getTvShowList()
         Assert.assertNotNull(tvShow)
+        Assert.assertNotEquals(0, tvShow.size)
         Assert.assertEquals(DataStore.tvShowList.size, tvShow.size)
     }
 }
