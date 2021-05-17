@@ -11,7 +11,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.github.pengdst.jetpacksubmission.R
 import io.github.pengdst.jetpacksubmission.utils.DataStore
-import io.github.pengdst.jetpacksubmission.utils.TabViewActions.selectTabAtPosition
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,7 +34,7 @@ class HomeActivityTest {
 
     @Test
     fun loadMovie() {
-        moveTabToPosition(R.id.tabs, 0)
+        Espresso.onView(ViewMatchers.withId(R.id.view_pager)).perform(ViewActions.swipeRight())
         checkDisplayed(R.id.rv_movies)
         checkScrollToPosition(R.id.rv_movies, dummyMovie.size)
     }
@@ -64,7 +63,7 @@ class HomeActivityTest {
 
     @Test
     fun loadTvShow() {
-        moveTabToPosition(R.id.tabs, 1)
+        Espresso.onView(ViewMatchers.withId(R.id.view_pager)).perform(ViewActions.swipeLeft())
         checkDisplayed(R.id.rv_tv_shows)
         checkScrollToPosition(R.id.rv_tv_shows, dummyTvShow.size)
     }
@@ -89,10 +88,6 @@ class HomeActivityTest {
         checkContent(R.id.tv_genre, dummyTvShow[0].genre)
         checkContent(R.id.tv_storyline, dummyTvShow[0].storyLine)
         checkContent(R.id.tv_language, dummyTvShow[0].language)
-    }
-
-    private fun moveTabToPosition(tabs: Int, tabIndex: Int) {
-        Espresso.onView(ViewMatchers.withId(tabs)).perform(selectTabAtPosition(tabIndex))
     }
 
     private fun checkScrollToPosition(resId: Int, size: Int) {
