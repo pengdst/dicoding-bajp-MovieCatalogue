@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import io.github.pengdst.jetpacksubmission.databinding.FragmentMovieListBinding
 import io.github.pengdst.jetpacksubmission.ui.detail.DetailViewModel
 import io.github.pengdst.jetpacksubmission.ui.home.ContentCallback
+import io.github.pengdst.jetpacksubmission.ui.home.HomeViewModel
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.libs.ui.extensions.viewBindings
 
@@ -17,7 +18,7 @@ class MovieListFragment : Fragment() {
 
     private val binding: FragmentMovieListBinding by viewBindings()
     private lateinit var movieListAdapter: MovieListAdapter
-    private lateinit var viewModel: DetailViewModel
+    private lateinit var viewModel: HomeViewModel
     private var contentCallback: ContentCallback? = null
 
     override fun onCreateView(
@@ -26,7 +27,7 @@ class MovieListFragment : Fragment() {
     ): View {
 
         movieListAdapter = MovieListAdapter()
-        viewModel = ViewModelProvider(requireActivity())[DetailViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
         return binding.root
     }
@@ -45,7 +46,6 @@ class MovieListFragment : Fragment() {
 
     private fun setupRecyclerView(){
         movieListAdapter.setOnItemClickListener { _, movie, position ->
-            viewModel.setSelectedContent(position)
             contentCallback?.moveTo(position, movie.id, DataStore.TYPE_MOVIE)
         }
         binding.rvMovies.adapter = movieListAdapter

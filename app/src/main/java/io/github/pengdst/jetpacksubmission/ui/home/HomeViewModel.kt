@@ -1,4 +1,4 @@
-package io.github.pengdst.jetpacksubmission.ui.detail
+package io.github.pengdst.jetpacksubmission.ui.home
 
 import androidx.lifecycle.ViewModel
 import io.github.pengdst.jetpacksubmission.data.models.Movie
@@ -12,19 +12,7 @@ import io.github.pengdst.jetpacksubmission.utils.DataStore
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-class DetailViewModel : ViewModel() {
-
-    private var contentPosition = 0
-
-    fun getMovie(): Movie {
-        return DataStore.movies[contentPosition]
-    }
-
-    fun getTvShow(): TvShow {
-        return DataStore.tvShowList[contentPosition]
-    }
-
-    fun setSelectedContent(contentPosition: Int?){
-        this.contentPosition = contentPosition ?: 0
-    }
+class HomeViewModel : ViewModel() {
+    fun getMovies() = DataStore.movies
+    fun getTvShowList() = DataStore.tvShowList
 }

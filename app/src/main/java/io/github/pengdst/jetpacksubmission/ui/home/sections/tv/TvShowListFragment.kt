@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import io.github.pengdst.jetpacksubmission.databinding.FragmentTvShowListBinding
 import io.github.pengdst.jetpacksubmission.ui.detail.DetailViewModel
 import io.github.pengdst.jetpacksubmission.ui.home.ContentCallback
+import io.github.pengdst.jetpacksubmission.ui.home.HomeViewModel
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.libs.ui.extensions.viewBindings
 
@@ -17,7 +18,7 @@ class TvShowListFragment : Fragment() {
 
     private val binding: FragmentTvShowListBinding by viewBindings()
     private lateinit var tvShowListAdapter: TvShowListAdapter
-    private lateinit var viewModel: DetailViewModel
+    private lateinit var viewModel: HomeViewModel
     private var contentCallback: ContentCallback? = null
 
     override fun onCreateView(
@@ -26,7 +27,7 @@ class TvShowListFragment : Fragment() {
     ): View {
 
         tvShowListAdapter = TvShowListAdapter()
-        viewModel = ViewModelProvider(requireActivity())[DetailViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
         return binding.root
     }
@@ -45,7 +46,6 @@ class TvShowListFragment : Fragment() {
 
     private fun setupRecyclerView(){
         tvShowListAdapter.setOnItemClickListener { _, tv, position ->
-            viewModel.setSelectedContent(position)
             contentCallback?.moveTo(position, tv.id, DataStore.TYPE_TV_SHOW)
         }
         binding.rvTvShows.adapter = tvShowListAdapter
