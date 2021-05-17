@@ -67,23 +67,23 @@ class DetailActivity : AppCompatActivity() {
 
         with(binding) {
             toolbar.title = title
-            tvMovieTitle.text = title
-            tvMovieGenre.text = genre
-            tvMovieLanguage.text = language
-            tvMovieReleaseDate.text = releaseDate
-            tvMovieStoryline.text = storyLine
+            tvTitle.text = title
+            tvGenre.text = genre
+            tvLanguage.text = language
+            tvReleaseDate.text = releaseDate
+            tvStoryline.text = storyLine
 
             Glide.with(applicationContext)
                 .load(imageUrl)
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background)
-                .into(ivMovieBackdrop)
+                .into(ivBackdrop)
 
             Glide.with(applicationContext)
                 .load(imageUrl)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_baseline_broken_image_24)
-                .into(ivMovieImage)
+                .into(ivThumbnail)
         }
     }
 
