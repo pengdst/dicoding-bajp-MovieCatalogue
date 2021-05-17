@@ -71,10 +71,14 @@ class HomeActivityTest {
     @Test
     fun loadDetailTvShow() {
         loadTvShow()
+        Thread.sleep(1000)
         performRecyclerViewClick(R.id.rv_tv_shows, 0)
+        Thread.sleep(1000)
 
         checkDisplayed(R.id.iv_backdrop)
+        Thread.sleep(1000)
         Espresso.onView(ViewMatchers.withId(R.id.iv_backdrop)).perform(ViewActions.swipeUp())
+        Thread.sleep(1000)
 
         checkDisplayed(R.id.iv_thumbnail)
         checkDisplayed(R.id.tv_title)

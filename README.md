@@ -26,9 +26,10 @@ Home Activity Test Scenario:
     ◦ Scroll rv_tv_shows ke posisi data terakhir.
 
 • Menampilkan data detail tv show
-    ◦ Memberi action click pada data pertama di rv_tv_shows.
-    ◦ Memastikan iv_backdrop dalam keadaan tampil.
-    ◦ Memastikan iv_backdrop swipe up agar view dibawahnya tampil.
+    ◦ Masuk tab TV Show lalu tunggu selama 1 detik.
+    ◦ Memberi action click pada data pertama di rv_tv_shows lalu tunggu selama 1 detik.
+    ◦ Memastikan iv_backdrop dalam keadaan tampil lalu tunggu selama 1 detik.
+    ◦ Memastikan iv_backdrop swipe up agar view dibawahnya tampil lalu tunggu selama 1 detik.
     ◦ Memastikan iv_thumbnail dalam keadaan tampil.
     ◦ Memastikan tv_title dalam keadaan tampil.
     ◦ Memastikan tv_storyline dalam keadaan tampil.
