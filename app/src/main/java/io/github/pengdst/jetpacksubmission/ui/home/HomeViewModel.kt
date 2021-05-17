@@ -1,8 +1,6 @@
 package io.github.pengdst.jetpacksubmission.ui.home
 
 import androidx.lifecycle.ViewModel
-import io.github.pengdst.jetpacksubmission.data.models.Movie
-import io.github.pengdst.jetpacksubmission.data.models.TvShow
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 
 /**

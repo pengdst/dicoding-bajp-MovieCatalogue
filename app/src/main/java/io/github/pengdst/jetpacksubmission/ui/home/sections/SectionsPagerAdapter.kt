@@ -8,11 +8,6 @@ class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAV
 
     private var sections = mutableListOf<Section>()
 
-    fun submitList(mutableMap: List<Section>) {
-        sections = mutableMap.toMutableList()
-        notifyDataSetChanged()
-    }
-
     fun addSection(section: Section){
         sections.add(section)
         notifyDataSetChanged()

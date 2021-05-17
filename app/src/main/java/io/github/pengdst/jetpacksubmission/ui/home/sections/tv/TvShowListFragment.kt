@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import io.github.pengdst.jetpacksubmission.databinding.FragmentTvShowListBinding
-import io.github.pengdst.jetpacksubmission.ui.detail.DetailViewModel
 import io.github.pengdst.jetpacksubmission.ui.home.ContentCallback
 import io.github.pengdst.jetpacksubmission.ui.home.HomeViewModel
 import io.github.pengdst.jetpacksubmission.utils.DataStore
