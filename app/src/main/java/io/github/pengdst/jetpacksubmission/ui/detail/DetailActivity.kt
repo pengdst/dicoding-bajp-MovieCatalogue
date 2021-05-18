@@ -1,8 +1,8 @@
 package io.github.pengdst.jetpacksubmission.ui.detail
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import io.github.pengdst.jetpacksubmission.R
 import io.github.pengdst.jetpacksubmission.databinding.ActivityDetailBinding
@@ -18,14 +18,13 @@ class DetailActivity : AppCompatActivity() {
 
     private var extras: Bundle? = null
     private val binding: ActivityDetailBinding by viewBindings()
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         extras = intent.extras
-        viewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         viewModel.setSelectedContent(extras?.getInt(EXTRA_CONTENT_POSITION))
 
         setSupportActionBar(binding.toolbar)

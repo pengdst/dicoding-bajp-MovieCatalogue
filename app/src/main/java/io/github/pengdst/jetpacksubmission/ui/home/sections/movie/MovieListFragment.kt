@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import io.github.pengdst.jetpacksubmission.databinding.FragmentMovieListBinding
 import io.github.pengdst.jetpacksubmission.ui.home.ContentCallback
 import io.github.pengdst.jetpacksubmission.ui.home.HomeViewModel
@@ -16,8 +16,8 @@ import io.github.pengdst.libs.ui.extensions.viewBindings
 class MovieListFragment : Fragment() {
 
     private val binding: FragmentMovieListBinding by viewBindings()
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var movieListAdapter: MovieListAdapter
-    private lateinit var viewModel: HomeViewModel
     private var contentCallback: ContentCallback? = null
 
     override fun onCreateView(
@@ -26,7 +26,6 @@ class MovieListFragment : Fragment() {
     ): View {
 
         movieListAdapter = MovieListAdapter()
-        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
         return binding.root
     }
