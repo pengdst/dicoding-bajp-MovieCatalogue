@@ -2,7 +2,7 @@ package io.github.pengdst.jetpacksubmission.ui.home.sections
 
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentPagerAdapter
-import io.github.pengdst.jetpacksubmission.data.models.Section
+import io.github.pengdst.jetpacksubmission.data.source.domain.models.Section
 import javax.inject.Inject
 
 class SectionsPagerAdapter @Inject constructor (
