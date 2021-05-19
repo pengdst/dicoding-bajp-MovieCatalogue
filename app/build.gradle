@@ -89,6 +89,10 @@ dependencies {
     // Espresso Idling Resource Implementation
     implementation "androidx.test.espresso:espresso-idling-resource:${versions.espresso}"
 
+    // Dagger Hilt
+    implementation "com.google.dagger:hilt-android:${versions.hilt}"
+    kapt "com.google.dagger:hilt-compiler:${versions.hilt}"
+
     //Mockito
     testImplementation "org.mockito:mockito-core:${versions.mockito}"
     testImplementation "org.mockito:mockito-inline:${versions.mockito}"
