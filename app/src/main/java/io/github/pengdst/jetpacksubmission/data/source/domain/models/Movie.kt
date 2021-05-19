@@ -1,6 +1,8 @@
-package io.github.pengdst.jetpacksubmission.data.models
+package io.github.pengdst.jetpacksubmission.data.source.domain.models
 
 import androidx.recyclerview.widget.DiffUtil
+import io.github.pengdst.jetpacksubmission.data.constants.ApiConst.IMAGE_URL_ORIGINAL
+import io.github.pengdst.jetpacksubmission.data.constants.ApiConst.IMAGE_URL_W500
 
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -12,7 +14,8 @@ import androidx.recyclerview.widget.DiffUtil
 data class Movie(
     val id: String,
     val title: String,
-    val imageUrl: String,
+    val posterPath: String,
+    val backdropPath: String,
     val releaseDate: String,
     val language: String,
     val genre: String,
@@ -24,4 +27,9 @@ data class Movie(
             override fun areContentsTheSame(oldItem: Movie, newItem: Movie) = oldItem.hashCode() == newItem.hashCode()
         }
     }
+
+    var posterBaseUrl = IMAGE_URL_W500
+    var backdropBaseUrl = IMAGE_URL_ORIGINAL
+    val imagePosterUrl: String get() = posterBaseUrl+posterPath
+    val imageBackdropUrl: String get() = backdropBaseUrl+backdropPath
 }

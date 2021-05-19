@@ -1,4 +1,4 @@
-package io.github.pengdst.jetpacksubmission.data.models
+package io.github.pengdst.jetpacksubmission.data.source.domain.models
 
 import androidx.recyclerview.widget.DiffUtil
 
