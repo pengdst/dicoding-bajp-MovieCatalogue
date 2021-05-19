@@ -1,9 +1,15 @@
 package io.github.pengdst.jetpacksubmission.ui.detail
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.github.pengdst.jetpacksubmission.data.models.Movie
-import io.github.pengdst.jetpacksubmission.data.models.TvShow
-import io.github.pengdst.jetpacksubmission.utils.DataStore
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.pengdst.jetpacksubmission.data.repository.MovieRepository
+import io.github.pengdst.jetpacksubmission.data.source.domain.models.Movie
+import io.github.pengdst.jetpacksubmission.data.source.domain.models.TvShow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Created on 5/16/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -12,19 +18,36 @@ import io.github.pengdst.jetpacksubmission.utils.DataStore
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-class DetailViewModel : ViewModel() {
+
+@HiltViewModel
+class DetailViewModel @Inject constructor(
+    private val repository: MovieRepository
+) : ViewModel() {
 
     private var contentPosition = 0
+    private var contentId: String = ""
 
-    fun getMovie(): Movie {
-        return DataStore.movies[contentPosition]
+    fun getMovie(): LiveData<Movie> {
+        val result = MutableLiveData<Movie>()
+        viewModelScope.launch {
+            result.postValue(repository.getMovie(contentId).value)
+        }
+        return result
     }
 
-    fun getTvShow(): TvShow {
-        return DataStore.tvShowList[contentPosition]
+    fun getTvShow(): LiveData<TvShow> {
+        val result = MutableLiveData<TvShow>()
+        viewModelScope.launch {
+            result.postValue(repository.getTv(contentId).value)
+        }
+        return result
     }
 
-    fun setSelectedContent(contentPosition: Int?){
+    fun setSelectedContentPosition(contentPosition: Int?){
         this.contentPosition = contentPosition ?: 0
+    }
+
+    fun setSelectedContent(contentId: String?){
+        this.contentId = contentId ?: ""
     }
 }
