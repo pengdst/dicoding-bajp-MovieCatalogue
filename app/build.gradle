@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -76,6 +78,10 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
     implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:${versions.okhttp}"
+
+    // Dagger Hilt
+    implementation "com.google.dagger:hilt-android:${versions.hilt}"
+    kapt "com.google.dagger:hilt-compiler:${versions.hilt}"
 
     //Mockito
     testImplementation "org.mockito:mockito-core:${versions.mockito}"
