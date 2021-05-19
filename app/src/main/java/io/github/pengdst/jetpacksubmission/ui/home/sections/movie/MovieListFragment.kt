@@ -7,25 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.pengdst.jetpacksubmission.databinding.FragmentMovieListBinding
 import io.github.pengdst.jetpacksubmission.ui.home.ContentCallback
 import io.github.pengdst.jetpacksubmission.ui.home.HomeViewModel
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.libs.ui.extensions.viewBindings
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MovieListFragment : Fragment() {
 
     private val binding: FragmentMovieListBinding by viewBindings()
     private val viewModel: HomeViewModel by viewModels()
-    private lateinit var movieListAdapter: MovieListAdapter
+    @Inject lateinit var movieListAdapter: MovieListAdapter
     private var contentCallback: ContentCallback? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        movieListAdapter = MovieListAdapter()
 
         return binding.root
     }

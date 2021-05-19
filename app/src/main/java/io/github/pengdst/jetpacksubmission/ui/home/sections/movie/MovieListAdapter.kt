@@ -10,6 +10,7 @@ import io.github.pengdst.jetpacksubmission.R
 import io.github.pengdst.jetpacksubmission.base.BaseListAdapter
 import io.github.pengdst.jetpacksubmission.data.models.Movie
 import io.github.pengdst.jetpacksubmission.databinding.ItemMovieBinding
+import javax.inject.Inject
 
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -18,7 +19,7 @@ import io.github.pengdst.jetpacksubmission.databinding.ItemMovieBinding
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-class MovieListAdapter : BaseListAdapter<Movie, MovieListAdapter.ViewHolder>(Movie.diffCallback) {
+class MovieListAdapter @Inject constructor()  : BaseListAdapter<Movie, MovieListAdapter.ViewHolder>(Movie.diffCallback) {
 
     class ViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {

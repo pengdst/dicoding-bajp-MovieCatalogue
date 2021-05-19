@@ -9,6 +9,7 @@ import io.github.pengdst.jetpacksubmission.R
 import io.github.pengdst.jetpacksubmission.base.BaseListAdapter
 import io.github.pengdst.jetpacksubmission.data.models.TvShow
 import io.github.pengdst.jetpacksubmission.databinding.ItemTvShowBinding
+import javax.inject.Inject
 
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -17,7 +18,7 @@ import io.github.pengdst.jetpacksubmission.databinding.ItemTvShowBinding
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-class TvShowListAdapter : BaseListAdapter<TvShow, TvShowListAdapter.ViewHolder>(TvShow.diffCallback) {
+class TvShowListAdapter @Inject constructor() : BaseListAdapter<TvShow, TvShowListAdapter.ViewHolder>(TvShow.diffCallback) {
 
     class ViewHolder(private val binding: ItemTvShowBinding) :
         RecyclerView.ViewHolder(binding.root) {

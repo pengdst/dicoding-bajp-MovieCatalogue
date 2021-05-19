@@ -7,25 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.pengdst.jetpacksubmission.databinding.FragmentTvShowListBinding
 import io.github.pengdst.jetpacksubmission.ui.home.ContentCallback
 import io.github.pengdst.jetpacksubmission.ui.home.HomeViewModel
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.libs.ui.extensions.viewBindings
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TvShowListFragment : Fragment() {
 
     private val binding: FragmentTvShowListBinding by viewBindings()
     private val viewModel: HomeViewModel by viewModels()
-    private lateinit var tvShowListAdapter: TvShowListAdapter
+    @Inject lateinit var tvShowListAdapter: TvShowListAdapter
     private var contentCallback: ContentCallback? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        tvShowListAdapter = TvShowListAdapter()
 
         return binding.root
     }

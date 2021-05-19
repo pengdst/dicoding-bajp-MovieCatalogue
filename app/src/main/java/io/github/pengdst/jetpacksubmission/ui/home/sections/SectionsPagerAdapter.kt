@@ -1,10 +1,13 @@
 package io.github.pengdst.jetpacksubmission.ui.home.sections
 
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentPagerAdapter
 import io.github.pengdst.jetpacksubmission.data.models.Section
+import javax.inject.Inject
 
-class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SectionsPagerAdapter @Inject constructor (
+    fa: FragmentActivity
+) : FragmentPagerAdapter(fa.supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private var sections = mutableListOf<Section>()
 
