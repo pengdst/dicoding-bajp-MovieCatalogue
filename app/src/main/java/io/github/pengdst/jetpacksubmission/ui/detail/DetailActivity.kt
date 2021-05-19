@@ -3,7 +3,9 @@ package io.github.pengdst.jetpacksubmission.ui.detail
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.pengdst.jetpacksubmission.R
 import io.github.pengdst.jetpacksubmission.databinding.ActivityDetailBinding
@@ -36,37 +38,45 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val title = when (extras?.getString(EXTRA_CONTENT_TYPE)) {
-            DataStore.TYPE_MOVIE -> viewModel.getMovie().title
-            DataStore.TYPE_TV_SHOW -> viewModel.getTvShow().title
-            else -> null
-        }
-        val genre = when (extras?.getString(EXTRA_CONTENT_TYPE)) {
-            DataStore.TYPE_MOVIE -> viewModel.getMovie().genre
-            DataStore.TYPE_TV_SHOW -> viewModel.getTvShow().genre
-            else -> null
-        }
-        val language = when (extras?.getString(EXTRA_CONTENT_TYPE)) {
-            DataStore.TYPE_MOVIE -> viewModel.getMovie().language
-            DataStore.TYPE_TV_SHOW -> viewModel.getTvShow().language
-            else -> null
-        }
-        val releaseDate = when (extras?.getString(EXTRA_CONTENT_TYPE)) {
-            DataStore.TYPE_MOVIE -> viewModel.getMovie().releaseDate
-            DataStore.TYPE_TV_SHOW -> viewModel.getTvShow().releaseDate
-            else -> null
-        }
-        val storyLine = when (extras?.getString(EXTRA_CONTENT_TYPE)) {
-            DataStore.TYPE_MOVIE -> viewModel.getMovie().storyLine
-            DataStore.TYPE_TV_SHOW -> viewModel.getTvShow().storyLine
-            else -> null
-        }
-        val imageUrl = when (extras?.getString(EXTRA_CONTENT_TYPE)) {
-            DataStore.TYPE_MOVIE -> viewModel.getMovie().imageUrl
-            DataStore.TYPE_TV_SHOW -> viewModel.getTvShow().imageUrl
-            else -> null
+
+        binding.ltLoading.isVisible = true
+        when (extras?.getString(EXTRA_CONTENT_TYPE)) {
+            DataStore.TYPE_MOVIE -> viewModel.getMovie().observe(this){
+                populateDetail(
+                    title = it.title,
+                    genre = it.genre,
+                    language = it.language,
+                    releaseDate = it.releaseDate,
+                    storyLine = it.storyLine,
+                    posterUrl = it.imagePosterUrl,
+                    backdropUrl = it.imageBackdropUrl
+                )
+            }
+            DataStore.TYPE_TV_SHOW -> viewModel.getTvShow().observe(this){
+                populateDetail(
+                    title = it.title,
+                    genre = it.genre,
+                    language = it.language,
+                    releaseDate = it.releaseDate,
+                    storyLine = it.storyLine,
+                    posterUrl = it.imagePosterUrl,
+                    backdropUrl = it.imageBackdropUrl
+                )
+            }
+            else -> Unit
         }
 
+    }
+
+    private fun populateDetail(
+        title: String?,
+        genre: String?,
+        language: String?,
+        releaseDate: String?,
+        storyLine: String?,
+        posterUrl: String?,
+        backdropUrl: String?
+    ) {
         with(binding) {
             toolbar.title = title
             tvTitle.text = title
@@ -76,16 +86,20 @@ class DetailActivity : AppCompatActivity() {
             tvStoryline.text = storyLine
 
             Glide.with(applicationContext)
-                .load(imageUrl)
+                .load(backdropUrl)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background)
                 .into(ivBackdrop)
 
             Glide.with(applicationContext)
-                .load(imageUrl)
+                .load(posterUrl)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_baseline_broken_image_24)
                 .into(ivThumbnail)
+
+            binding.ltLoading.isVisible = false
         }
     }
 
