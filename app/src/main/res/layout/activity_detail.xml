@@ -83,7 +83,7 @@
 
                     <ImageView
                         android:id="@+id/iv_thumbnail"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="150dp"
                         android:adjustViewBounds="true"
                         android:contentDescription="@string/image_thumbnail"
@@ -220,5 +220,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lt_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_900"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_among_us"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
