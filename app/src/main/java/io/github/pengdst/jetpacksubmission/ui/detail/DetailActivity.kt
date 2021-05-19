@@ -16,6 +16,7 @@ class DetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_CONTENT_TYPE = "content_type"
         const val EXTRA_CONTENT_POSITION = "content_position"
+        const val EXTRA_CONTENT_ID = "content_id"
     }
 
     private var extras: Bundle? = null
@@ -27,7 +28,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         extras = intent.extras
-        viewModel.setSelectedContent(extras?.getInt(EXTRA_CONTENT_POSITION))
+        viewModel.setSelectedContent(extras?.getString(EXTRA_CONTENT_ID))
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

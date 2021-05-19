@@ -35,6 +35,7 @@ class HomeActivity : AppCompatActivity(), ContentCallback {
         Intent(applicationContext, DetailActivity::class.java).apply {
             putExtras(Bundle().apply {
                 putInt(DetailActivity.EXTRA_CONTENT_POSITION, position)
+                putString(DetailActivity.EXTRA_CONTENT_ID, contentId)
                 putString(DetailActivity.EXTRA_CONTENT_TYPE, contentType)
             })
         }.also {
