@@ -191,92 +191,132 @@ object DataStore {
         TvShow(
             id = "TVSHOW_1",
             title = "The Arrow",
-            imageUrl = "https://2.bp.blogspot.com/-Q6hvB9BOCS8/VsPUwFl1aBI/AAAAAAAAKlc/88YB9Qb2XXs/s1600/Poster-Art-for-Arrow-Season-2.jpg",
+            posterPath = "Poster-Art-for-Arrow-Season-2.jpg",
+            backdropPath = "Poster-Art-for-Arrow-Season-2.jpg",
             releaseDate = "2012",
             language = "English",
             genre = "Kejahatan, Drama, Misteri",
             storyLine = "Panah adalah menceritakan kembali petualangan dari legendaris DC pahlawan Green Arrow"
-        ),
+        ).apply {
+            backdropBaseUrl = "https://2.bp.blogspot.com/-Q6hvB9BOCS8/VsPUwFl1aBI/AAAAAAAAKlc/88YB9Qb2XXs/s1600/"
+            posterBaseUrl = "https://2.bp.blogspot.com/-Q6hvB9BOCS8/VsPUwFl1aBI/AAAAAAAAKlc/88YB9Qb2XXs/s1600/"
+        },
         TvShow(
             id = "TVSHOW_2",
             title = "Doom Patrol",
-            imageUrl = "https://image.tmdb.org/t/p/original/imicPOkYP2S437QjbPvRL9zSV4a.jpg",
+            posterPath = "imicPOkYP2S437QjbPvRL9zSV4a.jpg",
+            backdropPath = "imicPOkYP2S437QjbPvRL9zSV4a.jpg",
             releaseDate = "2019",
             language = "English",
             genre = "Sci-fi & Fantasy, Aksi & Petualangan",
             storyLine = "The Doom Patrol’s members each suffered horrible accidents that gave them superhuman abilities — but also left them scarred and disfigured. Traumatized and downtrodden, the team found purpose through The Chief, who brought them together to investigate the weirdest phenomena in existence — and to protect Earth from what they find."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://image.tmdb.org/t/p/original/"
+            posterBaseUrl = "https://image.tmdb.org/t/p/original/"
+        },
         TvShow(
             id = "TVSHOW_3",
             title = "Family Guy",
-            imageUrl = "https://image.tmdb.org/t/p/original/q3E71oY6qgAEiw6YZIHDlHSLwer.jpg",
+            posterPath = "q3E71oY6qgAEiw6YZIHDlHSLwer.jpg",
+            backdropPath = "q3E71oY6qgAEiw6YZIHDlHSLwer.jpg",
             releaseDate = "1999",
             language = "English",
             genre = "Animasi, Komedi",
             storyLine = "Seri animasi animasi Freakin 'Sweet yang sakit, terpelintir, dan salah, menampilkan petualangan keluarga Griffin yang disfungsional. Peter yang kikuk dan Lois yang sudah lama menderita memiliki tiga anak. Stewie (bayi yang brilian tetapi sadis yang bertekad membunuh ibunya dan mengambil alih dunia), Meg (yang tertua, dan merupakan gadis yang paling tidak populer di kota) dan Chris (anak tengah, dia tidak terlalu cerdas tetapi memiliki hasrat untuk film )."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://image.tmdb.org/t/p/original/"
+            posterBaseUrl = "https://image.tmdb.org/t/p/original/"
+        },
         TvShow(
             id = "TVSHOW_4",
             title = "The Flash",
-            imageUrl = "https://fanart.tv/fanart/tv/279121/tvposter/the-flash-2014-55f8df0e9785c.jpg",
+            posterPath = "the-flash-2014-55f8df0e9785c.jpg",
+            backdropPath = "the-flash-2014-55f8df0e9785c.jpg",
             releaseDate = "2014",
             language = "English",
             genre = "Drama, Sci-fi & Fantasy",
             storyLine = "Setelah akselerator partikel menyebabkan badai aneh, Penyelidik CSI Barry Allen disambar petir dan jatuh koma. Beberapa bulan kemudian dia terbangun dengan kekuatan kecepatan super, memberinya kemampuan untuk bergerak melalui Central City seperti malaikat penjaga yang tak terlihat. Untuk saat ini, hanya beberapa teman dekat dan rekan yang tahu bahwa Barry secara harfiah adalah manusia tercepat, tetapi tidak lama sebelum dunia mengetahui apa yang menjadi Barry Allen ... The Flash."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://fanart.tv/fanart/tv/279121/tvposter/"
+            posterBaseUrl = "https://fanart.tv/fanart/tv/279121/tvposter/"
+        },
         TvShow(
             id = "TVSHOW_5",
             title = "Gotham",
-            imageUrl = "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cd16d519007077.562d357b15a03.jpg",
+            posterPath = "cd16d519007077.562d357b15a03.jpg",
+            backdropPath = "cd16d519007077.562d357b15a03.jpg",
             releaseDate = "2014",
             language = "English",
             genre = "Drama, Fantasi, Kejahatan",
             storyLine = "Semua orang tahu nama Komisaris Gordon. Dia adalah salah satu musuh terbesar dunia kejahatan, seorang pria yang reputasinya identik dengan hukum dan ketertiban. Tapi apa yang diketahui tentang kisah Gordon dan kenaikannya dari detektif pemula ke Komisaris Polisi? Apa yang diperlukan untuk menavigasi berbagai lapisan korupsi yang diam-diam memerintah Kota Gotham, tempat bertelurnya penjahat paling ikonik di dunia? Dan keadaan apa yang menciptakan mereka."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://mir-s3-cdn-cf.behance.net/project_modules/1400/"
+            posterBaseUrl = "https://mir-s3-cdn-cf.behance.net/project_modules/1400/"
+        },
         TvShow(
             id = "TVSHOW_6",
             title = "Grey's Anatomy",
-            imageUrl = "https://fanart.tv/fanart/tv/73762/tvposter/greys-anatomy-5429623632d98.jpg",
+            posterPath = "greys-anatomy-5429623632d98.jpg",
+            backdropPath = "greys-anatomy-5429623632d98.jpg",
             releaseDate = "2005",
             language = "English",
             genre = "Drama",
             storyLine = "Ikuti kehidupan pribadi dan profesional sekelompok dokter di Rumah Sakit Gray Sloan Memorial di Seattle."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://fanart.tv/fanart/tv/73762/tvposter/"
+            posterBaseUrl = "https://fanart.tv/fanart/tv/73762/tvposter/"
+        },
         TvShow(
             id = "TVSHOW_7",
             title = "Hanna",
-            imageUrl = "https://fanart.tv/fanart/movies/50456/movieposter/hanna-53a382c0908a7.jpg",
+            posterPath = "hanna-53a382c0908a7.jpg",
+            backdropPath = "hanna-53a382c0908a7.jpg",
             releaseDate = "2019",
             language = "English",
             genre = "Aksi & Petualangan, Drama",
             storyLine = "This thriller and coming-of-age drama follows the journey of an extraordinary young girl as she evades the relentless pursuit of an off-book CIA agent and tries to unearth the truth behind who she is. Based on the 2011 Joe Wright film."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://fanart.tv/fanart/movies/50456/movieposter/"
+            posterBaseUrl = "https://fanart.tv/fanart/movies/50456/movieposter/"
+        },
         TvShow(
             id = "TVSHOW_8",
             title = "Naruto Shippuden",
-            imageUrl = "https://posterspy.com/wp-content/uploads/2018/03/poster-1-cc.jpg",
+            posterPath = "poster-1-cc.jpg",
+            backdropPath = "poster-1-cc.jpg",
             releaseDate = "2007",
             language = "Japanese",
             genre = "Animasi, Komedi, Drama",
             storyLine = "Naruto Shippuuden adalah kelanjutan dari serial TV animasi asli Naruto. Kisah ini berkisah tentang Uzumaki Naruto yang lebih tua dan sedikit lebih matang dan upayanya untuk menyelamatkan temannya Uchiha Sasuke dari cengkeraman Shinobi seperti ular, Orochimaru. Setelah 2 setengah tahun, Naruto akhirnya kembali ke desanya Konoha, dan mulai mewujudkan ambisinya, meskipun itu tidak akan mudah, karena Ia telah mengumpulkan beberapa musuh (lebih berbahaya), seperti organisasi shinobi. ; Akatsuki."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://posterspy.com/wp-content/uploads/2018/03/"
+            posterBaseUrl = "https://posterspy.com/wp-content/uploads/2018/03/"
+        },
         TvShow(
             id = "TVSHOW_9",
             title = "NCIS",
-            imageUrl = "https://fanart.tv/fanart/tv/72108/seasonposter/ncis-579c825a3d855.jpg",
+            posterPath = "ncis-579c825a3d855.jpg",
+            backdropPath = "ncis-579c825a3d855.jpg",
             releaseDate = "2003",
             language = "English",
             genre = "Aksi & Petualangan, Kejahatan, Drama",
             storyLine = "From murder and espionage to terrorism and stolen submarines, a team of special agents investigates any crime that has a shred of evidence connected to Navy and Marine Corps personnel, regardless of rank or position."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://fanart.tv/fanart/tv/72108/seasonposter/"
+            posterBaseUrl = "https://fanart.tv/fanart/tv/72108/seasonposter/"
+        },
         TvShow(
             id = "TVSHOW_10",
             title = "The Simpsons",
-            imageUrl = "https://i.pinimg.com/736x/c7/b4/b0/c7b4b0c0265a5bc34089e305f507492f.jpg",
+            posterPath = "c7b4b0c0265a5bc34089e305f507492f.jpg",
+            backdropPath = "c7b4b0c0265a5bc34089e305f507492f.jpg",
             releaseDate = "1989",
             language = "English",
             genre = "Animasi, Komedi, Keluarga, Drama",
             storyLine = "Bertempat di Springfield, kota rata-rata di Amerika, pertunjukan ini berfokus pada kejenakaan dan petualangan sehari-hari keluarga Simpson; Homer, Marge, Bart, Lisa dan Maggie, serta ribuan pemain virtual. Sejak awal, serial ini telah menjadi ikon budaya pop, menarik ratusan selebriti menjadi bintang tamu. Acara ini juga menjadi terkenal karena satirnya yang tak kenal takut terhadap kehidupan politik, media, dan Amerika secara umum.",
-        ),
+        ).apply {
+            backdropBaseUrl = "https://i.pinimg.com/736x/c7/b4/b0/"
+            posterBaseUrl = "https://i.pinimg.com/736x/c7/b4/b0/"
+        },
     )
 }
