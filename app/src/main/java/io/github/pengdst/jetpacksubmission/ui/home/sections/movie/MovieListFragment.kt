@@ -40,7 +40,9 @@ class MovieListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-        movieListAdapter.submitList(viewModel.getMovies())
+        viewModel.getMovies().observe(viewLifecycleOwner){
+            movieListAdapter.submitList(it)
+        }
     }
 
     private fun setupRecyclerView(){

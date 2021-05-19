@@ -40,7 +40,9 @@ class TvShowListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-        tvShowListAdapter.submitList(viewModel.getTvShowList())
+        viewModel.getTvShowList().observe(viewLifecycleOwner){
+            tvShowListAdapter.submitList(it)
+        }
     }
 
     private fun setupRecyclerView(){
