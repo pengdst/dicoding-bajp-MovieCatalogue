@@ -1,7 +1,7 @@
 package io.github.pengdst.jetpacksubmission.utils
 
-import io.github.pengdst.jetpacksubmission.data.models.Movie
-import io.github.pengdst.jetpacksubmission.data.models.TvShow
+import io.github.pengdst.jetpacksubmission.data.source.domain.models.Movie
+import io.github.pengdst.jetpacksubmission.data.source.domain.models.TvShow
 
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -19,120 +19,172 @@ object DataStore {
         Movie(
             id = "MOVIE_1",
             title = "THE DIG",
-            imageUrl = "https://www.newdvdreleasedates.com/images/posters/the-dig-2018.jpg",
+            posterPath = "the-dig-2018.jpg",
+            backdropPath = "the-dig-2018.jpg",
             releaseDate = "Jan 29, 2021",
             language = "English (United Kingdom)",
             genre = "Drama",
             storyLine = "Ralph Fiennes and Carey Mulligan star in this Netflix original film based on true events and set in 1939. Mulligan plays a wealthy widow who hires an archaeologist (Fiennes) to excavate the burial mounds on her estate, leading to the discovery of a wealth of medieval Anglo-Saxon artifacts.",
-        ),
+        ).apply {
+                backdropBaseUrl = "https://www.newdvdreleasedates.com/images/posters/"
+                posterBaseUrl = "https://www.newdvdreleasedates.com/images/posters/"
+        },
         Movie(
             id = "MOVIE_2",
             title = "The SpongeBob Movie: Sponge on the Run (2021)",
-            imageUrl = "https://cdn.traileraddict.com/content/paramount-pictures/sponge-on-run-poster.jpg",
+            posterPath = "sponge-on-run-poster.jpg",
+            backdropPath = "sponge-on-run-poster.jpg",
             releaseDate = "Mar 4, 2021",
             language = "English (United Kingdom)",
             genre = "Kids And Family, Adventure, Animation, Comedy",
             storyLine = "The long-running, wildly popular animated series gets another big screen outing as the whole Spongebob Squarepants gang are back for another adventure. This time out, Spongebob and Patrick embark on a rescue mission to recover Gary, who has been taken by Poseidon, and find themselves in the mystical land of Atlantic City."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://cdn.traileraddict.com/content/paramount-pictures/"
+            posterBaseUrl = "https://cdn.traileraddict.com/content/paramount-pictures/"
+        },
         Movie(
             id = "MOVIE_3",
             title = "Malcolm & Marie",
-            imageUrl = "https://occ-0-299-300.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABQXfFBK-LuklIED_eT4C7ABpxv7WSe8-FaZ_5TbzLVs70VKiQ1SmdxCzcwDdvd5xHVXFRKVWplCECxAkpfyhiSv4pZWXOfVdE3GJYmsL-ngMcjII6RYG0V5nDVXqkw.jpg",
+            posterPath = "AAAABQXfFBK-LuklIED_eT4C7ABpxv7WSe8-FaZ_5TbzLVs70VKiQ1SmdxCzcwDdvd5xHVXFRKVWplCECxAkpfyhiSv4pZWXOfVdE3GJYmsL-ngMcjII6RYG0V5nDVXqkw.jpg",
+            backdropPath = "AAAABQXfFBK-LuklIED_eT4C7ABpxv7WSe8-FaZ_5TbzLVs70VKiQ1SmdxCzcwDdvd5xHVXFRKVWplCECxAkpfyhiSv4pZWXOfVdE3GJYmsL-ngMcjII6RYG0V5nDVXqkw.jpg",
             releaseDate = "February 5, 2021",
             language = "English (United Kingdom)",
             genre = "Drama",
             storyLine = "If you feel like you’ve been wasting time during quarantine, wait until you hear about writer/director Sam Levinson, who wrote an entire movie script in six days, then called up John David Washington and Zendaya to be in that movie, and then filmed it, all during lockdown. The story follows a filmmaker and his girlfriend as they return from a movie premiere and, over the course of the evening, begin to hash out their relationship."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://occ-0-299-300.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/"
+            posterBaseUrl = "https://occ-0-299-300.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/"
+        },
         Movie(
             id = "MOVIE_4",
             title = "Judas and the Black Messiah",
-            imageUrl = "https://img.reelgood.com/content/movie/edffa556-dcf1-415f-a6ae-bc9afe155c0a/poster-780.jpg",
+            posterPath = "edffa556-dcf1-415f-a6ae-bc9afe155c0a/poster-780.jpg",
+            backdropPath = "edffa556-dcf1-415f-a6ae-bc9afe155c0a/poster-780.jpg",
             releaseDate = "Feb 12, 2021",
             language = "English (United Kingdom)",
             genre = "History, Biography, Drama",
             storyLine = "FBI informant William O'Neal infiltrates the Illinois Black Panther Party and is tasked with keeping tabs on their charismatic leader, Chairman Fred Hampton. A career thief, O'Neal revels in the danger of manipulating both his comrades and his handler, Special Agent Roy Mitchell. Hampton's political prowess grows just as he's falling in love with fellow revolutionary Deborah Johnson. Meanwhile, a battle wages for O'Neal's soul. Will he align with the forces of good? Or subdue Hampton and The Panthers by any means, as FBI Director J. Edgar Hoover commands?"
-        ),
+        ).apply {
+            backdropBaseUrl = "https://img.reelgood.com/content/movie/"
+            posterBaseUrl = "https://img.reelgood.com/content/movie/"
+        },
         Movie(
             id = "MOVIE_5",
             title = "To All The Boys: Always And Forever",
-            imageUrl = "https://image.tmdb.org/t/p/w500/bEOlLKcsAbWxCMUtZL80BxvqkT4.jpg",
+            posterPath = "bEOlLKcsAbWxCMUtZL80BxvqkT4.jpg",
+            backdropPath = "bEOlLKcsAbWxCMUtZL80BxvqkT4.jpg",
             releaseDate = "Feb 12, 2021",
             language = "English (United Kingdom)",
             genre = "Drama, Romance, Comedy",
             storyLine = "Senior year of high school takes center stage as Lara Jean returns from a family trip to Korea and considers her college plans -- with and without Peter."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://image.tmdb.org/t/p/w500/"
+            posterBaseUrl = "https://image.tmdb.org/t/p/w500/"
+        },
         Movie(
             id = "MOVIE_6",
             title = "I Care a Lot",
-            imageUrl = "https://resizing.flixster.com/C_n4-iDSsd3FnJVmXPUSthil4B4=/206x305/v2/https://resizing.flixster.com/4-k4CXIwxuqc4RzII8doRKzA3yQ=/ems.ZW1zLXByZC1hc3NldHMvbW92aWVzL2I3ODViYjk4LTE5NDUtNDYxNi05YTUzLWI2ZmNmYWY0NGU1Zi5qcGc=",
+            posterPath = "ems.ZW1zLXByZC1hc3NldHMvbW92aWVzL2I3ODViYjk4LTE5NDUtNDYxNi05YTUzLWI2ZmNmYWY0NGU1Zi5qcGc=",
+            backdropPath = "ems.ZW1zLXByZC1hc3NldHMvbW92aWVzL2I3ODViYjk4LTE5NDUtNDYxNi05YTUzLWI2ZmNmYWY0NGU1Zi5qcGc=",
             releaseDate = "Feb 19, 2021",
             language = "English (United Kingdom)",
             genre = "Mystery And Thriller, Comedy",
             storyLine = "Rosamund Pike stars in this comedy as a con woman who takes swindles the elderly out of their money until she comes into contact with a woman who is more cunning than she appears."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://resizing.flixster.com/C_n4-iDSsd3FnJVmXPUSthil4B4=/206x305/v2/https://resizing.flixster.com/4-k4CXIwxuqc4RzII8doRKzA3yQ=/"
+            posterBaseUrl = "https://resizing.flixster.com/C_n4-iDSsd3FnJVmXPUSthil4B4=/206x305/v2/https://resizing.flixster.com/4-k4CXIwxuqc4RzII8doRKzA3yQ=/"
+        },
         Movie(
             id = "MOVIE_7",
             title = "NOMADLAND",
-            imageUrl = "https://www.themoviedb.org/t/p/original/hDnSdalzjnZoveu8mpdRij8IF1u.jpg",
+            posterPath = "hDnSdalzjnZoveu8mpdRij8IF1u.jpg",
+            backdropPath = "hDnSdalzjnZoveu8mpdRij8IF1u.jpg",
             releaseDate = "February 19, 2021",
             language = "English (United Kingdom)",
             genre = "Drama",
             storyLine = "A woman embarks on a journey through the American West after losing everything during the recession."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://www.themoviedb.org/t/p/original/"
+            posterBaseUrl = "https://www.themoviedb.org/t/p/original/"
+        },
         Movie(
             id = "MOVIE_8",
             title = "The Father",
-            imageUrl = "https://media2.firstshowing.net/firstshowing/img11/TheFatherPostermainimageBig59901.jpg",
+            posterPath = "TheFatherPostermainimageBig59901.jpg",
+            backdropPath = "TheFatherPostermainimageBig59901.jpg",
             releaseDate = "Feb 26, 2021 ",
             language = "English (United Kingdom)",
             genre = "Drama",
             storyLine = "Anthony (Academy Award Winner, Anthony Hopkins) is 80, mischievous, living defiantly alone and rejecting the carers that his daughter, Anne (Academy Award and Golden Globe Winner, Olivia Colman), encouragingly introduces. Yet help is also becoming a necessity for Anne; she can't make daily visits anymore and Anthony's grip on reality is unraveling. As we experience the ebb and flow of his memory, how much of his own identity and past can Anthony cling to? How does Anne cope as she grieves the loss of her father, while he still lives and breathes before her? THE FATHER warmly embraces real life, through loving reflection upon the vibrant human condition; heart-breaking and uncompromisingly poignant -- a movie that nestles in the truth of our own lives."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://media2.firstshowing.net/firstshowing/img11/"
+            posterBaseUrl = "https://media2.firstshowing.net/firstshowing/img11/"
+        },
         Movie(
             id = "MOVIE_9",
             title = "TOM & JERRY",
-            imageUrl = "https://www.themoviedb.org/t/p/original/ohQLO7hfiVK0ByF0hSEth3IAziI.jpg",
+            posterPath = "ohQLO7hfiVK0ByF0hSEth3IAziI.jpg",
+            backdropPath = "ohQLO7hfiVK0ByF0hSEth3IAziI.jpg",
             releaseDate = "Feb 26, 2021",
             language = "English (United Kingdom)",
             genre = "Drama",
             storyLine = "A legendary rivalry reemerges when Jerry moves into New York City's finest hotel on the eve of the wedding of the century, forcing the desperate event planner to hire Tom to get rid of him. As mayhem ensues, the escalating cat-and-mouse battle soon threatens to destroy her career, the wedding, and possibly the hotel itself."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://www.themoviedb.org/t/p/original/"
+            posterBaseUrl = "https://www.themoviedb.org/t/p/original/"
+        },
         Movie(
             id = "MOVIE_10",
             title = "COMING 2 AMERICA",
-            imageUrl = "https://icecreamconvos.com/wp-content/uploads/2021/02/C2A2_2021_KeyArt_Vert_4x5_Date_Ensemble_EN_Final_ANDRE.jpg",
+            posterPath = "C2A2_2021_KeyArt_Vert_4x5_Date_Ensemble_EN_Final_ANDRE.jpg",
+            backdropPath = "C2A2_2021_KeyArt_Vert_4x5_Date_Ensemble_EN_Final_ANDRE.jpg",
             releaseDate = "Mar 5, 2021",
             language = "English (United Kingdom)",
             genre = "Drama",
             storyLine = "Set in the lush and royal country of Zamunda, newly-crowned King Akeem (Eddie Murphy) and his trusted confidante Semmi(Arsenio Hall) embark on an all-new hilarious adventure that has them traversing the globe from their great African nation to the borough of Queens, New York – where it all began."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://icecreamconvos.com/wp-content/uploads/2021/02/"
+            posterBaseUrl = "https://icecreamconvos.com/wp-content/uploads/2021/02/"
+        },
         Movie(
             id = "MOVIE_11",
             title = "RAYA AND THE LAST DRAGON",
-            imageUrl = "https://www.themoviedb.org/t/p/original/pJWDbagdts9qnhT7joZ0S3HxtZv.jpg",
+            posterPath = "pJWDbagdts9qnhT7joZ0S3HxtZv.jpg",
+            backdropPath = "pJWDbagdts9qnhT7joZ0S3HxtZv.jpg",
             releaseDate = "Mar 5, 2021",
             language = "English (United Kingdom)",
             genre = "Drama",
             storyLine = "Long ago, in the fantasy world of Kumandra, humans and dragons lived together in harmony. But when sinister monsters known as the Druun threatened the land, the dragons sacrificed themselves to save humanity. Now, 500 years later, those same monsters have returned and it's up to a lone warrior, Raya, to track down the last dragon in order to finally stop the Druun for good. However, along her journey, she'll learn that it'll take more than dragon magic to save the world--it's going to take trust as well."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://www.themoviedb.org/t/p/original/"
+            posterBaseUrl = "https://www.themoviedb.org/t/p/original/"
+        },
         Movie(
             id = "MOVIE_12",
             title = "ZACK SNYDER'S JUSTICE LEAGUE",
-            imageUrl = "https://www.themoviedb.org/t/p/original/eG7Nbhfl5JY3M6SPnUm0tDIRuxQ.jpg",
+            posterPath = "eG7Nbhfl5JY3M6SPnUm0tDIRuxQ.jpg",
+            backdropPath = "eG7Nbhfl5JY3M6SPnUm0tDIRuxQ.jpg",
             releaseDate = "Mar 18, 2021",
             language = "English (United Kingdom)",
             genre = "Drama",
             storyLine = "In ZACK SNYDER'S JUSTICE LEAGUE, determined to ensure Superman's (Henry Cavill) ultimate sacrifice was not in vain, Bruce Wayne (Ben Affleck) aligns forces with Diana Prince (Gal Gadot) with plans to recruit a team of metahumans to protect the world from an approaching threat of catastrophic proportions. The task proves more difficult than Bruce imagined, as each of the recruits must face the demons of their own pasts to transcend that which has held them back, allowing them to come together, finally forming an unprecedented league of heroes. Now united, Batman (Affleck), Wonder Woman (Gadot), Aquaman (Jason Momoa), Cyborg (Ray Fisher) and The Flash (Ezra Miller) may be too late to save the planet from Steppenwolf, DeSaad and Darkseid and their dreadful intentions."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://www.themoviedb.org/t/p/original/"
+            posterBaseUrl = "https://www.themoviedb.org/t/p/original/"
+        },
         Movie(
             id = "MOVIE_13",
             title = "NOBODY",
-            imageUrl = "https://www.8days.sg/blob/13770426/1bd56651c21d4bb79e0b9787fb2d4bf3/nobody-poster-data.jpg",
+            posterPath = "nobody-poster-data.jpg",
+            backdropPath = "nobody-poster-data.jpg",
             releaseDate = "Mar 26, 2021",
             language = "English (United Kingdom)",
             genre = "Drama",
             storyLine = "Emmy winner Bob Odenkirk (Better Call Saul, The Post, Nebraska) stars as Hutch Mansell, an underestimated and overlooked dad and husband, taking life's indignities on the chin and never pushing back. A nobody. When two thieves break into his suburban home one night, Hutch declines to defend himself or his family, hoping to prevent serious violence. His teenage son, Blake (Gage Munroe, The Shack), is disappointed in him and his wife, Becca (Connie Nielsen, Wonder Woman), seems to pull only further away. The aftermath of the incident strikes a match to Hutch's long-simmering rage, triggering dormant instincts and propelling him on a brutal path that will surface dark secrets and lethal skills. In a barrage of fists, gunfire and squealing tires, Hutch must save his family from a dangerous adversary (famed Russian actor Aleksey Serebryakov, Amazon's McMafia)--and ensure that he will never be underestimated as a nobody again."
-        ),
+        ).apply {
+            backdropBaseUrl = "https://www.8days.sg/blob/13770426/1bd56651c21d4bb79e0b9787fb2d4bf3/"
+            posterBaseUrl = "https://www.8days.sg/blob/13770426/1bd56651c21d4bb79e0b9787fb2d4bf3/"
+        },
     )
 
     val tvShowList = listOf(
