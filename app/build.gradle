@@ -16,6 +16,9 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+        buildConfigField "String", "API_KEY", "\"1cb8ea66e27ef093b9c346b353cf6a57\""
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testApplicationId 'io.github.pengdst.jetpacksubmission.submission2.test'
         testInstrumentationRunnerArguments clearPackageData: 'true'
