@@ -29,7 +29,7 @@ class TvShowListAdapter @Inject constructor() : BaseListAdapter<TvShow, TvShowLi
                 if (tvShow.storyLine.count() >= 50) "${tvShow.storyLine.slice(0..50)}..." else tvShow.storyLine
 
             Glide.with(binding.root)
-                .load(tvShow.imageUrl)
+                .load(tvShow.imagePosterUrl)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_baseline_broken_image_24)
                 .transform(RoundedCorners(16))
