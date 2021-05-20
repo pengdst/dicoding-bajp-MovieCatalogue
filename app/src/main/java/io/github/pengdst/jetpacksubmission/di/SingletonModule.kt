@@ -30,7 +30,7 @@ object SingletonModule {
 
     @Provides
     @Singleton
-    fun provideMovieRoute(retrofit: Retrofit) = retrofit.create(MovieRoute::class.java)
+    fun provideMovieRoute(retrofit: Retrofit): MovieRoute = retrofit.create(MovieRoute::class.java)
 
     @Provides
     @Singleton

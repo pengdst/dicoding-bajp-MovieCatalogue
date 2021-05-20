@@ -37,8 +37,8 @@ class HomeViewModelTest : TestCase() {
 
     private lateinit var viewModel: HomeViewModel
 
-    val dummyMovieList = DataStore.movies
-    val dummyTvShowList = DataStore.tvShowList
+    private val dummyMovieList = DataStore.movies
+    private val dummyTvShowList = DataStore.tvShowList
 
     @Before
     public override fun setUp() {

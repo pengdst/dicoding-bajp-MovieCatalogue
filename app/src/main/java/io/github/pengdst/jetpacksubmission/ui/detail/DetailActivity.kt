@@ -99,7 +99,7 @@ class DetailActivity : AppCompatActivity() {
                 .error(R.drawable.ic_baseline_broken_image_24)
                 .into(ivThumbnail)
 
-            binding.ltLoading.isVisible = false
+            ltLoading.isVisible = false
         }
     }
 

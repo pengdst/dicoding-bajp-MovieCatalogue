@@ -38,10 +38,13 @@ class DetailViewModelTest {
 
     private val moviePosition = 0
     private val tvShowPosition = 0
-    val dummyMovieList = DataStore.movies
+
+    private val dummyMovieList = DataStore.movies
+    private val dummyTvShowList = DataStore.tvShowList
+
     private val dummyMovie = dummyMovieList[moviePosition]
-    val dummyTvShowList = DataStore.tvShowList
     private val dummyTvShow = dummyTvShowList[tvShowPosition]
+
     private val movieId = dummyMovie.id
     private val tvShowId = dummyTvShow.id
 

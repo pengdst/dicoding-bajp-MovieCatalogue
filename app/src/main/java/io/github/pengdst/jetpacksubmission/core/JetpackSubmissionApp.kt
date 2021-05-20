@@ -12,5 +12,4 @@ import dagger.hilt.android.HiltAndroidApp
  */
 
 @HiltAndroidApp
-class JetpackSubmissionApp : Application() {
-}
+class JetpackSubmissionApp : Application()

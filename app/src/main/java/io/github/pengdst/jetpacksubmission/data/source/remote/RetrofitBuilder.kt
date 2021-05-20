@@ -33,7 +33,7 @@ object RetrofitBuilder {
             }.build()
     }
 
-    fun build() = Retrofit.Builder()
+    fun build(): Retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.BASE_URL)
         .client(okHttpClient())
         .addConverterFactory(GsonConverterFactory.create())
