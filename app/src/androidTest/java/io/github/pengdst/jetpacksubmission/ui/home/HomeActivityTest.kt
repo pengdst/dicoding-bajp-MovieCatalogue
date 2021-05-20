@@ -2,6 +2,7 @@ package io.github.pengdst.jetpacksubmission.ui.home
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -11,6 +12,9 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.github.pengdst.jetpacksubmission.R
 import io.github.pengdst.jetpacksubmission.utils.DataStore
+import io.github.pengdst.jetpacksubmission.utils.EspressoIdlingResource
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,11 +30,21 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class HomeActivityTest {
 
+    @get:Rule
+    var activityRule = ActivityScenarioRule(HomeActivity::class.java)
+
     private val dummyMovie = DataStore.movies
     private val dummyTvShow = DataStore.tvShowList
 
-    @get:Rule
-    var activityRule = ActivityScenarioRule(HomeActivity::class.java)
+    @Before
+    fun setUp(){
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResourceForMainActivity())
+    }
+
+    @After
+    fun tearDown(){
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResourceForMainActivity())
+    }
 
     @Test
     fun loadMovie() {
