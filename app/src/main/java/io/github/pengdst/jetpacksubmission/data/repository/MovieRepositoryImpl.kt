@@ -19,10 +19,6 @@ class MovieRepositoryImpl @Inject constructor(
     private val remote: MovieRemoteSource
 ) : MovieRepository {
 
-    companion object {
-        private const val TAG = "MovieRepositoryImpl"
-    }
-
     override fun getUpcomingMovies(): LiveData<List<Movie>> {
         val result = MutableLiveData<List<Movie>>()
 
