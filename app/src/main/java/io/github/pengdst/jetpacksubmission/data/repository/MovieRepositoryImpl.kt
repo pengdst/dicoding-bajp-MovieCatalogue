@@ -31,7 +31,7 @@ class MovieRepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             try {
                 val response = movieRoute.getUpcomingMovies()
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val data = response.body()?.results ?: emptyList()
                     result.postValue(data.map {
                         Movie(
@@ -40,12 +40,12 @@ class MovieRepositoryImpl @Inject constructor(
                             backdropPath = it.backdropPath.toString(),
                             posterPath = it.posterPath.toString(),
                             releaseDate = it.releaseDate.toString(),
-                            language = it.originalLanguage.toString(),
-                            genre = it.genreIds.toString(),
+                            language = it.spokenLanguages?.map { it.englishName }.toString().replace("[", "").replace("]", ""),
+                            genre = it.genres?.map { it.name }.toString().replace("[", "").replace("]", ""),
                             storyLine = it.overview.toString()
                         )
                     })
-                }else {
+                } else {
                     Log.e(TAG, "getUpcomingMovies() called response = $response")
                 }
 
@@ -63,7 +63,7 @@ class MovieRepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             try {
                 val response = movieRoute.getMovie(movieId)
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val data = response.body()
                     result.postValue(
                         Movie(
@@ -72,11 +72,12 @@ class MovieRepositoryImpl @Inject constructor(
                             backdropPath = data?.backdropPath.toString(),
                             posterPath = data?.posterPath.toString(),
                             releaseDate = data?.releaseDate.toString(),
-                            language = data?.originalLanguage.toString(),
-                            genre = data?.genreIds.toString(),
+                            language = data?.spokenLanguages?.map { it.englishName }.toString().replace("[", "").replace("]", ""),
+                            genre = data?.genres?.map { it.name }.toString().replace("[", "").replace("]", ""),
                             storyLine = data?.overview.toString()
-                        ))
-                }else {
+                        )
+                    )
+                } else {
                     Log.e(TAG, "getMovie() called response = $response")
                 }
 
@@ -94,7 +95,7 @@ class MovieRepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             try {
                 val response = movieRoute.getTvOnAir()
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val data = response.body()?.results ?: emptyList()
                     result.postValue(data.map {
                         TvShow(
@@ -103,12 +104,12 @@ class MovieRepositoryImpl @Inject constructor(
                             backdropPath = it.backdropPath.toString(),
                             posterPath = it.posterPath.toString(),
                             releaseDate = it.firstAirDate.toString(),
-                            language = it.originalLanguage.toString(),
-                            genre = it.genreIds.toString(),
+                            language = it.spokenLanguages?.map { it.englishName }.toString().replace("[", "").replace("]", ""),
+                            genre = it.genres?.map { it.name }.toString().replace("[", "").replace("]", ""),
                             storyLine = it.overview.toString()
                         )
                     })
-                }else {
+                } else {
                     Log.e(TAG, "getTvOnAir() called response = $response")
                 }
 
@@ -126,7 +127,7 @@ class MovieRepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             try {
                 val response = movieRoute.getTv(tvId)
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val data = response.body()
                     result.postValue(
                         TvShow(
@@ -135,12 +136,12 @@ class MovieRepositoryImpl @Inject constructor(
                             backdropPath = data?.backdropPath.toString(),
                             posterPath = data?.posterPath.toString(),
                             releaseDate = data?.firstAirDate.toString(),
-                            language = data?.originalLanguage.toString(),
-                            genre = data?.genreIds.toString(),
+                            language = data?.spokenLanguages?.map { it.englishName }.toString().replace("[", "").replace("]", ""),
+                            genre = data?.genres?.map { it.name }.toString().replace("[", "").replace("]", ""),
                             storyLine = data?.overview.toString()
                         )
                     )
-                }else {
+                } else {
                     Log.e(TAG, "getTv() called response = $response")
                 }
 
