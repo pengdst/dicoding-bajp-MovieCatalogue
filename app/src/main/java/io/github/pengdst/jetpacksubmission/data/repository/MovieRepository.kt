@@ -13,9 +13,9 @@ import io.github.pengdst.jetpacksubmission.data.source.domain.models.TvShow
  */
 interface MovieRepository {
 
-    suspend fun getUpcomingMovies(): LiveData<List<Movie>>
-    suspend fun getMovie(movieId: String): LiveData<Movie>
-    suspend fun getTvOnAir(): LiveData<List<TvShow>>
-    suspend fun getTv(tvId: String): LiveData<TvShow>
+    fun getUpcomingMovies(): LiveData<List<Movie>>
+    fun getMovie(movieId: String): LiveData<Movie>
+    fun getTvOnAir(): LiveData<List<TvShow>>
+    fun getTv(tvId: String): LiveData<TvShow>
 
 }
