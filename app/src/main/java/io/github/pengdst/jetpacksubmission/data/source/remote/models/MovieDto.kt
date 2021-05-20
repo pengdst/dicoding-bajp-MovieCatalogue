@@ -1,48 +1,86 @@
 package io.github.pengdst.jetpacksubmission.data.source.remote.models
 
 import com.google.gson.annotations.SerializedName
+import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.GenreDto
+import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.ProductionCompanyDto
+import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.ProductionCountryDto
+import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.SpokenLanguageDto
 
 data class MovieDto(
 
-	@field:SerializedName("overview")
-	val overview: String? = null,
-
-	@field:SerializedName("original_language")
+    @field:SerializedName("original_language")
 	val originalLanguage: String? = null,
 
-	@field:SerializedName("original_title")
-	val originalTitle: String? = null,
+    @field:SerializedName("imdb_id")
+	val imdbId: String? = null,
 
-	@field:SerializedName("video")
+    @field:SerializedName("video")
 	val video: Boolean? = null,
 
-	@field:SerializedName("title")
+    @field:SerializedName("title")
 	val title: String? = null,
 
-	@field:SerializedName("genre_ids")
-	val genreIds: List<Int?>? = null,
-
-	@field:SerializedName("poster_path")
-	val posterPath: String? = null,
-
-	@field:SerializedName("backdrop_path")
+    @field:SerializedName("backdrop_path")
 	val backdropPath: String? = null,
 
-	@field:SerializedName("release_date")
-	val releaseDate: String? = null,
+    @field:SerializedName("revenue")
+	val revenue: Int? = null,
 
-	@field:SerializedName("popularity")
+    @field:SerializedName("genres")
+	val genres: List<GenreDto>? = null,
+
+    @field:SerializedName("popularity")
 	val popularity: Double? = null,
 
-	@field:SerializedName("vote_average")
-	val voteAverage: Double? = null,
+    @field:SerializedName("production_countries")
+	val productionCountries: List<ProductionCountryDto>? = null,
 
-	@field:SerializedName("id")
+    @field:SerializedName("id")
 	val id: Int? = null,
 
-	@field:SerializedName("adult")
+    @field:SerializedName("vote_count")
+	val voteCount: Int? = null,
+
+    @field:SerializedName("budget")
+	val budget: Int? = null,
+
+    @field:SerializedName("overview")
+	val overview: String? = null,
+
+    @field:SerializedName("original_title")
+	val originalTitle: String? = null,
+
+    @field:SerializedName("runtime")
+	val runtime: Int? = null,
+
+    @field:SerializedName("poster_path")
+	val posterPath: String? = null,
+
+    @field:SerializedName("spoken_languages")
+	val spokenLanguages: List<SpokenLanguageDto>? = null,
+
+    @field:SerializedName("production_companies")
+	val productionCompanies: List<ProductionCompanyDto>? = null,
+
+    @field:SerializedName("release_date")
+	val releaseDate: String? = null,
+
+    @field:SerializedName("vote_average")
+	val voteAverage: Double? = null,
+
+    @field:SerializedName("belongs_to_collection")
+	val belongsToCollection: Any? = null,
+
+    @field:SerializedName("tagline")
+	val tagline: String? = null,
+
+    @field:SerializedName("adult")
 	val adult: Boolean? = null,
 
-	@field:SerializedName("vote_count")
-	val voteCount: Int? = null
+    @field:SerializedName("homepage")
+	val homepage: String? = null,
+
+    @field:SerializedName("status")
+	val status: String? = null
 )
+

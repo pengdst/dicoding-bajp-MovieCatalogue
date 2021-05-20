@@ -1,4 +1,4 @@
-package io.github.pengdst.jetpacksubmission.data.source.remote.models
+package io.github.pengdst.jetpacksubmission.data.source.remote.models.relations
 
 import com.google.gson.annotations.SerializedName
 
