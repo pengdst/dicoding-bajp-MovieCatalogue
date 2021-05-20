@@ -92,8 +92,8 @@ class MovieRepositoryTest {
         }.`when`(remote).getMovie(eq(movieId), any())
 
         val movie = LiveDataTestUtil.getValue(repository.getMovie(movieId))
-
         verify(remote).getMovie(eq(movieId), any())
+
         Assert.assertNotNull(movie)
         Assert.assertEquals(dummyMovie.id, movie.id)
         Assert.assertEquals(dummyMovie.title, movie.title)
@@ -111,8 +111,8 @@ class MovieRepositoryTest {
         }.`when`(remote).getTvOnAir(any())
 
         val tvList = LiveDataTestUtil.getValue(repository.getTvOnAir())
-
         verify(remote).getTvOnAir(any())
+
         Assert.assertNotNull(tvList)
         Assert.assertEquals(dummyTvList.size, tvList.size)
     }
@@ -125,8 +125,8 @@ class MovieRepositoryTest {
         }.`when`(remote).getTv(eq(tvId), any())
 
         val tvShow = LiveDataTestUtil.getValue(repository.getTv(tvId))
-
         verify(remote).getTv(eq(tvId), any())
+
         Assert.assertNotNull(tvShow)
         Assert.assertEquals(dummyTvShow.id, tvShow.id)
         Assert.assertEquals(dummyTvShow.title, tvShow.title)
