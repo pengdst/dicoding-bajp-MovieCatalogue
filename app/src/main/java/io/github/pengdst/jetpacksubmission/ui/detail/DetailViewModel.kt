@@ -24,28 +24,11 @@ class DetailViewModel @Inject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {
 
-    private var contentPosition = 0
     private var contentId: String = ""
 
-    fun getMovie(): LiveData<Movie> {
-        val result = MutableLiveData<Movie>()
-        viewModelScope.launch {
-            result.postValue(repository.getMovie(contentId).value)
-        }
-        return result
-    }
+    fun getMovie() = repository.getMovie(contentId)
 
-    fun getTvShow(): LiveData<TvShow> {
-        val result = MutableLiveData<TvShow>()
-        viewModelScope.launch {
-            result.postValue(repository.getTv(contentId).value)
-        }
-        return result
-    }
-
-    fun setSelectedContentPosition(contentPosition: Int?){
-        this.contentPosition = contentPosition ?: 0
-    }
+    fun getTvShow() = repository.getTv(contentId)
 
     fun setSelectedContent(contentId: String?){
         this.contentId = contentId ?: ""
