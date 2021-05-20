@@ -19,22 +19,22 @@ class HomeViewModelTest : TestCase() {
 
     @Before
     public override fun setUp() {
-        viewModel = HomeViewModel()
+        viewModel = HomeViewModel(FakeRepository())
     }
 
     @Test
     fun testGetMovies() {
-        val movies = viewModel.getMovies()
+        val movies = viewModel.getMovies().value
         Assert.assertNotNull(movies)
-        Assert.assertNotEquals(0, movies.size)
-        Assert.assertEquals(DataStore.movies.size, movies.size)
+        Assert.assertNotEquals(0, movies?.size)
+        Assert.assertEquals(DataStore.movies.size, movies?.size)
     }
 
     @Test
     fun testGetTvShowList() {
-        val tvShow = viewModel.getTvShowList()
+        val tvShow = viewModel.getTvShowList().value
         Assert.assertNotNull(tvShow)
-        Assert.assertNotEquals(0, tvShow.size)
-        Assert.assertEquals(DataStore.tvShowList.size, tvShow.size)
+        Assert.assertNotEquals(0, tvShow?.size)
+        Assert.assertEquals(DataStore.tvShowList.size, tvShow?.size)
     }
 }
