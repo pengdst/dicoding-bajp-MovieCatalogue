@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.pengdst.jetpacksubmission.data.repository.MovieRepository
 import io.github.pengdst.jetpacksubmission.data.repository.MovieRepositoryImpl
+import io.github.pengdst.jetpacksubmission.data.source.remote.MovieRemoteSource
 import io.github.pengdst.jetpacksubmission.data.source.remote.RetrofitBuilder
 import io.github.pengdst.jetpacksubmission.data.source.remote.routes.MovieRoute
 import retrofit2.Retrofit
@@ -33,6 +34,10 @@ object SingletonModule {
 
     @Provides
     @Singleton
-    fun provideMovieRepository(route: MovieRoute): MovieRepository = MovieRepositoryImpl(route)
+    fun provideMovieRemoteSource(route: MovieRoute) = MovieRemoteSource(route)
+
+    @Provides
+    @Singleton
+    fun provideMovieRepository(remote: MovieRemoteSource): MovieRepository = MovieRepositoryImpl(remote)
 
 }
