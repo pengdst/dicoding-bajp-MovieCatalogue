@@ -1,7 +1,7 @@
 package io.github.pengdst.jetpacksubmission.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.DateDto
+import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.DateDto
 import io.github.pengdst.jetpacksubmission.data.source.remote.models.MovieDto
 
 data class MovieResponse(
