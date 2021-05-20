@@ -4,6 +4,7 @@ import android.util.Log
 import io.github.pengdst.jetpacksubmission.data.source.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.data.source.domain.models.TvShow
 import io.github.pengdst.jetpacksubmission.data.source.remote.routes.MovieRoute
+import io.github.pengdst.jetpacksubmission.utils.EspressoIdlingResource
 import io.github.pengdst.jetpacksubmission.utils.LoadContent
 import io.github.pengdst.jetpacksubmission.utils.enqueueCall
 
@@ -23,6 +24,7 @@ class MovieRemoteSource(
     }
 
     fun getUpcomingMovies(callback: LoadContent<List<Movie>>) {
+        EspressoIdlingResource.increment()
         movieRoute.getUpcomingMovies().enqueueCall { _, response ->
             if (response.isSuccessful) {
                 val results = response.body()?.results ?: emptyList()
@@ -43,10 +45,12 @@ class MovieRemoteSource(
             } else {
                 Log.e(TAG, "getUpcomingMovies() called response = $response")
             }
+            EspressoIdlingResource.decrement()
         }
     }
 
     fun getMovie(movieId: String, callback: LoadContent<Movie>) {
+        EspressoIdlingResource.increment()
         movieRoute.getMovie(movieId).enqueueCall { _, response ->
             if (response.isSuccessful) {
                 val data = response.body()
@@ -67,10 +71,12 @@ class MovieRemoteSource(
             } else {
                 Log.e(TAG, "getMovie() called response = $response")
             }
+            EspressoIdlingResource.decrement()
         }
     }
 
     fun getTvOnAir(callback: LoadContent<List<TvShow>>) {
+        EspressoIdlingResource.increment()
         movieRoute.getTvOnAir().enqueueCall { _, response ->
             if (response.isSuccessful) {
                 val results = response.body()?.results ?: emptyList()
@@ -91,10 +97,12 @@ class MovieRemoteSource(
             } else {
                 Log.e(TAG, "getTvOnAir() called response = $response")
             }
+            EspressoIdlingResource.decrement()
         }
     }
 
     fun getTv(tvId: String, callback: LoadContent<TvShow>) {
+        EspressoIdlingResource.increment()
         movieRoute.getTv(tvId).enqueueCall { _, response ->
             if (response.isSuccessful) {
                 val data = response.body()
@@ -115,6 +123,7 @@ class MovieRemoteSource(
             } else {
                 Log.e(TAG, "getTv() called response = $response")
             }
+            EspressoIdlingResource.decrement()
         }
     }
 }
