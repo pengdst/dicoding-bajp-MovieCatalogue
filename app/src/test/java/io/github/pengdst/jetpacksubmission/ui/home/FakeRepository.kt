@@ -111,14 +111,14 @@ class FakeRepository : MovieRepository {
                 val data = DataStore.tvShowListResponse[0]
                 result.postValue(
                     TvShow(
-                        id = data?.id.toString(),
-                        title = data?.name.toString(),
-                        backdropPath = data?.backdropPath.toString(),
-                        posterPath = data?.posterPath.toString(),
-                        releaseDate = data?.firstAirDate.toString(),
-                        language = data?.spokenLanguages?.map { it.englishName }.toString().replace("[", "").replace("]", ""),
-                        genre = data?.genres?.map { it.name }.toString().replace("[", "").replace("]", ""),
-                        storyLine = data?.overview.toString()
+                        id = data.id.toString(),
+                        title = data.name.toString(),
+                        backdropPath = data.backdropPath.toString(),
+                        posterPath = data.posterPath.toString(),
+                        releaseDate = data.firstAirDate.toString(),
+                        language = data.spokenLanguages?.map { it.englishName }.toString().replace("[", "").replace("]", ""),
+                        genre = data.genres?.map { it.name }.toString().replace("[", "").replace("]", ""),
+                        storyLine = data.overview.toString()
                     )
                 )
 
