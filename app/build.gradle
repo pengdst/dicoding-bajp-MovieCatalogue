@@ -92,6 +92,8 @@ dependencies {
     //Mockito
     testImplementation "org.mockito:mockito-core:${versions.mockito}"
     testImplementation "org.mockito:mockito-inline:${versions.mockito}"
+    testImplementation "androidx.arch.core:core-testing:${versions.androidCoreTest}"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockitoKotlin}"
 
     testImplementation "junit:junit:${versions.junit}"
     androidTestImplementation "junit:junit:${versions.junit}"

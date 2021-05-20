@@ -13,6 +13,8 @@ buildscript {
                 "junitExt"           : "1.1.2",
                 "junit"              : "4.13.2",
                 "mockito"            : "3.6.0",
+                "mockitoKotlin"      : "2.2.0",
+                "androidCoreTest"    : "2.1.0",
                 "espresso"           : "3.3.0",
                 "androidTest"        : "1.3.0",
                 "coroutineAndroid"   : "1.4.2",
