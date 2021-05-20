@@ -1,4 +1,9 @@
 Home Activity Test Scenario:
+• Pre-test
+    ◦ Mendaftarkan idling resource.
+• Pre-test
+    ◦ Membatalkan idling resource.
+
 • Menampilkan data movie
     ◦ Pindah ke tab movie.
     ◦ Memastikan rv_movies dalam keadaan tampil.
