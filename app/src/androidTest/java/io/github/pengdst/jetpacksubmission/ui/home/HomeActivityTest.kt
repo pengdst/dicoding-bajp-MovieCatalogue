@@ -11,8 +11,8 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.github.pengdst.jetpacksubmission.R
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.Movie
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.TvShow
+import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.MovieMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.TvMapper.toDomain
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.EspressoIdlingResource
 import org.junit.After
@@ -35,34 +35,8 @@ class HomeActivityTest {
     @get:Rule
     var activityRule = ActivityScenarioRule(HomeActivity::class.java)
 
-    private val dummyMovie = DataStore.moviesResponse.map { data ->
-        Movie(
-            id = data.id.toString(),
-            title = data.title.toString(),
-            backdropPath = data.backdropPath.toString(),
-            posterPath = data.posterPath.toString(),
-            releaseDate = data.releaseDate.toString(),
-            language = data.spokenLanguages?.map { it.englishName }.toString()
-                .replace("[", "").replace("]", ""),
-            genre = data.genres?.map { it.name }.toString().replace("[", "")
-                .replace("]", ""),
-            storyLine = data.overview.toString()
-        )
-    }
-    private val dummyTvShow = DataStore.tvShowListResponse.map {data->
-        TvShow(
-            id = data.id.toString(),
-            title = data.name.toString(),
-            backdropPath = data.backdropPath.toString(),
-            posterPath = data.posterPath.toString(),
-            releaseDate = data.firstAirDate.toString(),
-            language = data.spokenLanguages?.map { it.englishName }.toString()
-                .replace("[", "").replace("]", ""),
-            genre = data.genres?.map { it.name }.toString().replace("[", "")
-                .replace("]", ""),
-            storyLine = data.overview.toString()
-        )
-    }
+    private val dummyMovie = DataStore.moviesResponse.toDomain()
+    private val dummyTvShow = DataStore.tvShowListResponse.toDomain()
 
     @Before
     fun setUp(){
