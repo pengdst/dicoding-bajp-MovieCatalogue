@@ -36,7 +36,8 @@ ext {
             "glide"              : "4.12.0",
             "roboelectric"       : "4.4",
             "retrofit"           : "2.9.0",
-            "mockwebserver"      : "4.9.1",
+            "mockwebserver"      : "5.0.0-alpha.2",
+            "okhttp"             : "4.9.1",
     ]
 }
 
