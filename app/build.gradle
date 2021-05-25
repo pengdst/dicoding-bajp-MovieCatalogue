@@ -54,6 +54,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
     // Coroutine Android
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutineAndroid}"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutineAndroid}"
 
     // Glide
     implementation "com.github.bumptech.glide:glide:${versions.glide}"
