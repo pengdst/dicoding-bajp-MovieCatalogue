@@ -1,12 +1,6 @@
 package io.github.pengdst.jetpacksubmission.data.source.remote
 
-import android.util.Log
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.Movie
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.TvShow
 import io.github.pengdst.jetpacksubmission.data.source.remote.routes.MovieRoute
-import io.github.pengdst.jetpacksubmission.utils.EspressoIdlingResource
-import io.github.pengdst.jetpacksubmission.utils.LoadContent
-import io.github.pengdst.jetpacksubmission.utils.enqueueCall
 
 /**
  * Created on 5/20/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -19,111 +13,11 @@ class MovieRemoteSource(
     private val movieRoute: MovieRoute
 ) {
 
-    companion object {
-        private const val TAG = "MovieRemoteSource"
-    }
+    suspend fun getUpcomingMovies() = movieRoute.getUpcomingMovies()
 
-    fun getUpcomingMovies(callback: LoadContent<List<Movie>>) {
-        EspressoIdlingResource.increment()
-        movieRoute.getUpcomingMovies().enqueueCall { _, response ->
-            if (response.isSuccessful) {
-                val results = response.body()?.results ?: emptyList()
-                callback.onContentReceived(results.map { data ->
-                    Movie(
-                        id = data.id.toString(),
-                        title = data.title.toString(),
-                        backdropPath = data.backdropPath.toString(),
-                        posterPath = data.posterPath.toString(),
-                        releaseDate = data.releaseDate.toString(),
-                        language = data.spokenLanguages?.map { it.englishName }.toString()
-                            .replace("[", "").replace("]", ""),
-                        genre = data.genres?.map { it.name }.toString().replace("[", "")
-                            .replace("]", ""),
-                        storyLine = data.overview.toString()
-                    )
-                })
-            } else {
-                Log.e(TAG, "getUpcomingMovies() called response = $response")
-            }
-            EspressoIdlingResource.decrement()
-        }
-    }
+    suspend fun getMovie(movieId: String) = movieRoute.getMovie(movieId)
 
-    fun getMovie(movieId: String, callback: LoadContent<Movie>) {
-        EspressoIdlingResource.increment()
-        movieRoute.getMovie(movieId).enqueueCall { _, response ->
-            if (response.isSuccessful) {
-                val data = response.body()
-                callback.onContentReceived(
-                    Movie(
-                        id = data?.id.toString(),
-                        title = data?.title.toString(),
-                        backdropPath = data?.backdropPath.toString(),
-                        posterPath = data?.posterPath.toString(),
-                        releaseDate = data?.releaseDate.toString(),
-                        language = data?.spokenLanguages?.map { it.englishName }.toString()
-                            .replace("[", "").replace("]", ""),
-                        genre = data?.genres?.map { it.name }.toString().replace("[", "")
-                            .replace("]", ""),
-                        storyLine = data?.overview.toString()
-                    )
-                )
-            } else {
-                Log.e(TAG, "getMovie() called response = $response")
-            }
-            EspressoIdlingResource.decrement()
-        }
-    }
+    suspend fun getTvOnAir() = movieRoute.getTvOnAir()
 
-    fun getTvOnAir(callback: LoadContent<List<TvShow>>) {
-        EspressoIdlingResource.increment()
-        movieRoute.getTvOnAir().enqueueCall { _, response ->
-            if (response.isSuccessful) {
-                val results = response.body()?.results ?: emptyList()
-                callback.onContentReceived(results.map { data ->
-                    TvShow(
-                        id = data.id.toString(),
-                        title = data.name.toString(),
-                        backdropPath = data.backdropPath.toString(),
-                        posterPath = data.posterPath.toString(),
-                        releaseDate = data.firstAirDate.toString(),
-                        language = data.spokenLanguages?.map { it.englishName }.toString()
-                            .replace("[", "").replace("]", ""),
-                        genre = data.genres?.map { it.name }.toString().replace("[", "")
-                            .replace("]", ""),
-                        storyLine = data.overview.toString()
-                    )
-                })
-            } else {
-                Log.e(TAG, "getTvOnAir() called response = $response")
-            }
-            EspressoIdlingResource.decrement()
-        }
-    }
-
-    fun getTv(tvId: String, callback: LoadContent<TvShow>) {
-        EspressoIdlingResource.increment()
-        movieRoute.getTv(tvId).enqueueCall { _, response ->
-            if (response.isSuccessful) {
-                val data = response.body()
-                callback.onContentReceived(
-                    TvShow(
-                        id = data?.id.toString(),
-                        title = data?.name.toString(),
-                        backdropPath = data?.backdropPath.toString(),
-                        posterPath = data?.posterPath.toString(),
-                        releaseDate = data?.firstAirDate.toString(),
-                        language = data?.spokenLanguages?.map { it.englishName }.toString()
-                            .replace("[", "").replace("]", ""),
-                        genre = data?.genres?.map { it.name }.toString().replace("[", "")
-                            .replace("]", ""),
-                        storyLine = data?.overview.toString()
-                    )
-                )
-            } else {
-                Log.e(TAG, "getTv() called response = $response")
-            }
-            EspressoIdlingResource.decrement()
-        }
-    }
+    suspend fun getTv(tvId: String) = movieRoute.getTv(tvId)
 }
