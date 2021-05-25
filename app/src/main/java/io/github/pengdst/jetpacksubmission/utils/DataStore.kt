@@ -1,10 +1,15 @@
 package io.github.pengdst.jetpacksubmission.utils
 
+import com.google.gson.Gson
 import io.github.pengdst.jetpacksubmission.data.source.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.data.source.domain.models.TvShow
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.GenreDto
+import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.MovieMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.TvMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.source.remote.models.MovieDto
 import io.github.pengdst.jetpacksubmission.data.source.remote.models.TvDto
+import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.GenreDto
+import io.github.pengdst.jetpacksubmission.data.source.remote.response.MovieResponse
+import io.github.pengdst.jetpacksubmission.data.source.remote.response.TvResponse
 
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -18,545 +23,440 @@ object DataStore {
     const val TYPE_MOVIE = "movie"
     const val TYPE_TV_SHOW = "tv_show"
 
-    val movies = listOf(
-        Movie(
-            id = "MOVIE_1",
-            title = "THE DIG",
-            posterPath = "the-dig-2018.jpg",
-            backdropPath = "the-dig-2018.jpg",
-            releaseDate = "Jan 29, 2021",
-            language = "English (United Kingdom)",
-            genre = "Drama",
-            storyLine = "Ralph Fiennes and Carey Mulligan star in this Netflix original film based on true events and set in 1939. Mulligan plays a wealthy widow who hires an archaeologist (Fiennes) to excavate the burial mounds on her estate, leading to the discovery of a wealth of medieval Anglo-Saxon artifacts.",
-        ).apply {
-                backdropBaseUrl = "https://www.newdvdreleasedates.com/images/posters/"
-                posterBaseUrl = "https://www.newdvdreleasedates.com/images/posters/"
-        },
-        Movie(
-            id = "MOVIE_2",
-            title = "The SpongeBob Movie: Sponge on the Run (2021)",
-            posterPath = "sponge-on-run-poster.jpg",
-            backdropPath = "sponge-on-run-poster.jpg",
-            releaseDate = "Mar 4, 2021",
-            language = "English (United Kingdom)",
-            genre = "Kids And Family, Adventure, Animation, Comedy",
-            storyLine = "The long-running, wildly popular animated series gets another big screen outing as the whole Spongebob Squarepants gang are back for another adventure. This time out, Spongebob and Patrick embark on a rescue mission to recover Gary, who has been taken by Poseidon, and find themselves in the mystical land of Atlantic City."
-        ).apply {
-            backdropBaseUrl = "https://cdn.traileraddict.com/content/paramount-pictures/"
-            posterBaseUrl = "https://cdn.traileraddict.com/content/paramount-pictures/"
-        },
-        Movie(
-            id = "MOVIE_3",
-            title = "Malcolm & Marie",
-            posterPath = "AAAABQXfFBK-LuklIED_eT4C7ABpxv7WSe8-FaZ_5TbzLVs70VKiQ1SmdxCzcwDdvd5xHVXFRKVWplCECxAkpfyhiSv4pZWXOfVdE3GJYmsL-ngMcjII6RYG0V5nDVXqkw.jpg",
-            backdropPath = "AAAABQXfFBK-LuklIED_eT4C7ABpxv7WSe8-FaZ_5TbzLVs70VKiQ1SmdxCzcwDdvd5xHVXFRKVWplCECxAkpfyhiSv4pZWXOfVdE3GJYmsL-ngMcjII6RYG0V5nDVXqkw.jpg",
-            releaseDate = "February 5, 2021",
-            language = "English (United Kingdom)",
-            genre = "Drama",
-            storyLine = "If you feel like you’ve been wasting time during quarantine, wait until you hear about writer/director Sam Levinson, who wrote an entire movie script in six days, then called up John David Washington and Zendaya to be in that movie, and then filmed it, all during lockdown. The story follows a filmmaker and his girlfriend as they return from a movie premiere and, over the course of the evening, begin to hash out their relationship."
-        ).apply {
-            backdropBaseUrl = "https://occ-0-299-300.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/"
-            posterBaseUrl = "https://occ-0-299-300.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/"
-        },
-        Movie(
-            id = "MOVIE_4",
-            title = "Judas and the Black Messiah",
-            posterPath = "edffa556-dcf1-415f-a6ae-bc9afe155c0a/poster-780.jpg",
-            backdropPath = "edffa556-dcf1-415f-a6ae-bc9afe155c0a/poster-780.jpg",
-            releaseDate = "Feb 12, 2021",
-            language = "English (United Kingdom)",
-            genre = "History, Biography, Drama",
-            storyLine = "FBI informant William O'Neal infiltrates the Illinois Black Panther Party and is tasked with keeping tabs on their charismatic leader, Chairman Fred Hampton. A career thief, O'Neal revels in the danger of manipulating both his comrades and his handler, Special Agent Roy Mitchell. Hampton's political prowess grows just as he's falling in love with fellow revolutionary Deborah Johnson. Meanwhile, a battle wages for O'Neal's soul. Will he align with the forces of good? Or subdue Hampton and The Panthers by any means, as FBI Director J. Edgar Hoover commands?"
-        ).apply {
-            backdropBaseUrl = "https://img.reelgood.com/content/movie/"
-            posterBaseUrl = "https://img.reelgood.com/content/movie/"
-        },
-        Movie(
-            id = "MOVIE_5",
-            title = "To All The Boys: Always And Forever",
-            posterPath = "bEOlLKcsAbWxCMUtZL80BxvqkT4.jpg",
-            backdropPath = "bEOlLKcsAbWxCMUtZL80BxvqkT4.jpg",
-            releaseDate = "Feb 12, 2021",
-            language = "English (United Kingdom)",
-            genre = "Drama, Romance, Comedy",
-            storyLine = "Senior year of high school takes center stage as Lara Jean returns from a family trip to Korea and considers her college plans -- with and without Peter."
-        ).apply {
-            backdropBaseUrl = "https://image.tmdb.org/t/p/w500/"
-            posterBaseUrl = "https://image.tmdb.org/t/p/w500/"
-        },
-        Movie(
-            id = "MOVIE_6",
-            title = "I Care a Lot",
-            posterPath = "ems.ZW1zLXByZC1hc3NldHMvbW92aWVzL2I3ODViYjk4LTE5NDUtNDYxNi05YTUzLWI2ZmNmYWY0NGU1Zi5qcGc=",
-            backdropPath = "ems.ZW1zLXByZC1hc3NldHMvbW92aWVzL2I3ODViYjk4LTE5NDUtNDYxNi05YTUzLWI2ZmNmYWY0NGU1Zi5qcGc=",
-            releaseDate = "Feb 19, 2021",
-            language = "English (United Kingdom)",
-            genre = "Mystery And Thriller, Comedy",
-            storyLine = "Rosamund Pike stars in this comedy as a con woman who takes swindles the elderly out of their money until she comes into contact with a woman who is more cunning than she appears."
-        ).apply {
-            backdropBaseUrl = "https://resizing.flixster.com/C_n4-iDSsd3FnJVmXPUSthil4B4=/206x305/v2/https://resizing.flixster.com/4-k4CXIwxuqc4RzII8doRKzA3yQ=/"
-            posterBaseUrl = "https://resizing.flixster.com/C_n4-iDSsd3FnJVmXPUSthil4B4=/206x305/v2/https://resizing.flixster.com/4-k4CXIwxuqc4RzII8doRKzA3yQ=/"
-        },
-        Movie(
-            id = "MOVIE_7",
-            title = "NOMADLAND",
-            posterPath = "hDnSdalzjnZoveu8mpdRij8IF1u.jpg",
-            backdropPath = "hDnSdalzjnZoveu8mpdRij8IF1u.jpg",
-            releaseDate = "February 19, 2021",
-            language = "English (United Kingdom)",
-            genre = "Drama",
-            storyLine = "A woman embarks on a journey through the American West after losing everything during the recession."
-        ).apply {
-            backdropBaseUrl = "https://www.themoviedb.org/t/p/original/"
-            posterBaseUrl = "https://www.themoviedb.org/t/p/original/"
-        },
-        Movie(
-            id = "MOVIE_8",
-            title = "The Father",
-            posterPath = "TheFatherPostermainimageBig59901.jpg",
-            backdropPath = "TheFatherPostermainimageBig59901.jpg",
-            releaseDate = "Feb 26, 2021 ",
-            language = "English (United Kingdom)",
-            genre = "Drama",
-            storyLine = "Anthony (Academy Award Winner, Anthony Hopkins) is 80, mischievous, living defiantly alone and rejecting the carers that his daughter, Anne (Academy Award and Golden Globe Winner, Olivia Colman), encouragingly introduces. Yet help is also becoming a necessity for Anne; she can't make daily visits anymore and Anthony's grip on reality is unraveling. As we experience the ebb and flow of his memory, how much of his own identity and past can Anthony cling to? How does Anne cope as she grieves the loss of her father, while he still lives and breathes before her? THE FATHER warmly embraces real life, through loving reflection upon the vibrant human condition; heart-breaking and uncompromisingly poignant -- a movie that nestles in the truth of our own lives."
-        ).apply {
-            backdropBaseUrl = "https://media2.firstshowing.net/firstshowing/img11/"
-            posterBaseUrl = "https://media2.firstshowing.net/firstshowing/img11/"
-        },
-        Movie(
-            id = "MOVIE_9",
-            title = "TOM & JERRY",
-            posterPath = "ohQLO7hfiVK0ByF0hSEth3IAziI.jpg",
-            backdropPath = "ohQLO7hfiVK0ByF0hSEth3IAziI.jpg",
-            releaseDate = "Feb 26, 2021",
-            language = "English (United Kingdom)",
-            genre = "Drama",
-            storyLine = "A legendary rivalry reemerges when Jerry moves into New York City's finest hotel on the eve of the wedding of the century, forcing the desperate event planner to hire Tom to get rid of him. As mayhem ensues, the escalating cat-and-mouse battle soon threatens to destroy her career, the wedding, and possibly the hotel itself."
-        ).apply {
-            backdropBaseUrl = "https://www.themoviedb.org/t/p/original/"
-            posterBaseUrl = "https://www.themoviedb.org/t/p/original/"
-        },
-        Movie(
-            id = "MOVIE_10",
-            title = "COMING 2 AMERICA",
-            posterPath = "C2A2_2021_KeyArt_Vert_4x5_Date_Ensemble_EN_Final_ANDRE.jpg",
-            backdropPath = "C2A2_2021_KeyArt_Vert_4x5_Date_Ensemble_EN_Final_ANDRE.jpg",
-            releaseDate = "Mar 5, 2021",
-            language = "English (United Kingdom)",
-            genre = "Drama",
-            storyLine = "Set in the lush and royal country of Zamunda, newly-crowned King Akeem (Eddie Murphy) and his trusted confidante Semmi(Arsenio Hall) embark on an all-new hilarious adventure that has them traversing the globe from their great African nation to the borough of Queens, New York – where it all began."
-        ).apply {
-            backdropBaseUrl = "https://icecreamconvos.com/wp-content/uploads/2021/02/"
-            posterBaseUrl = "https://icecreamconvos.com/wp-content/uploads/2021/02/"
-        },
-        Movie(
-            id = "MOVIE_11",
-            title = "RAYA AND THE LAST DRAGON",
-            posterPath = "pJWDbagdts9qnhT7joZ0S3HxtZv.jpg",
-            backdropPath = "pJWDbagdts9qnhT7joZ0S3HxtZv.jpg",
-            releaseDate = "Mar 5, 2021",
-            language = "English (United Kingdom)",
-            genre = "Drama",
-            storyLine = "Long ago, in the fantasy world of Kumandra, humans and dragons lived together in harmony. But when sinister monsters known as the Druun threatened the land, the dragons sacrificed themselves to save humanity. Now, 500 years later, those same monsters have returned and it's up to a lone warrior, Raya, to track down the last dragon in order to finally stop the Druun for good. However, along her journey, she'll learn that it'll take more than dragon magic to save the world--it's going to take trust as well."
-        ).apply {
-            backdropBaseUrl = "https://www.themoviedb.org/t/p/original/"
-            posterBaseUrl = "https://www.themoviedb.org/t/p/original/"
-        },
-        Movie(
-            id = "MOVIE_12",
-            title = "ZACK SNYDER'S JUSTICE LEAGUE",
-            posterPath = "eG7Nbhfl5JY3M6SPnUm0tDIRuxQ.jpg",
-            backdropPath = "eG7Nbhfl5JY3M6SPnUm0tDIRuxQ.jpg",
-            releaseDate = "Mar 18, 2021",
-            language = "English (United Kingdom)",
-            genre = "Drama",
-            storyLine = "In ZACK SNYDER'S JUSTICE LEAGUE, determined to ensure Superman's (Henry Cavill) ultimate sacrifice was not in vain, Bruce Wayne (Ben Affleck) aligns forces with Diana Prince (Gal Gadot) with plans to recruit a team of metahumans to protect the world from an approaching threat of catastrophic proportions. The task proves more difficult than Bruce imagined, as each of the recruits must face the demons of their own pasts to transcend that which has held them back, allowing them to come together, finally forming an unprecedented league of heroes. Now united, Batman (Affleck), Wonder Woman (Gadot), Aquaman (Jason Momoa), Cyborg (Ray Fisher) and The Flash (Ezra Miller) may be too late to save the planet from Steppenwolf, DeSaad and Darkseid and their dreadful intentions."
-        ).apply {
-            backdropBaseUrl = "https://www.themoviedb.org/t/p/original/"
-            posterBaseUrl = "https://www.themoviedb.org/t/p/original/"
-        },
-        Movie(
-            id = "MOVIE_13",
-            title = "NOBODY",
-            posterPath = "nobody-poster-data.jpg",
-            backdropPath = "nobody-poster-data.jpg",
-            releaseDate = "Mar 26, 2021",
-            language = "English (United Kingdom)",
-            genre = "Drama",
-            storyLine = "Emmy winner Bob Odenkirk (Better Call Saul, The Post, Nebraska) stars as Hutch Mansell, an underestimated and overlooked dad and husband, taking life's indignities on the chin and never pushing back. A nobody. When two thieves break into his suburban home one night, Hutch declines to defend himself or his family, hoping to prevent serious violence. His teenage son, Blake (Gage Munroe, The Shack), is disappointed in him and his wife, Becca (Connie Nielsen, Wonder Woman), seems to pull only further away. The aftermath of the incident strikes a match to Hutch's long-simmering rage, triggering dormant instincts and propelling him on a brutal path that will surface dark secrets and lethal skills. In a barrage of fists, gunfire and squealing tires, Hutch must save his family from a dangerous adversary (famed Russian actor Aleksey Serebryakov, Amazon's McMafia)--and ensure that he will never be underestimated as a nobody again."
-        ).apply {
-            backdropBaseUrl = "https://www.8days.sg/blob/13770426/1bd56651c21d4bb79e0b9787fb2d4bf3/"
-            posterBaseUrl = "https://www.8days.sg/blob/13770426/1bd56651c21d4bb79e0b9787fb2d4bf3/"
-        },
-    )
+    const val moviesUpcomingResponseBody = """{
+  "dates": {
+    "maximum": "2021-06-16",
+    "minimum": "2021-05-26"
+  },
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/inJjDhCjfhh3RtrJWBmmDqeuSYC.jpg",
+      "genre_ids": [
+        878,
+        28,
+        18
+      ],
+      "id": 399566,
+      "original_language": "en",
+      "original_title": "Godzilla vs. Kong",
+      "overview": "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
+      "popularity": 1564.627,
+      "poster_path": "/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg",
+      "release_date": "2021-03-24",
+      "title": "Godzilla vs. Kong",
+      "video": false,
+      "vote_average": 8.1,
+      "vote_count": 5549
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/6zbKgwgaaCyyBXE4Sun4oWQfQmi.jpg",
+      "genre_ids": [
+        28,
+        53,
+        80,
+        35
+      ],
+      "id": 615457,
+      "original_language": "en",
+      "original_title": "Nobody",
+      "overview": "Hutch Mansell, a suburban dad, overlooked husband, nothing neighbor — a \"nobody.\" When two thieves break into his home one night, Hutch's unknown long-simmering rage is ignited and propels him on a brutal path that will uncover dark secrets he fought to leave behind.",
+      "popularity": 1196.803,
+      "poster_path": "/oBgWY00bEFeZ9N25wWVyuQddbAo.jpg",
+      "release_date": "2021-03-26",
+      "title": "Nobody",
+      "video": false,
+      "vote_average": 8.4,
+      "vote_count": 1523
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/lkInRiMtLgl9u9xE0By5hqf66K8.jpg",
+      "genre_ids": [
+        27
+      ],
+      "id": 632357,
+      "original_language": "en",
+      "original_title": "The Unholy",
+      "overview": "Alice, a young hearing-impaired girl who, after a supposed visitation from the Virgin Mary, is inexplicably able to hear, speak and heal the sick. As word spreads and people from near and far flock to witness her miracles, a disgraced journalist hoping to revive his career visits the small New England town to investigate. When terrifying events begin to happen all around, he starts to question if these phenomena are the works of the Virgin Mary or something much more sinister.",
+      "popularity": 1132.929,
+      "poster_path": "/b4gYVcl8pParX8AjkN90iQrWrWO.jpg",
+      "release_date": "2021-03-31",
+      "title": "The Unholy",
+      "video": false,
+      "vote_average": 5.6,
+      "vote_count": 89
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/xPpXYnCWfjkt3zzE0dpCNME1pXF.jpg",
+      "genre_ids": [
+        16,
+        28,
+        12,
+        14,
+        18
+      ],
+      "id": 635302,
+      "original_language": "ja",
+      "original_title": "劇場版「鬼滅の刃」無限列車編",
+      "overview": "Tanjirō Kamado, joined with Inosuke Hashibira, a boy raised by boars who wears a boar's head, and Zenitsu Agatsuma, a scared boy who reveals his true power when he sleeps, boards the Infinity Train on a new mission with the Fire Hashira, Kyōjurō Rengoku, to defeat a demon who has been tormenting the people and killing the demon slayers who oppose it!",
+      "popularity": 1010.159,
+      "poster_path": "/h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg",
+      "release_date": "2020-10-16",
+      "title": "Demon Slayer -Kimetsu no Yaiba- The Movie: Mugen Train",
+      "video": false,
+      "vote_average": 8.4,
+      "vote_count": 958
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/mYM8x2Atv4MaLulaV0KVJWI1Djv.jpg",
+      "genre_ids": [
+        28,
+        80,
+        53
+      ],
+      "id": 804435,
+      "original_language": "en",
+      "original_title": "Vanquish",
+      "overview": "Victoria is a young mother trying to put her dark past as a Russian drug courier behind her, but retired cop Damon forces Victoria to do his bidding by holding her daughter hostage. Now, Victoria must use guns, guts and a motorcycle to take out a series of violent gangsters—or she may never see her child again.",
+      "popularity": 809.144,
+      "poster_path": "/AoWY1gkcNzabh229Icboa1Ff0BM.jpg",
+      "release_date": "2021-04-16",
+      "title": "Vanquish",
+      "video": false,
+      "vote_average": 6.3,
+      "vote_count": 90
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/7HtvmsLrDeiAgDGa1W3m6senpfE.jpg",
+      "genre_ids": [
+        12,
+        16,
+        10751
+      ],
+      "id": 681260,
+      "original_language": "en",
+      "original_title": "Maya the Bee: The Golden Orb",
+      "overview": "When Maya, a headstrong little bee, and her best friend Willi, rescue an ant princess they find themselves in the middle of an epic bug battle that will take them to strange new worlds and test their friendship to its limits.",
+      "popularity": 763.168,
+      "poster_path": "/tMS2qcbhbkFpcwLnbUE9o9IK4HH.jpg",
+      "release_date": "2021-01-07",
+      "title": "Maya the Bee: The Golden Orb",
+      "video": false,
+      "vote_average": 6.9,
+      "vote_count": 28
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/ouOojiypBE6CD1aqcHPVq7cJf2R.jpg",
+      "genre_ids": [
+        53,
+        18,
+        28,
+        9648
+      ],
+      "id": 578701,
+      "original_language": "en",
+      "original_title": "Those Who Wish Me Dead",
+      "overview": "A young boy finds himself pursued by two assassins in the Montana wilderness with a survival expert determined to protecting him - and a forest fire threatening to consume them all.",
+      "popularity": 738.115,
+      "poster_path": "/xCEg6KowNISWvMh8GvPSxtdf9TO.jpg",
+      "release_date": "2021-05-05",
+      "title": "Those Who Wish Me Dead",
+      "video": false,
+      "vote_average": 7.2,
+      "vote_count": 172
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/ovggmAOu1IbPGTQE8lg4lBasNC7.jpg",
+      "genre_ids": [
+        878,
+        28,
+        12,
+        53
+      ],
+      "id": 412656,
+      "original_language": "en",
+      "original_title": "Chaos Walking",
+      "overview": "Two unlikely companions embark on a perilous adventure through the badlands of an unexplored planet as they try to escape a dangerous and disorienting reality, where all inner thoughts are seen and heard by everyone.",
+      "popularity": 557.859,
+      "poster_path": "/9kg73Mg8WJKlB9Y2SAJzeDKAnuB.jpg",
+      "release_date": "2021-02-24",
+      "title": "Chaos Walking",
+      "video": false,
+      "vote_average": 7.1,
+      "vote_count": 594
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/9ns9463dwOeo1CK1JU2wirL5Yi1.jpg",
+      "genre_ids": [
+        35,
+        10751,
+        16
+      ],
+      "id": 587807,
+      "original_language": "en",
+      "original_title": "Tom & Jerry",
+      "overview": "Tom the cat and Jerry the mouse get kicked out of their home and relocate to a fancy New York hotel, where a scrappy employee named Kayla will lose her job if she can’t evict Jerry before a high-class wedding at the hotel. Her solution? Hiring Tom to get rid of the pesky mouse.",
+      "popularity": 476.296,
+      "poster_path": "/8XZI9QZ7Pm3fVkigWJPbrXCMzjq.jpg",
+      "release_date": "2021-02-11",
+      "title": "Tom & Jerry",
+      "video": false,
+      "vote_average": 7.3,
+      "vote_count": 1359
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/kf456ZqeC45XTvo6W9pW5clYKfQ.jpg",
+      "genre_ids": [
+        10751,
+        16,
+        35,
+        18,
+        10402,
+        14
+      ],
+      "id": 508442,
+      "original_language": "en",
+      "original_title": "Soul",
+      "overview": "Joe Gardner is a middle school teacher with a love for jazz music. After a successful gig at the Half Note Club, he suddenly gets into an accident that separates his soul from his body and is transported to the You Seminar, a center in which souls develop and gain passions before being transported to a newborn child. Joe must enlist help from the other souls-in-training, like 22, a soul who has spent eons in the You Seminar, in order to get back to Earth.",
+      "popularity": 418.784,
+      "poster_path": "/hm58Jw4Lw8OIeECIq5qyPYhAeRJ.jpg",
+      "release_date": "2020-12-25",
+      "title": "Soul",
+      "video": false,
+      "vote_average": 8.3,
+      "vote_count": 6026
+    }
+  ],
+  "total_pages": 15,
+  "total_results": 290
+}"""
 
-    val tvShowList = listOf(
-        TvShow(
-            id = "TVSHOW_1",
-            title = "The Arrow",
-            posterPath = "Poster-Art-for-Arrow-Season-2.jpg",
-            backdropPath = "Poster-Art-for-Arrow-Season-2.jpg",
-            releaseDate = "2012",
-            language = "English",
-            genre = "Kejahatan, Drama, Misteri",
-            storyLine = "Panah adalah menceritakan kembali petualangan dari legendaris DC pahlawan Green Arrow"
-        ).apply {
-            backdropBaseUrl = "https://2.bp.blogspot.com/-Q6hvB9BOCS8/VsPUwFl1aBI/AAAAAAAAKlc/88YB9Qb2XXs/s1600/"
-            posterBaseUrl = "https://2.bp.blogspot.com/-Q6hvB9BOCS8/VsPUwFl1aBI/AAAAAAAAKlc/88YB9Qb2XXs/s1600/"
-        },
-        TvShow(
-            id = "TVSHOW_2",
-            title = "Doom Patrol",
-            posterPath = "imicPOkYP2S437QjbPvRL9zSV4a.jpg",
-            backdropPath = "imicPOkYP2S437QjbPvRL9zSV4a.jpg",
-            releaseDate = "2019",
-            language = "English",
-            genre = "Sci-fi & Fantasy, Aksi & Petualangan",
-            storyLine = "The Doom Patrol’s members each suffered horrible accidents that gave them superhuman abilities — but also left them scarred and disfigured. Traumatized and downtrodden, the team found purpose through The Chief, who brought them together to investigate the weirdest phenomena in existence — and to protect Earth from what they find."
-        ).apply {
-            backdropBaseUrl = "https://image.tmdb.org/t/p/original/"
-            posterBaseUrl = "https://image.tmdb.org/t/p/original/"
-        },
-        TvShow(
-            id = "TVSHOW_3",
-            title = "Family Guy",
-            posterPath = "q3E71oY6qgAEiw6YZIHDlHSLwer.jpg",
-            backdropPath = "q3E71oY6qgAEiw6YZIHDlHSLwer.jpg",
-            releaseDate = "1999",
-            language = "English",
-            genre = "Animasi, Komedi",
-            storyLine = "Seri animasi animasi Freakin 'Sweet yang sakit, terpelintir, dan salah, menampilkan petualangan keluarga Griffin yang disfungsional. Peter yang kikuk dan Lois yang sudah lama menderita memiliki tiga anak. Stewie (bayi yang brilian tetapi sadis yang bertekad membunuh ibunya dan mengambil alih dunia), Meg (yang tertua, dan merupakan gadis yang paling tidak populer di kota) dan Chris (anak tengah, dia tidak terlalu cerdas tetapi memiliki hasrat untuk film )."
-        ).apply {
-            backdropBaseUrl = "https://image.tmdb.org/t/p/original/"
-            posterBaseUrl = "https://image.tmdb.org/t/p/original/"
-        },
-        TvShow(
-            id = "TVSHOW_4",
-            title = "The Flash",
-            posterPath = "the-flash-2014-55f8df0e9785c.jpg",
-            backdropPath = "the-flash-2014-55f8df0e9785c.jpg",
-            releaseDate = "2014",
-            language = "English",
-            genre = "Drama, Sci-fi & Fantasy",
-            storyLine = "Setelah akselerator partikel menyebabkan badai aneh, Penyelidik CSI Barry Allen disambar petir dan jatuh koma. Beberapa bulan kemudian dia terbangun dengan kekuatan kecepatan super, memberinya kemampuan untuk bergerak melalui Central City seperti malaikat penjaga yang tak terlihat. Untuk saat ini, hanya beberapa teman dekat dan rekan yang tahu bahwa Barry secara harfiah adalah manusia tercepat, tetapi tidak lama sebelum dunia mengetahui apa yang menjadi Barry Allen ... The Flash."
-        ).apply {
-            backdropBaseUrl = "https://fanart.tv/fanart/tv/279121/tvposter/"
-            posterBaseUrl = "https://fanart.tv/fanart/tv/279121/tvposter/"
-        },
-        TvShow(
-            id = "TVSHOW_5",
-            title = "Gotham",
-            posterPath = "cd16d519007077.562d357b15a03.jpg",
-            backdropPath = "cd16d519007077.562d357b15a03.jpg",
-            releaseDate = "2014",
-            language = "English",
-            genre = "Drama, Fantasi, Kejahatan",
-            storyLine = "Semua orang tahu nama Komisaris Gordon. Dia adalah salah satu musuh terbesar dunia kejahatan, seorang pria yang reputasinya identik dengan hukum dan ketertiban. Tapi apa yang diketahui tentang kisah Gordon dan kenaikannya dari detektif pemula ke Komisaris Polisi? Apa yang diperlukan untuk menavigasi berbagai lapisan korupsi yang diam-diam memerintah Kota Gotham, tempat bertelurnya penjahat paling ikonik di dunia? Dan keadaan apa yang menciptakan mereka."
-        ).apply {
-            backdropBaseUrl = "https://mir-s3-cdn-cf.behance.net/project_modules/1400/"
-            posterBaseUrl = "https://mir-s3-cdn-cf.behance.net/project_modules/1400/"
-        },
-        TvShow(
-            id = "TVSHOW_6",
-            title = "Grey's Anatomy",
-            posterPath = "greys-anatomy-5429623632d98.jpg",
-            backdropPath = "greys-anatomy-5429623632d98.jpg",
-            releaseDate = "2005",
-            language = "English",
-            genre = "Drama",
-            storyLine = "Ikuti kehidupan pribadi dan profesional sekelompok dokter di Rumah Sakit Gray Sloan Memorial di Seattle."
-        ).apply {
-            backdropBaseUrl = "https://fanart.tv/fanart/tv/73762/tvposter/"
-            posterBaseUrl = "https://fanart.tv/fanart/tv/73762/tvposter/"
-        },
-        TvShow(
-            id = "TVSHOW_7",
-            title = "Hanna",
-            posterPath = "hanna-53a382c0908a7.jpg",
-            backdropPath = "hanna-53a382c0908a7.jpg",
-            releaseDate = "2019",
-            language = "English",
-            genre = "Aksi & Petualangan, Drama",
-            storyLine = "This thriller and coming-of-age drama follows the journey of an extraordinary young girl as she evades the relentless pursuit of an off-book CIA agent and tries to unearth the truth behind who she is. Based on the 2011 Joe Wright film."
-        ).apply {
-            backdropBaseUrl = "https://fanart.tv/fanart/movies/50456/movieposter/"
-            posterBaseUrl = "https://fanart.tv/fanart/movies/50456/movieposter/"
-        },
-        TvShow(
-            id = "TVSHOW_8",
-            title = "Naruto Shippuden",
-            posterPath = "poster-1-cc.jpg",
-            backdropPath = "poster-1-cc.jpg",
-            releaseDate = "2007",
-            language = "Japanese",
-            genre = "Animasi, Komedi, Drama",
-            storyLine = "Naruto Shippuuden adalah kelanjutan dari serial TV animasi asli Naruto. Kisah ini berkisah tentang Uzumaki Naruto yang lebih tua dan sedikit lebih matang dan upayanya untuk menyelamatkan temannya Uchiha Sasuke dari cengkeraman Shinobi seperti ular, Orochimaru. Setelah 2 setengah tahun, Naruto akhirnya kembali ke desanya Konoha, dan mulai mewujudkan ambisinya, meskipun itu tidak akan mudah, karena Ia telah mengumpulkan beberapa musuh (lebih berbahaya), seperti organisasi shinobi. ; Akatsuki."
-        ).apply {
-            backdropBaseUrl = "https://posterspy.com/wp-content/uploads/2018/03/"
-            posterBaseUrl = "https://posterspy.com/wp-content/uploads/2018/03/"
-        },
-        TvShow(
-            id = "TVSHOW_9",
-            title = "NCIS",
-            posterPath = "ncis-579c825a3d855.jpg",
-            backdropPath = "ncis-579c825a3d855.jpg",
-            releaseDate = "2003",
-            language = "English",
-            genre = "Aksi & Petualangan, Kejahatan, Drama",
-            storyLine = "From murder and espionage to terrorism and stolen submarines, a team of special agents investigates any crime that has a shred of evidence connected to Navy and Marine Corps personnel, regardless of rank or position."
-        ).apply {
-            backdropBaseUrl = "https://fanart.tv/fanart/tv/72108/seasonposter/"
-            posterBaseUrl = "https://fanart.tv/fanart/tv/72108/seasonposter/"
-        },
-        TvShow(
-            id = "TVSHOW_10",
-            title = "The Simpsons",
-            posterPath = "c7b4b0c0265a5bc34089e305f507492f.jpg",
-            backdropPath = "c7b4b0c0265a5bc34089e305f507492f.jpg",
-            releaseDate = "1989",
-            language = "English",
-            genre = "Animasi, Komedi, Keluarga, Drama",
-            storyLine = "Bertempat di Springfield, kota rata-rata di Amerika, pertunjukan ini berfokus pada kejenakaan dan petualangan sehari-hari keluarga Simpson; Homer, Marge, Bart, Lisa dan Maggie, serta ribuan pemain virtual. Sejak awal, serial ini telah menjadi ikon budaya pop, menarik ratusan selebriti menjadi bintang tamu. Acara ini juga menjadi terkenal karena satirnya yang tak kenal takut terhadap kehidupan politik, media, dan Amerika secara umum.",
-        ).apply {
-            backdropBaseUrl = "https://i.pinimg.com/736x/c7/b4/b0/"
-            posterBaseUrl = "https://i.pinimg.com/736x/c7/b4/b0/"
-        },
-    )
+    const val tvOnAirResponseBody = """{
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/jeruqNWhqRqOR1QyqdQdHunrvU5.jpg",
+      "first_air_date": "2014-10-07",
+      "genre_ids": [
+        18,
+        10765
+      ],
+      "id": 60735,
+      "name": "The Flash",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "The Flash",
+      "overview": "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \"meta-human\" who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash.",
+      "popularity": 1135.315,
+      "poster_path": "/lJA2RCMfsWoskqlQhXPSLFQGXEJ.jpg",
+      "vote_average": 7.7,
+      "vote_count": 7632
+    },
+    {
+      "backdrop_path": "/mZjZgY6ObiKtVuKVDrnS9VnuNlE.jpg",
+      "first_air_date": "2017-09-25",
+      "genre_ids": [
+        18
+      ],
+      "id": 71712,
+      "name": "The Good Doctor",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "The Good Doctor",
+      "overview": "A young surgeon with Savant syndrome is recruited into the surgical unit of a prestigious hospital. The question will arise: can a person who doesn't have the ability to relate to people actually save their lives",
+      "popularity": 1087.369,
+      "poster_path": "/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg",
+      "vote_average": 8.6,
+      "vote_count": 8413
+    },
+    {
+      "backdrop_path": "/edmk8xjGBsYVIf4QtLY9WMaMcXZ.jpg",
+      "first_air_date": "2005-03-27",
+      "genre_ids": [
+        18
+      ],
+      "id": 1416,
+      "name": "Grey's Anatomy",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Grey's Anatomy",
+      "overview": "Follows the personal and professional lives of a group of doctors at Seattle’s Grey Sloan Memorial Hospital.",
+      "popularity": 770.248,
+      "poster_path": "/clnyhPqj1SNgpAdeSS6a6fwE6Bo.jpg",
+      "vote_average": 8.2,
+      "vote_count": 6063
+    },
+    {
+      "backdrop_path": "/wkyzeBBKLhSg1Oqhky5yoiFF2hG.jpg",
+      "first_air_date": "2018-04-22",
+      "genre_ids": [
+        18
+      ],
+      "id": 79008,
+      "name": "Luis Miguel: The Series",
+      "origin_country": [
+        "MX"
+      ],
+      "original_language": "es",
+      "original_name": "Luis Miguel: La Serie",
+      "overview": "The series dramatizes the life story of Mexican superstar singer Luis Miguel, who has captivated audiences in Latin America and beyond for decades.",
+      "popularity": 627.121,
+      "poster_path": "/34FaY8qpjBAVysSfrJ1l7nrAQaD.jpg",
+      "vote_average": 8.1,
+      "vote_count": 411
+    },
+    {
+      "backdrop_path": "/sjxtIUCWR74yPPcZFfTsToepfWm.jpg",
+      "first_air_date": "2021-05-04",
+      "genre_ids": [
+        10765,
+        10759,
+        16
+      ],
+      "id": 105971,
+      "name": "The Bad Batch",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "The Bad Batch",
+      "overview": "Follow the elite and experimental Clones of the Bad Batch as they find their way in a rapidly changing galaxy in the aftermath of the Clone Wars.",
+      "popularity": 603.928,
+      "poster_path": "/WjQmEWFrOf98nT5aEfUfVYz9N2.jpg",
+      "vote_average": 9,
+      "vote_count": 179
+    },
+    {
+      "backdrop_path": "/pPKiIJEEcV0E1hpVcWRXyp73ZpX.jpg",
+      "first_air_date": "2021-02-23",
+      "genre_ids": [
+        10759,
+        10765,
+        18
+      ],
+      "id": 95057,
+      "name": "Superman & Lois",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Superman & Lois",
+      "overview": "After years of facing megalomaniacal supervillains, monsters wreaking havoc on Metropolis, and alien invaders intent on wiping out the human race, The Man of Steel aka Clark Kent and Lois Lane come face to face with one of their greatest challenges ever: dealing with all the stress, pressures and complexities that come with being working parents in today's society.",
+      "popularity": 525.307,
+      "poster_path": "/vlv1gn98GqMnKHLSh0dNciqGfBl.jpg",
+      "vote_average": 8.3,
+      "vote_count": 827
+    },
+    {
+      "backdrop_path": "/hNiGqLsiD30C194lci7VYDmciHD.jpg",
+      "first_air_date": "2017-04-26",
+      "genre_ids": [
+        10765,
+        18
+      ],
+      "id": 69478,
+      "name": "The Handmaid's Tale",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "The Handmaid's Tale",
+      "overview": "Set in a dystopian future, a woman is forced to live as a concubine under a fundamentalist theocratic dictatorship. A TV adaptation of Margaret Atwood's novel.",
+      "popularity": 494.192,
+      "poster_path": "/oIkxqt6ug5zT5ZSUUyc1Iqopf02.jpg",
+      "vote_average": 8.2,
+      "vote_count": 1338
+    },
+    {
+      "backdrop_path": "/pnyT1foDmmXTsho2DfxN2ePI8ix.jpg",
+      "first_air_date": "2018-06-12",
+      "genre_ids": [
+        18
+      ],
+      "id": 80240,
+      "name": "The Queen of Flow",
+      "origin_country": [
+        "CO"
+      ],
+      "original_language": "es",
+      "original_name": "La Reina del Flow",
+      "overview": "After spending seventeen years in prison unfairly, a talented songwriter seeks revenge on the men who sank her and killed her family.",
+      "popularity": 487.047,
+      "poster_path": "/fuVuDYrs8sxvEolnYr0wCSvtyTi.jpg",
+      "vote_average": 8,
+      "vote_count": 759
+    },
+    {
+      "backdrop_path": "/5VltHQJXdmbSD6gEJw3R8R1Kbmc.jpg",
+      "first_air_date": "2016-09-23",
+      "genre_ids": [
+        9648,
+        10765,
+        10759
+      ],
+      "id": 65820,
+      "name": "Van Helsing",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Van Helsing",
+      "overview": "Vanessa Helsing, the daughter of famous vampire hunter and Dracula nemesis Abraham Van Helsing is resurrected five years in the future to find out that vampires have taken over the world and that she possesses unique power over them. She is humanity’s last hope to lead an offensive to take back what has been lost.",
+      "popularity": 425.894,
+      "poster_path": "/r8ODGmfNbZQlNhiJl2xQENE2jsk.jpg",
+      "vote_average": 6.9,
+      "vote_count": 556
+    },
+    {
+      "backdrop_path": "/fRYwdeNjMqC30EhofPx5PlDpdun.jpg",
+      "first_air_date": "2018-10-25",
+      "genre_ids": [
+        10765,
+        18
+      ],
+      "id": 79460,
+      "name": "Legacies",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Legacies",
+      "overview": "In a place where young witches, vampires, and werewolves are nurtured to be their best selves in spite of their worst impulses, Klaus Mikaelson’s daughter, 17-year-old Hope Mikaelson, Alaric Saltzman’s twins, Lizzie and Josie Saltzman, among others, come of age into heroes and villains at The Salvatore School for the Young and Gifted.",
+      "popularity": 407.163,
+      "poster_path": "/qTZIgXrBKURBK1KrsT7fe3qwtl9.jpg",
+      "vote_average": 8.6,
+      "vote_count": 1869
+    }
+  ],
+  "total_pages": 47,
+  "total_results": 934
+}"""
 
-    val moviesResponse = listOf(
-        MovieDto(
-            id = 1,
-            title = "THE DIG",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "Jan 29, 2021",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("Drama")),
-            overview = "Ralph Fiennes and Carey Mulligan star in this Netflix original film based on true events and set in 1939. Mulligan plays a wealthy widow who hires an archaeologist (Fiennes) to excavate the burial mounds on her estate, leading to the discovery of a wealth of medieval Anglo-Saxon artifacts.",
-        ),
-        MovieDto(
-            id = 2,
-            title = "The SpongeBob MovieDto: Sponge on the Run (2021)",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "Mar 4, 2021",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("Kids And Family, Adventure, Animation, Comedy")),
-            overview = "The long-running, wildly popular animated series gets another big screen outing as the whole Spongebob Squarepants gang are back for another adventure. This time out, Spongebob and Patrick embark on a rescue mission to recover Gary, who has been taken by Poseidon, and find themselves in the mystical land of Atlantic City."
-        ),
-        MovieDto(
-            id = 3,
-            title = "Malcolm & Marie",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "February 5, 2021",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("Drama")),
-            overview = "If you feel like you’ve been wasting time during quarantine, wait until you hear about writer/director Sam Levinson, who wrote an entire movie script in six days, then called up John David Washington and Zendaya to be in that movie, and then filmed it, all during lockdown. The story follows a filmmaker and his girlfriend as they return from a movie premiere and, over the course of the evening, begin to hash out their relationship."
-        ),
-        MovieDto(
-            id = 4,
-            title = "Judas and the Black Messiah",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "Feb 12, 2021",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("History, Biography, Drama")),
-            overview = "FBI informant William O'Neal infiltrates the Illinois Black Panther Party and is tasked with keeping tabs on their charismatic leader, Chairman Fred Hampton. A career thief, O'Neal revels in the danger of manipulating both his comrades and his handler, Special Agent Roy Mitchell. Hampton's political prowess grows just as he's falling in love with fellow revolutionary Deborah Johnson. Meanwhile, a battle wages for O'Neal's soul. Will he align with the forces of good? Or subdue Hampton and The Panthers by any means, as FBI Director J. Edgar Hoover commands?"
-        ),
-        MovieDto(
-            id = 5,
-            title = "To All The Boys: Always And Forever",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "Feb 12, 2021",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("Drama, Romance, Comedy")),
-            overview = "Senior year of high school takes center stage as Lara Jean returns from a family trip to Korea and considers her college plans -- with and without Peter."
-        ),
-        MovieDto(
-            id = 6,
-            title = "I Care a Lot",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "Feb 19, 2021",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("Mystery And Thriller, Comedy")),
-            overview = "Rosamund Pike stars in this comedy as a con woman who takes swindles the elderly out of their money until she comes into contact with a woman who is more cunning than she appears."
-        ),
-        MovieDto(
-            id = 7,
-            title = "NOMADLAND",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "February 19, 2021",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("Drama")),
-            overview = "A woman embarks on a journey through the American West after losing everything during the recession."
-        ),
-        MovieDto(
-            id = 8,
-            title = "The Father",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "Feb 26, 2021 ",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("Drama")),
-            overview = "Anthony (Academy Award Winner, Anthony Hopkins) is 80, mischievous, living defiantly alone and rejecting the carers that his daughter, Anne (Academy Award and Golden Globe Winner, Olivia Colman), encouragingly introduces. Yet help is also becoming a necessity for Anne; she can't make daily visits anymore and Anthony's grip on reality is unraveling. As we experience the ebb and flow of his memory, how much of his own identity and past can Anthony cling to? How does Anne cope as she grieves the loss of her father, while he still lives and breathes before her? THE FATHER warmly embraces real life, through loving reflection upon the vibrant human condition; heart-breaking and uncompromisingly poignant -- a movie that nestles in the truth of our own lives."
-        ),
-        MovieDto(
-            id = 9,
-            title = "TOM & JERRY",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "Feb 26, 2021",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("Drama")),
-            overview = "A legendary rivalry reemerges when Jerry moves into New York City's finest hotel on the eve of the wedding of the century, forcing the desperate event planner to hire Tom to get rid of him. As mayhem ensues, the escalating cat-and-mouse battle soon threatens to destroy her career, the wedding, and possibly the hotel itself."
-        ),
-        MovieDto(
-            id = 10,
-            title = "COMING 2 AMERICA",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "Mar 5, 2021",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("Drama")),
-            overview = "Set in the lush and royal country of Zamunda, newly-crowned King Akeem (Eddie Murphy) and his trusted confidante Semmi(Arsenio Hall) embark on an all-new hilarious adventure that has them traversing the globe from their great African nation to the borough of Queens, New York – where it all began."
-        ),
-        MovieDto(
-            id = 11,
-            title = "RAYA AND THE LAST DRAGON",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "Mar 5, 2021",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("Drama")),
-            overview = "Long ago, in the fantasy world of Kumandra, humans and dragons lived together in harmony. But when sinister monsters known as the Druun threatened the land, the dragons sacrificed themselves to save humanity. Now, 500 years later, those same monsters have returned and it's up to a lone warrior, Raya, to track down the last dragon in order to finally stop the Druun for good. However, along her journey, she'll learn that it'll take more than dragon magic to save the world--it's going to take trust as well."
-        ),
-        MovieDto(
-            id = 12,
-            title = "ZACK SNYDER'S JUSTICE LEAGUE",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "Mar 18, 2021",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("Drama")),
-            overview = "In ZACK SNYDER'S JUSTICE LEAGUE, determined to ensure Superman's (Henry Cavill) ultimate sacrifice was not in vain, Bruce Wayne (Ben Affleck) aligns forces with Diana Prince (Gal Gadot) with plans to recruit a team of metahumans to protect the world from an approaching threat of catastrophic proportions. The task proves more difficult than Bruce imagined, as each of the recruits must face the demons of their own pasts to transcend that which has held them back, allowing them to come together, finally forming an unprecedented league of heroes. Now united, Batman (Affleck), Wonder Woman (Gadot), Aquaman (Jason Momoa), Cyborg (Ray Fisher) and The Flash (Ezra Miller) may be too late to save the planet from Steppenwolf, DeSaad and Darkseid and their dreadful intentions."
-        ),
-        MovieDto(
-            id = 13,
-            title = "NOBODY",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            releaseDate = "Mar 26, 2021",
-            originalLanguage = "English (United Kingdom)",
-            genres = listOf(GenreDto("Drama")),
-            overview = "Emmy winner Bob Odenkirk (Better Call Saul, The Post, Nebraska) stars as Hutch Mansell, an underestimated and overlooked dad and husband, taking life's indignities on the chin and never pushing back. A nobody. When two thieves break into his suburban home one night, Hutch declines to defend himself or his family, hoping to prevent serious violence. His teenage son, Blake (Gage Munroe, The Shack), is disappointed in him and his wife, Becca (Connie Nielsen, Wonder Woman), seems to pull only further away. The aftermath of the incident strikes a match to Hutch's long-simmering rage, triggering dormant instincts and propelling him on a brutal path that will surface dark secrets and lethal skills. In a barrage of fists, gunfire and squealing tires, Hutch must save his family from a dangerous adversary (famed Russian actor Aleksey Serebryakov, Amazon's McMafia)--and ensure that he will never be underestimated as a nobody again."
-        ),
-    )
+    val moviesResponse: List<MovieDto> = Gson().fromJson(moviesUpcomingResponseBody, MovieResponse::class.java).results!!
 
-    val tvShowListResponse = listOf(
-        TvDto(
-            id = 1,
-            name = "The Arrow",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            firstAirDate = "2012",
-            originalLanguage = "English",
-            genres = listOf(GenreDto("Kejahatan, Drama, Misteri")),
-            overview = "Panah adalah menceritakan kembali petualangan dari legendaris DC pahlawan Green Arrow"
-        ),
-        TvDto(
-            id = 2,
-            name = "Doom Patrol",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            firstAirDate = "2019",
-            originalLanguage = "English",
-            genres = listOf(GenreDto("Sci-fi & Fantasy, Aksi & Petualangan")),
-            overview = "The Doom Patrol’s members each suffered horrible accidents that gave them superhuman abilities — but also left them scarred and disfigured. Traumatized and downtrodden, the team found purpose through The Chief, who brought them together to investigate the weirdest phenomena in existence — and to protect Earth from what they find."
-        ),
-        TvDto(
-            id = 3,
-            name = "Family Guy",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            firstAirDate = "1999",
-            originalLanguage = "English",
-            genres = listOf(GenreDto("Animasi, Komedi")),
-            overview = "Seri animasi animasi Freakin 'Sweet yang sakit, terpelintir, dan salah, menampilkan petualangan keluarga Griffin yang disfungsional. Peter yang kikuk dan Lois yang sudah lama menderita memiliki tiga anak. Stewie (bayi yang brilian tetapi sadis yang bertekad membunuh ibunya dan mengambil alih dunia), Meg (yang tertua, dan merupakan gadis yang paling tidak populer di kota) dan Chris (anak tengah, dia tidak terlalu cerdas tetapi memiliki hasrat untuk film )."
-        ),
-        TvDto(
-            id = 4,
-            name = "The Flash",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            firstAirDate = "2014",
-            originalLanguage = "English",
-            genres = listOf(GenreDto("Drama, Sci-fi & Fantasy")),
-            overview = "Setelah akselerator partikel menyebabkan badai aneh, Penyelidik CSI Barry Allen disambar petir dan jatuh koma. Beberapa bulan kemudian dia terbangun dengan kekuatan kecepatan super, memberinya kemampuan untuk bergerak melalui Central City seperti malaikat penjaga yang tak terlihat. Untuk saat ini, hanya beberapa teman dekat dan rekan yang tahu bahwa Barry secara harfiah adalah manusia tercepat, tetapi tidak lama sebelum dunia mengetahui apa yang menjadi Barry Allen ... The Flash."
-        ),
-        TvDto(
-            id = 5,
-            name = "Gotham",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            firstAirDate = "2014",
-            originalLanguage = "English",
-            genres = listOf(GenreDto("Drama, Fantasi, Kejahatan")),
-            overview = "Semua orang tahu nama Komisaris Gordon. Dia adalah salah satu musuh terbesar dunia kejahatan, seorang pria yang reputasinya identik dengan hukum dan ketertiban. Tapi apa yang diketahui tentang kisah Gordon dan kenaikannya dari detektif pemula ke Komisaris Polisi? Apa yang diperlukan untuk menavigasi berbagai lapisan korupsi yang diam-diam memerintah Kota Gotham, tempat bertelurnya penjahat paling ikonik di dunia? Dan keadaan apa yang menciptakan mereka."
-        ),
-        TvDto(
-            id = 6,
-            name = "Grey's Anatomy",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            firstAirDate = "2005",
-            originalLanguage = "English",
-            genres = listOf(GenreDto("Drama")),
-            overview = "Ikuti kehidupan pribadi dan profesional sekelompok dokter di Rumah Sakit Gray Sloan Memorial di Seattle."
-        ),
-        TvDto(
-            id = 7,
-            name = "Hanna",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            firstAirDate = "2019",
-            originalLanguage = "English",
-            genres = listOf(GenreDto("Aksi & Petualangan, Drama")),
-            overview = "This thriller and coming-of-age drama follows the journey of an extraordinary young girl as she evades the relentless pursuit of an off-book CIA agent and tries to unearth the truth behind who she is. Based on the 2011 Joe Wright film."
-        ),
-        TvDto(
-            id = 8,
-            name = "Naruto Shippuden",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            firstAirDate = "2007",
-            originalLanguage = "Japanese",
-            genres = listOf(GenreDto("Animasi, Komedi, Drama")),
-            overview = "Naruto Shippuuden adalah kelanjutan dari serial TV animasi asli Naruto. Kisah ini berkisah tentang Uzumaki Naruto yang lebih tua dan sedikit lebih matang dan upayanya untuk menyelamatkan temannya Uchiha Sasuke dari cengkeraman Shinobi seperti ular, Orochimaru. Setelah 2 setengah tahun, Naruto akhirnya kembali ke desanya Konoha, dan mulai mewujudkan ambisinya, meskipun itu tidak akan mudah, karena Ia telah mengumpulkan beberapa musuh (lebih berbahaya), seperti organisasi shinobi. ; Akatsuki."
-        ),
-        TvDto(
-            id = 9,
-            name = "NCIS",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            firstAirDate = "2003",
-            originalLanguage = "English",
-            genres = listOf(GenreDto("Aksi & Petualangan, Kejahatan, Drama")),
-            overview = "From murder and espionage to terrorism and stolen submarines, a team of special agents investigates any crime that has a shred of evidence connected to Navy and Marine Corps personnel, regardless of rank or position."
-        ),
-        TvDto(
-            id = 10,
-            name = "The Simpsons",
-            posterPath = "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
-            backdropPath = "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
-            firstAirDate = "1989",
-            originalLanguage = "English",
-            genres = listOf(GenreDto("Animasi, Komedi, Keluarga, Drama")),
-            overview = "Bertempat di Springfield, kota rata-rata di Amerika, pertunjukan ini berfokus pada kejenakaan dan petualangan sehari-hari keluarga Simpson; Homer, Marge, Bart, Lisa dan Maggie, serta ribuan pemain virtual. Sejak awal, serial ini telah menjadi ikon budaya pop, menarik ratusan selebriti menjadi bintang tamu. Acara ini juga menjadi terkenal karena satirnya yang tak kenal takut terhadap kehidupan politik, media, dan Amerika secara umum.",
-        ),
-    )
+    val tvShowListResponse: List<TvDto> = Gson().fromJson(DataStore.tvOnAirResponseBody, TvResponse::class.java).results!!
+
+    val movies: List<Movie> = moviesResponse.toDomain()
+
+    val tvShowList: List<TvShow> = tvShowListResponse.toDomain()
+
+    val movieResponseBody: String = Gson().toJson(moviesResponse[0])
+    val tvShowResponseBody: String = Gson().toJson(tvShowListResponse[0])
 
 }
