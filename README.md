@@ -1,8 +1,8 @@
 Home Activity Test Scenario:
 • Pre-test
-    ◦ Mendaftarkan idling resource.
-• Pre-test
-    ◦ Membatalkan idling resource.
+    ◦ Mendaftarkan idling resource setiap proses testing dimulai .
+• Post-test
+    ◦ Membatalkan idling resource setiap proses testing selesai.
 
 • Menampilkan data movie
     ◦ Pindah ke tab movie.
