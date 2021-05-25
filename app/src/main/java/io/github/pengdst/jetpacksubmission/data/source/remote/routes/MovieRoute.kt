@@ -5,6 +5,7 @@ import io.github.pengdst.jetpacksubmission.data.source.remote.models.TvDto
 import io.github.pengdst.jetpacksubmission.data.source.remote.response.MovieResponse
 import io.github.pengdst.jetpacksubmission.data.source.remote.response.TvResponse
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -19,19 +20,19 @@ import retrofit2.http.Path
 interface MovieRoute {
 
     @GET("movie/upcoming")
-    fun getUpcomingMovies(): Call<MovieResponse>
+    suspend fun getUpcomingMovies(): Response<MovieResponse>
 
     @GET("movie/{movie_id}}")
-    fun getMovie(
+    suspend fun getMovie(
         @Path("movie_id") movieId: String,
-    ): Call<MovieDto>
+    ): Response<MovieDto>
 
     @GET("tv/on_the_air")
-    fun getTvOnAir(): Call<TvResponse>
+    suspend fun getTvOnAir(): Response<TvResponse>
 
     @GET("tv/{tv_id}}")
-    fun getTv(
+    suspend fun getTv(
         @Path("tv_id") tvId: String,
-    ): Call<TvDto>
+    ): Response<TvDto>
 
 }
