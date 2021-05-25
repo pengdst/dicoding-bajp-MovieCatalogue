@@ -64,6 +64,7 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:${versions.mockwebserver}"
 
     //Mockito
     testImplementation "org.mockito:mockito-core:${versions.mockito}"
