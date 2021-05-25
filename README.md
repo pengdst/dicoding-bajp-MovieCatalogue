@@ -19,11 +19,6 @@ Home Activity Test Scenario:
     ◦ Memastikan tv_genre dalam keadaan tampil.
     ◦ Memastikan tv_release_date dalam keadaan tampil.
     ◦ Memastikan tv_language dalam keadaan tampil.
-    ◦ Memastikan TextView untuk title tampil sesuai dengan yang diharapkan.
-    ◦ Memastikan TextView untuk releaseDate tampil sesuai dengan yang diharapkan.
-    ◦ Memastikan TextView untuk genre tampil sesuai dengan yang diharapkan.
-    ◦ Memastikan TextView untuk storyLine tampil sesuai dengan yang diharapkan.
-    ◦ Memastikan TextView untuk language tampil sesuai dengan yang diharapkan.
     
 • Menampilkan data tv show
     ◦ Pindah ke tab tv show.
@@ -41,8 +36,3 @@ Home Activity Test Scenario:
     ◦ Memastikan tv_genre dalam keadaan tampil.
     ◦ Memastikan tv_release_date dalam keadaan tampil.
     ◦ Memastikan tv_language dalam keadaan tampil.
-    ◦ Memastikan TextView untuk title tampil sesuai dengan yang diharapkan.
-    ◦ Memastikan TextView untuk storyLine tampil sesuai dengan yang diharapkan.
-    ◦ Memastikan TextView untuk genre tampil sesuai dengan yang diharapkan.
-    ◦ Memastikan TextView untuk releaseDate tampil sesuai dengan yang diharapkan.
-    ◦ Memastikan TextView untuk language tampil sesuai dengan yang diharapkan.
