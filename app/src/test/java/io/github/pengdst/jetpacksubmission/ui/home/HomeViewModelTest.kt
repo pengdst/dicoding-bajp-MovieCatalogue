@@ -1,14 +1,16 @@
 package io.github.pengdst.jetpacksubmission.ui.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import io.github.pengdst.jetpacksubmission.data.repository.MovieRepositoryImpl
 import io.github.pengdst.jetpacksubmission.data.source.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.data.source.domain.models.TvShow
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.LiveDataTestUtil
+import io.github.pengdst.jetpacksubmission.utils.MainCoroutineRule
 import junit.framework.TestCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -26,10 +28,12 @@ import org.mockito.junit.MockitoJUnitRunner
  * - LinkedIn https://linkedin.com/in/pengdst
  */
 
+@ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class HomeViewModelTest : TestCase() {
 
     @get:Rule var instantTaskExecutorRule = InstantTaskExecutorRule()
+    @get:Rule var mainCoroutineRule = MainCoroutineRule()
 
     @Mock private lateinit var repository: MovieRepositoryImpl
     @Mock private lateinit var movieListObserver: Observer<List<Movie>>
@@ -46,10 +50,8 @@ class HomeViewModelTest : TestCase() {
     }
 
     @Test
-    fun testGetMovies() {
-        val lMovies = MutableLiveData(dummyMovieList)
-
-        Mockito.`when`(repository.getUpcomingMovies()).thenReturn(lMovies)
+    fun testGetMovies() = runBlockingTest {
+        Mockito.`when`(repository.getUpcomingMovies()).thenReturn(dummyMovieList)
         val movies = LiveDataTestUtil.getValue(viewModel.getMovies())
         Mockito.verify(repository).getUpcomingMovies()
 
@@ -62,10 +64,8 @@ class HomeViewModelTest : TestCase() {
     }
 
     @Test
-    fun testGetTvShowList() {
-        val lTvList = MutableLiveData(dummyTvShowList)
-
-        Mockito.`when`(repository.getTvOnAir()).thenReturn(lTvList)
+    fun testGetTvShowList() = runBlockingTest {
+        Mockito.`when`(repository.getTvOnAir()).thenReturn(dummyTvShowList)
         val tvShow = LiveDataTestUtil.getValue(viewModel.getTvShowList())
         Mockito.verify(repository).getTvOnAir()
 
