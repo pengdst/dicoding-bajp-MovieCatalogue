@@ -1,4 +1,4 @@
-package io.github.pengdst.jetpacksubmission.data.source.remote
+package io.github.pengdst.jetpacksubmission.data.source.remote.source
 
 import io.github.pengdst.jetpacksubmission.data.source.remote.models.MovieDto
 import io.github.pengdst.jetpacksubmission.data.source.remote.models.TvDto

@@ -2,7 +2,7 @@ package io.github.pengdst.jetpacksubmission.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.verify
-import io.github.pengdst.jetpacksubmission.data.source.remote.MovieRemoteSource
+import io.github.pengdst.jetpacksubmission.data.source.remote.source.MovieRemoteSource
 import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.MovieMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.TvMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.source.remote.response.MovieResponse

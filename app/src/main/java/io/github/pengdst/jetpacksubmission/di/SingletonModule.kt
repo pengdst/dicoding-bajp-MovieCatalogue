@@ -6,7 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.pengdst.jetpacksubmission.data.repository.MovieRepository
 import io.github.pengdst.jetpacksubmission.data.repository.MovieRepositoryImpl
-import io.github.pengdst.jetpacksubmission.data.source.remote.MovieRemoteSource
+import io.github.pengdst.jetpacksubmission.data.source.remote.source.MovieRemoteSource
 import io.github.pengdst.jetpacksubmission.data.source.remote.RetrofitBuilder
 import io.github.pengdst.jetpacksubmission.data.source.remote.routes.MovieRoute
 import retrofit2.Retrofit

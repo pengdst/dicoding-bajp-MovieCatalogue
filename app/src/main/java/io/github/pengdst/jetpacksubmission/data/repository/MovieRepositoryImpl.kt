@@ -1,7 +1,7 @@
 package io.github.pengdst.jetpacksubmission.data.repository
 
-import io.github.pengdst.jetpacksubmission.data.source.remote.MovieRemoteSource
-import io.github.pengdst.jetpacksubmission.data.source.remote.SafeRemoteSource
+import io.github.pengdst.jetpacksubmission.data.source.remote.source.MovieRemoteSource
+import io.github.pengdst.jetpacksubmission.data.source.remote.source.SafeRemoteSource
 import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.MovieMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.TvMapper.toDomain
 import javax.inject.Inject
