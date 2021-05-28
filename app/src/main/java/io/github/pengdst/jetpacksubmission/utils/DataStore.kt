@@ -1,13 +1,12 @@
 package io.github.pengdst.jetpacksubmission.utils
 
 import com.google.gson.Gson
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.Movie
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.TvShow
+import io.github.pengdst.jetpacksubmission.domain.models.Movie
+import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.MovieMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.TvMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.source.remote.models.MovieDto
 import io.github.pengdst.jetpacksubmission.data.source.remote.models.TvDto
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.GenreDto
 import io.github.pengdst.jetpacksubmission.data.source.remote.response.MovieResponse
 import io.github.pengdst.jetpacksubmission.data.source.remote.response.TvResponse
 
@@ -450,7 +449,7 @@ object DataStore {
 
     val moviesResponse: List<MovieDto> = Gson().fromJson(moviesUpcomingResponseBody, MovieResponse::class.java).results!!
 
-    val tvShowListResponse: List<TvDto> = Gson().fromJson(DataStore.tvOnAirResponseBody, TvResponse::class.java).results!!
+    val tvShowListResponse: List<TvDto> = Gson().fromJson(tvOnAirResponseBody, TvResponse::class.java).results!!
 
     val movies: List<Movie> = moviesResponse.toDomain()
 

@@ -3,8 +3,8 @@ package io.github.pengdst.jetpacksubmission.ui.detail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import io.github.pengdst.jetpacksubmission.data.repository.MovieRepositoryImpl
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.Movie
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.TvShow
+import io.github.pengdst.jetpacksubmission.domain.models.Movie
+import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.MainCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi

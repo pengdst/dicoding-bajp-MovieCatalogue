@@ -1,4 +1,4 @@
-package io.github.pengdst.jetpacksubmission.data.source.domain.models
+package io.github.pengdst.jetpacksubmission.domain.models
 
 import androidx.recyclerview.widget.DiffUtil
 import io.github.pengdst.jetpacksubmission.data.constants.ApiConst.IMAGE_URL_ORIGINAL

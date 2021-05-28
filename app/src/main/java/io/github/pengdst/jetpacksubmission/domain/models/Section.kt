@@ -1,4 +1,4 @@
-package io.github.pengdst.jetpacksubmission.data.source.domain.models
+package io.github.pengdst.jetpacksubmission.domain.models
 
 import androidx.fragment.app.Fragment
 

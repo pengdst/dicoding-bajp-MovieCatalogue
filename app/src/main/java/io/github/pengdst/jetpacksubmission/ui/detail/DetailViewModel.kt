@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.pengdst.jetpacksubmission.data.repository.MovieRepository
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.Movie
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.TvShow
+import io.github.pengdst.jetpacksubmission.domain.models.Movie
+import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

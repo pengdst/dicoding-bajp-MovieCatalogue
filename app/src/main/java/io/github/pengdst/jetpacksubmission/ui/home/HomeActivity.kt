@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.pengdst.jetpacksubmission.R
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.Section
+import io.github.pengdst.jetpacksubmission.domain.models.Section
 import io.github.pengdst.jetpacksubmission.databinding.ActivityHomeBinding
 import io.github.pengdst.jetpacksubmission.ui.detail.DetailActivity
 import io.github.pengdst.jetpacksubmission.ui.home.sections.SectionsPagerAdapter

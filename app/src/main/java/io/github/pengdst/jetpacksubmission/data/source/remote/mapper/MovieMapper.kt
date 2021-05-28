@@ -1,6 +1,6 @@
 package io.github.pengdst.jetpacksubmission.data.source.remote.mapper
 
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.Movie
+import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.data.source.remote.models.MovieDto
 
 /**

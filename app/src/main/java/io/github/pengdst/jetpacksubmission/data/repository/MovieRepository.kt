@@ -1,7 +1,7 @@
 package io.github.pengdst.jetpacksubmission.data.repository
 
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.Movie
-import io.github.pengdst.jetpacksubmission.data.source.domain.models.TvShow
+import io.github.pengdst.jetpacksubmission.domain.models.Movie
+import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 
 /**
  * Created on 5/19/21 by Pengkuh Dwi Septiandi (@pengdst)
