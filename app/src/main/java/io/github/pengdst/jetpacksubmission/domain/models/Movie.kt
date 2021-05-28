@@ -23,13 +23,16 @@ data class Movie(
 ) {
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<Movie>() {
-            override fun areItemsTheSame(oldItem: Movie, newItem: Movie) = oldItem.title == newItem.title
-            override fun areContentsTheSame(oldItem: Movie, newItem: Movie) = oldItem.hashCode() == newItem.hashCode()
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie) =
+                oldItem.title == newItem.title
+
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie) =
+                oldItem.hashCode() == newItem.hashCode()
         }
     }
 
     var posterBaseUrl = IMAGE_URL_W500
     var backdropBaseUrl = IMAGE_URL_ORIGINAL
-    val imagePosterUrl: String get() = posterBaseUrl+posterPath
-    val imageBackdropUrl: String get() = backdropBaseUrl+backdropPath
+    val imagePosterUrl: String get() = posterBaseUrl + posterPath
+    val imageBackdropUrl: String get() = backdropBaseUrl + backdropPath
 }

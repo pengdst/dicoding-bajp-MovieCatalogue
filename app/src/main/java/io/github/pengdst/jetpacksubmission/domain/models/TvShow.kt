@@ -19,16 +19,19 @@ data class TvShow(
     val language: String,
     val genre: String,
     val storyLine: String,
-){
+) {
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<TvShow>() {
-            override fun areItemsTheSame(oldItem: TvShow, newItem: TvShow) = oldItem.title == newItem.title
-            override fun areContentsTheSame(oldItem: TvShow, newItem: TvShow) = oldItem.hashCode() == newItem.hashCode()
+            override fun areItemsTheSame(oldItem: TvShow, newItem: TvShow) =
+                oldItem.title == newItem.title
+
+            override fun areContentsTheSame(oldItem: TvShow, newItem: TvShow) =
+                oldItem.hashCode() == newItem.hashCode()
         }
     }
 
     var posterBaseUrl = ApiConst.IMAGE_URL_W500
     var backdropBaseUrl = ApiConst.IMAGE_URL_ORIGINAL
-    val imagePosterUrl: String get() = posterBaseUrl+posterPath
-    val imageBackdropUrl: String get() = backdropBaseUrl+backdropPath
+    val imagePosterUrl: String get() = posterBaseUrl + posterPath
+    val imageBackdropUrl: String get() = backdropBaseUrl + backdropPath
 }
