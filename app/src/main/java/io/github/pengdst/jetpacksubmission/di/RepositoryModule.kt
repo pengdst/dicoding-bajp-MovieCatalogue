@@ -1,7 +1,7 @@
 package io.github.pengdst.jetpacksubmission.di
 
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.pengdst.jetpacksubmission.data.repository.MovieRepositoryImpl
@@ -19,9 +19,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-    
+
     @Singleton
-    @Provides
+    @Binds
     abstract fun bindMovieRepository(movieRepositoryImpl: MovieRepositoryImpl): MovieRepository
 
 }
