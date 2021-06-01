@@ -10,5 +10,5 @@ package io.github.pengdst.jetpacksubmission.data.vo
 sealed class Resource<T> {
     class Success<T>(val data: T,val  message: String): Resource<T>()
     class Error<T>(val data: T?, val message: String, val throwable: Throwable? = null): Resource<T>()
-    object Loading: Resource<Any>()
+    class Loading<T>: Resource<T>()
 }
