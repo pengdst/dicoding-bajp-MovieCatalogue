@@ -12,7 +12,6 @@ import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.databinding.ActivityDetailBinding
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.longToast
-import io.github.pengdst.jetpacksubmission.utils.shortToast
 import io.github.pengdst.libs.ui.activity.viewbinding.ActivityViewBindingDelegate.Companion.viewBindings
 
 @AndroidEntryPoint
@@ -45,6 +44,7 @@ class DetailActivity : AppCompatActivity() {
         binding.ltLoading.isVisible = true
         when (extras?.getString(EXTRA_CONTENT_TYPE)) {
             DataStore.TYPE_MOVIE -> viewModel.getMovie().observe(this){
+                showLoading(false)
                 when(it){
                     is Resource.Success -> populateDetail(
                         title = it.data.title,
@@ -60,6 +60,7 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
             DataStore.TYPE_TV_SHOW -> viewModel.getTvShow().observe(this){
+                showLoading(false)
                 when(it){
                     is Resource.Success -> populateDetail(
                         title = it.data.title,
@@ -71,12 +72,16 @@ class DetailActivity : AppCompatActivity() {
                         backdropUrl = it.data.imageBackdropUrl
                     )
                     is Resource.Error -> longToast(it.message)
-                    else -> Unit
+                    is Resource.Loading -> showLoading(true)
                 }
             }
             else -> Unit
         }
 
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.ltLoading.isVisible = isLoading
     }
 
     private fun populateDetail(
@@ -109,8 +114,6 @@ class DetailActivity : AppCompatActivity() {
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_baseline_broken_image_24)
                 .into(ivThumbnail)
-
-            ltLoading.isVisible = false
         }
     }
 

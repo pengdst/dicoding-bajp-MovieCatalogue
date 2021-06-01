@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,12 +44,17 @@ class MovieListFragment : Fragment() {
 
         setupRecyclerView()
         viewModel.getMovies().observe(viewLifecycleOwner){
+            showLoading(false)
             when(it){
                 is Resource.Success -> movieListAdapter.submitList(it.data)
                 is Resource.Error -> context.longToast(it.message)
-                else -> Unit
+                is Resource.Loading -> showLoading(true)
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.ltLoading.isVisible = isLoading
     }
 
     private fun setupRecyclerView(){
