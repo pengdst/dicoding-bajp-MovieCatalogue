@@ -2,11 +2,11 @@ package io.github.pengdst.jetpacksubmission.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.verify
-import io.github.pengdst.jetpacksubmission.data.source.remote.source.MovieRemoteSource
-import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.MovieMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.TvMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.source.remote.response.MovieResponse
-import io.github.pengdst.jetpacksubmission.data.source.remote.response.TvResponse
+import io.github.pengdst.jetpacksubmission.data.remote.source.MovieRemoteSource
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.MovieResponse
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.TvResponse
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest

@@ -1,4 +1,4 @@
-package io.github.pengdst.jetpacksubmission.data.repository
+package io.github.pengdst.jetpacksubmission.domain.repository
 
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow

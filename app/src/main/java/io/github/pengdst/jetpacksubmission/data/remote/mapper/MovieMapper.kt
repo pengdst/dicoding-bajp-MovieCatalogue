@@ -1,7 +1,7 @@
-package io.github.pengdst.jetpacksubmission.data.source.remote.mapper
+package io.github.pengdst.jetpacksubmission.data.remote.mapper
 
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.MovieDto
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.MovieDto
 
 /**
  * Created on 5/25/21 by Pengkuh Dwi Septiandi (@pengdst)

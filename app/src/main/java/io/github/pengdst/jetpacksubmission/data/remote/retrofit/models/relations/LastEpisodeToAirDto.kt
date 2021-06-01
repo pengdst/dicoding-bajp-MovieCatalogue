@@ -1,8 +1,8 @@
-package io.github.pengdst.jetpacksubmission.data.source.remote.models.relations
+package io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.relations
 
 import com.google.gson.annotations.SerializedName
 
-data class NextEpisodeToAirDto(
+data class LastEpisodeToAirDto(
 
 	@field:SerializedName("production_code")
 	val productionCode: String? = null,
@@ -29,7 +29,7 @@ data class NextEpisodeToAirDto(
 	val id: Int? = null,
 
 	@field:SerializedName("still_path")
-	val stillPath: Any? = null,
+	val stillPath: String? = null,
 
 	@field:SerializedName("vote_count")
 	val voteCount: Int? = null

@@ -4,11 +4,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.github.pengdst.jetpacksubmission.data.repository.MovieRepository
+import io.github.pengdst.jetpacksubmission.domain.repository.MovieRepository
 import io.github.pengdst.jetpacksubmission.data.repository.MovieRepositoryImpl
-import io.github.pengdst.jetpacksubmission.data.source.remote.source.MovieRemoteSource
-import io.github.pengdst.jetpacksubmission.data.source.remote.RetrofitBuilder
-import io.github.pengdst.jetpacksubmission.data.source.remote.routes.MovieRoute
+import io.github.pengdst.jetpacksubmission.data.remote.source.MovieRemoteSource
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.RetrofitBuilder
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.routes.MovieRoute
 import retrofit2.Retrofit
 import javax.inject.Singleton
 

@@ -1,4 +1,4 @@
-package io.github.pengdst.jetpacksubmission.data.source.remote
+package io.github.pengdst.jetpacksubmission.data.remote.retrofit
 
 import io.github.pengdst.jetpacksubmission.BuildConfig
 import okhttp3.HttpUrl

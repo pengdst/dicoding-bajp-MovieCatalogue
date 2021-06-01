@@ -1,10 +1,9 @@
-package io.github.pengdst.jetpacksubmission.data.source.remote.routes
+package io.github.pengdst.jetpacksubmission.data.remote.retrofit.routes
 
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.MovieDto
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.TvDto
-import io.github.pengdst.jetpacksubmission.data.source.remote.response.MovieResponse
-import io.github.pengdst.jetpacksubmission.data.source.remote.response.TvResponse
-import retrofit2.Call
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.MovieDto
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.TvDto
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.MovieResponse
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.TvResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

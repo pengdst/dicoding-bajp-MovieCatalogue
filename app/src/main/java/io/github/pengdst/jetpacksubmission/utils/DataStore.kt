@@ -3,12 +3,12 @@ package io.github.pengdst.jetpacksubmission.utils
 import com.google.gson.Gson
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
-import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.MovieMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.source.remote.mapper.TvMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.MovieDto
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.TvDto
-import io.github.pengdst.jetpacksubmission.data.source.remote.response.MovieResponse
-import io.github.pengdst.jetpacksubmission.data.source.remote.response.TvResponse
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.MovieDto
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.TvDto
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.MovieResponse
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.TvResponse
 
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)

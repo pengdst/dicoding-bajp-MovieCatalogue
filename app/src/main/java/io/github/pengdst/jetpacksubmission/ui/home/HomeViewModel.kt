@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.github.pengdst.jetpacksubmission.data.repository.MovieRepository
+import io.github.pengdst.jetpacksubmission.domain.repository.MovieRepository
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 import kotlinx.coroutines.launch

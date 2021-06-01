@@ -1,7 +1,7 @@
-package io.github.pengdst.jetpacksubmission.data.source.remote.models
+package io.github.pengdst.jetpacksubmission.data.remote.retrofit.models
 
 import com.google.gson.annotations.SerializedName
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.*
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.relations.*
 
 data class TvDto(
 

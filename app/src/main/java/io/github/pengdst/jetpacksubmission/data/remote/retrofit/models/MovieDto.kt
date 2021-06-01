@@ -1,10 +1,10 @@
-package io.github.pengdst.jetpacksubmission.data.source.remote.models
+package io.github.pengdst.jetpacksubmission.data.remote.retrofit.models
 
 import com.google.gson.annotations.SerializedName
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.GenreDto
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.ProductionCompanyDto
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.ProductionCountryDto
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.relations.SpokenLanguageDto
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.relations.GenreDto
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.relations.ProductionCompanyDto
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.relations.ProductionCountryDto
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.relations.SpokenLanguageDto
 
 data class MovieDto(
 

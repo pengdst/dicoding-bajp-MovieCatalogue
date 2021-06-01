@@ -1,4 +1,4 @@
-package io.github.pengdst.jetpacksubmission.data.source.remote.source
+package io.github.pengdst.jetpacksubmission.data.remote.source
 
 import android.util.Log
 import retrofit2.Response

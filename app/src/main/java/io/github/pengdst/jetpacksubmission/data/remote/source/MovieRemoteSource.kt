@@ -1,10 +1,10 @@
-package io.github.pengdst.jetpacksubmission.data.source.remote.source
+package io.github.pengdst.jetpacksubmission.data.remote.source
 
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.MovieDto
-import io.github.pengdst.jetpacksubmission.data.source.remote.models.TvDto
-import io.github.pengdst.jetpacksubmission.data.source.remote.response.MovieResponse
-import io.github.pengdst.jetpacksubmission.data.source.remote.response.TvResponse
-import io.github.pengdst.jetpacksubmission.data.source.remote.routes.MovieRoute
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.MovieDto
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.TvDto
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.MovieResponse
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.TvResponse
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.routes.MovieRoute
 import io.github.pengdst.jetpacksubmission.utils.EspressoIdlingResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
