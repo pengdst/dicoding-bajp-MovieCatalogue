@@ -31,6 +31,7 @@ class DetailViewModel @Inject constructor(
 
     fun getMovie(): LiveData<Resource<Movie>> {
         val result = MutableLiveData<Resource<Movie>>()
+        result.postValue(Resource.Loading())
         viewModelScope.launch {
             result.postValue(getDetailMovieUsecase.run(GetDetailMovieUsecase.Params(contentId)))
         }
@@ -39,6 +40,7 @@ class DetailViewModel @Inject constructor(
 
     fun getTvShow(): LiveData<Resource<TvShow>> {
         val result = MutableLiveData<Resource<TvShow>>()
+        result.postValue(Resource.Loading())
         viewModelScope.launch {
             result.postValue(getDetailTvUsecase.run(GetDetailTvUsecase.Params(contentId)))
         }

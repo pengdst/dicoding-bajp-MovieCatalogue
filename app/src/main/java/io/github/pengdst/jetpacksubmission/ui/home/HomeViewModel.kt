@@ -30,6 +30,7 @@ class HomeViewModel @Inject constructor(
     fun getMovies(): LiveData<Resource<List<Movie>>> {
         val result = MutableLiveData<Resource<List<Movie>>>()
 
+        result.postValue(Resource.Loading())
         viewModelScope.launch {
             result.postValue(getUpcomingMoviesUsecase.run(GetUpcomingMoviesUsecase.Companion))
         }
@@ -40,6 +41,7 @@ class HomeViewModel @Inject constructor(
     fun getTvShowList(): LiveData<Resource<List<TvShow>>> {
         val result = MutableLiveData<Resource<List<TvShow>>>()
 
+        result.postValue(Resource.Loading())
         viewModelScope.launch {
             result.postValue(getTvOnAirUsecase.run(GetTvOnAirUsecase.Companion))
         }
