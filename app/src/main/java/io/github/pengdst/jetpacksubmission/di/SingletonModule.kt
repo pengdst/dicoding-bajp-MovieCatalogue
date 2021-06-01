@@ -36,8 +36,4 @@ object SingletonModule {
     @Singleton
     fun provideMovieRemoteSource(route: MovieRoute) = MovieRemoteSource(route)
 
-    @Provides
-    @Singleton
-    fun provideMovieRepository(remote: MovieRemoteSource): MovieRepository = MovieRepositoryImpl(remote)
-
 }
