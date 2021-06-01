@@ -8,9 +8,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.pengdst.jetpacksubmission.R
+import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.databinding.ActivityDetailBinding
 import io.github.pengdst.jetpacksubmission.utils.DataStore
-import io.github.pengdst.libs.ui.extensions.viewBindings
+import io.github.pengdst.jetpacksubmission.utils.longToast
+import io.github.pengdst.jetpacksubmission.utils.shortToast
+import io.github.pengdst.libs.ui.activity.viewbinding.ActivityViewBindingDelegate.Companion.viewBindings
 
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
@@ -42,26 +45,34 @@ class DetailActivity : AppCompatActivity() {
         binding.ltLoading.isVisible = true
         when (extras?.getString(EXTRA_CONTENT_TYPE)) {
             DataStore.TYPE_MOVIE -> viewModel.getMovie().observe(this){
-                populateDetail(
-                    title = it.title,
-                    genre = it.genre,
-                    language = it.language,
-                    releaseDate = it.releaseDate,
-                    storyLine = it.storyLine,
-                    posterUrl = it.imagePosterUrl,
-                    backdropUrl = it.imageBackdropUrl
-                )
+                when(it){
+                    is Resource.Success -> populateDetail(
+                        title = it.data.title,
+                        genre = it.data.genre,
+                        language = it.data.language,
+                        releaseDate = it.data.releaseDate,
+                        storyLine = it.data.storyLine,
+                        posterUrl = it.data.imagePosterUrl,
+                        backdropUrl = it.data.imageBackdropUrl
+                    )
+                    is Resource.Error -> longToast(it.message)
+                    else -> Unit
+                }
             }
             DataStore.TYPE_TV_SHOW -> viewModel.getTvShow().observe(this){
-                populateDetail(
-                    title = it.title,
-                    genre = it.genre,
-                    language = it.language,
-                    releaseDate = it.releaseDate,
-                    storyLine = it.storyLine,
-                    posterUrl = it.imagePosterUrl,
-                    backdropUrl = it.imageBackdropUrl
-                )
+                when(it){
+                    is Resource.Success -> populateDetail(
+                        title = it.data.title,
+                        genre = it.data.genre,
+                        language = it.data.language,
+                        releaseDate = it.data.releaseDate,
+                        storyLine = it.data.storyLine,
+                        posterUrl = it.data.imagePosterUrl,
+                        backdropUrl = it.data.imageBackdropUrl
+                    )
+                    is Resource.Error -> longToast(it.message)
+                    else -> Unit
+                }
             }
             else -> Unit
         }

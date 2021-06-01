@@ -11,7 +11,7 @@ import io.github.pengdst.jetpacksubmission.ui.detail.DetailActivity
 import io.github.pengdst.jetpacksubmission.ui.home.sections.SectionsPagerAdapter
 import io.github.pengdst.jetpacksubmission.ui.home.sections.movie.MovieListFragment
 import io.github.pengdst.jetpacksubmission.ui.home.sections.tv.TvShowListFragment
-import io.github.pengdst.libs.ui.extensions.viewBindings
+import io.github.pengdst.libs.ui.activity.viewbinding.ActivityViewBindingDelegate.Companion.viewBindings
 import javax.inject.Inject
 
 @AndroidEntryPoint

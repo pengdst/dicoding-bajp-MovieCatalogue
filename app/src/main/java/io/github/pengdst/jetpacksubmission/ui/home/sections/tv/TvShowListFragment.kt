@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.databinding.FragmentTvShowListBinding
 import io.github.pengdst.jetpacksubmission.ui.home.ContentCallback
 import io.github.pengdst.jetpacksubmission.ui.home.HomeViewModel
 import io.github.pengdst.jetpacksubmission.utils.DataStore
-import io.github.pengdst.libs.ui.extensions.viewBindings
+import io.github.pengdst.jetpacksubmission.utils.longToast
+import io.github.pengdst.libs.ui.fragment.viewbinding.FragmentViewBindingDelegate.Companion.viewBindings
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -41,7 +43,11 @@ class TvShowListFragment : Fragment() {
 
         setupRecyclerView()
         viewModel.getTvShowList().observe(viewLifecycleOwner){
-            tvShowListAdapter.submitList(it)
+            when(it){
+                is Resource.Success -> tvShowListAdapter.submitList(it.data)
+                is Resource.Error -> context.longToast(it.message)
+                else -> Unit
+            }
         }
     }
 

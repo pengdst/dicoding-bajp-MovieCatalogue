@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.github.pengdst.jetpacksubmission.domain.repository.MovieRepository
+import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
+import io.github.pengdst.jetpacksubmission.domain.usecase.GetDetailMovieUsecase
+import io.github.pengdst.jetpacksubmission.domain.usecase.GetDetailTvUsecase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,23 +23,24 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: MovieRepository
+    private val getDetailMovieUsecase: GetDetailMovieUsecase,
+    private val getDetailTvUsecase: GetDetailTvUsecase
 ) : ViewModel() {
 
     private var contentId: String = ""
 
-    fun getMovie(): LiveData<Movie> {
-        val result = MutableLiveData<Movie>()
+    fun getMovie(): LiveData<Resource<Movie>> {
+        val result = MutableLiveData<Resource<Movie>>()
         viewModelScope.launch {
-            result.postValue(repository.getMovie(contentId))
+            result.postValue(getDetailMovieUsecase.run(GetDetailMovieUsecase.Params(contentId)))
         }
         return result
     }
 
-    fun getTvShow(): LiveData<TvShow> {
-        val result = MutableLiveData<TvShow>()
+    fun getTvShow(): LiveData<Resource<TvShow>> {
+        val result = MutableLiveData<Resource<TvShow>>()
         viewModelScope.launch {
-            result.postValue(repository.getTv(contentId))
+            result.postValue(getDetailTvUsecase.run(GetDetailTvUsecase.Params(contentId)))
         }
         return result
     }
