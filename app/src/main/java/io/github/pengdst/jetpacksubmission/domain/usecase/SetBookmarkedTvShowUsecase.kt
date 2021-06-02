@@ -1,6 +1,6 @@
 package io.github.pengdst.jetpacksubmission.domain.usecase
 
-import io.github.pengdst.jetpacksubmission.core.UseCase
+import io.github.pengdst.jetpacksubmission.core.SuspendUseCase
 import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
 import io.github.pengdst.jetpacksubmission.domain.repository.MovieRepository
 import javax.inject.Inject
@@ -12,7 +12,7 @@ import javax.inject.Inject
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-class SetBookmarkedTvShowUsecase @Inject constructor(private val repository: MovieRepository): UseCase<Unit, SetBookmarkedTvShowUsecase.Params>() {
+class SetBookmarkedTvShowUsecase @Inject constructor(private val repository: MovieRepository): SuspendUseCase<Unit, SetBookmarkedTvShowUsecase.Params>() {
     data class Params(val tvShowEntity: TvShowEntity)
-    override fun run(params: Params) = repository.setBookmarkedTvShow(params.tvShowEntity)
+    override suspend fun run(params: Params) = repository.setBookmarkedTvShow(params.tvShowEntity)
 }
