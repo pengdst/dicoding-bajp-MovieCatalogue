@@ -10,6 +10,7 @@
     tools:keep="@layout/activity_detail">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
@@ -220,6 +221,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_favourite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/favourite"
+        android:layout_margin="16dp"
+        app:srcCompat="@drawable/ic_baseline_favorite_border_24"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|end" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lt_loading"
