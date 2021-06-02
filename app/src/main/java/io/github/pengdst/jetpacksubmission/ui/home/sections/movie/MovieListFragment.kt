@@ -46,7 +46,7 @@ class MovieListFragment : Fragment() {
         viewModel.getMovies().observe(viewLifecycleOwner){
             showLoading(false)
             when(it){
-                is Resource.Success -> movieListAdapter.submitList(it.data)
+                is Resource.Success -> movieListAdapter.submitData(lifecycle, it.data)
                 is Resource.Error -> context.longToast(it.message)
                 is Resource.Loading -> showLoading(true)
             }
