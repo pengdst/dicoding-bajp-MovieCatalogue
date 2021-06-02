@@ -1,9 +1,13 @@
 package io.github.pengdst.jetpacksubmission.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.github.pengdst.jetpacksubmission.data.local.room.MovieRoomDatabase
+import io.github.pengdst.jetpacksubmission.data.local.source.MovieLocalSource
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.RetrofitBuilder
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.routes.MovieRoute
 import io.github.pengdst.jetpacksubmission.data.remote.source.MovieRemoteSource
@@ -25,6 +29,15 @@ object SingletonModule {
     @Provides
     @Singleton
     fun provideRetrofitInstance() = RetrofitBuilder.build()
+
+    @Provides
+    @Singleton
+    fun provideMovieRoomDatabase(@ApplicationContext context: Context) =
+        MovieRoomDatabase.newInstance(context)
+
+    @Provides
+    @Singleton
+    fun provideMovieLocalSource(db: MovieRoomDatabase) = MovieLocalSource(db.movieDao())
 
     @Provides
     @Singleton
