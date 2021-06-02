@@ -16,8 +16,10 @@ import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 interface MovieRepository {
 
     fun getUpcomingMovies(): LiveData<Resource<PagingData<Movie>>>
+    fun getBookmarkedMovies(): LiveData<PagingData<Movie>>
     fun getMovie(movieId: String): LiveData<Resource<Movie>>
     fun getTvOnAir(): LiveData<Resource<PagingData<TvShow>>>
+    fun getBookmarkedTvShows(): LiveData<PagingData<TvShow>>
     fun getTv(tvId: String): LiveData<Resource<TvShow>>
 
 }
