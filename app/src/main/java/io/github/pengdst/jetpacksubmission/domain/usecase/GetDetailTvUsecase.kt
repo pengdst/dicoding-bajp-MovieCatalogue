@@ -14,5 +14,5 @@ import javax.inject.Inject
  */
 class GetDetailTvUsecase @Inject constructor(private val repository: MovieRepository): UseCase<TvShow, GetDetailTvUsecase.Params>()  {
     data class Params(val tvId: String)
-    override suspend fun run(params: Params) = repository.getTv(params.tvId)
+    override fun run(params: Params) = repository.getTv(params.tvId)
 }

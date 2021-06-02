@@ -14,5 +14,5 @@ import javax.inject.Inject
  */
 class GetUpcomingMoviesUsecase @Inject constructor(private val repository: MovieRepository): UseCase<List<Movie>, GetUpcomingMoviesUsecase.Companion>() {
     companion object;
-    override suspend fun run(params: Companion) = repository.getUpcomingMovies()
+    override fun run(params: Companion) = repository.getUpcomingMovies()
 }

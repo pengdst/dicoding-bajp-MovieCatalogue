@@ -14,5 +14,5 @@ import javax.inject.Inject
  */
 class GetTvOnAirUsecase @Inject constructor(private val repository: MovieRepository): UseCase<List<TvShow>, GetTvOnAirUsecase.Companion>() {
     companion object;
-    override suspend fun run(params: Companion) = repository.getTvOnAir()
+    override fun run(params: Companion) = repository.getTvOnAir()
 }

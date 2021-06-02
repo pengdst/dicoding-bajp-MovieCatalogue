@@ -14,5 +14,5 @@ import javax.inject.Inject
  */
 class GetDetailMovieUsecase @Inject constructor(private val repository: MovieRepository): UseCase<Movie, GetDetailMovieUsecase.Params>() {
     data class Params(val movieId: String)
-    override suspend fun run(params: Params) = repository.getMovie(params.movieId)
+    override fun run(params: Params) = repository.getMovie(params.movieId)
 }
