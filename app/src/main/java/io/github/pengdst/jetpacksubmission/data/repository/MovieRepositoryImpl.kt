@@ -2,6 +2,7 @@ package io.github.pengdst.jetpacksubmission.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asFlow
+import androidx.lifecycle.map
 import androidx.paging.PagingData
 import androidx.paging.map
 import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieMapper.toDomain
@@ -79,6 +80,10 @@ class MovieRepositoryImpl @Inject constructor(
         }.liveData
     }
 
+    override fun getBookmarkedMovies() = local.getBookmarkedMovies().map { pagingData ->
+        pagingData.map { it.toDomain() }
+    }
+
     override fun getMovie(movieId: String): LiveData<Resource<Movie>> {
 
         return object : NetworkBoundResource<Movie, MovieEntity, MovieDto>() {
@@ -151,6 +156,10 @@ class MovieRepositoryImpl @Inject constructor(
                 }
             }
         }.liveData
+    }
+
+    override fun getBookmarkedTvShows() = local.getBookmarkedTvShows().map { pagingData ->
+        pagingData.map { it.toDomain() }
     }
 
     override fun getTv(tvId: String): LiveData<Resource<TvShow>> {
