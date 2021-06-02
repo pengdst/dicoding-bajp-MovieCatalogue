@@ -23,7 +23,7 @@ interface MovieRepository {
     fun getTvOnAir(): LiveData<Resource<PagingData<TvShow>>>
     fun getBookmarkedTvShows(): LiveData<PagingData<TvShow>>
     fun getTv(tvId: String): LiveData<Resource<TvShow>>
-    fun setBookmarkedTvShow(tvShowEntity: TvShowEntity)
-    fun setBookmarkedMovie(movieEntity: MovieEntity)
+    suspend fun setBookmarkedTvShow(tvShowEntity: TvShowEntity)
+    suspend fun setBookmarkedMovie(movieEntity: MovieEntity)
 
 }

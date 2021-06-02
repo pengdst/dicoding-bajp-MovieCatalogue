@@ -71,4 +71,12 @@ class MovieLocalSource(
         movieDao.insertTvShows(list)
     }
 
+    suspend fun updateTvShow(tvShowEntity: TvShowEntity) {
+        movieDao.updateTvShow(tvShowEntity)
+    }
+
+    suspend fun updateMovie(movieEntity: MovieEntity) {
+        movieDao.updateMovie(movieEntity)
+    }
+
 }

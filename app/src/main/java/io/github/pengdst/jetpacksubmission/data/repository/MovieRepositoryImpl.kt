@@ -198,4 +198,12 @@ class MovieRepositoryImpl @Inject constructor(
         }.liveData
     }
 
+    override suspend fun setBookmarkedTvShow(tvShowEntity: TvShowEntity) = local.updateTvShow(tvShowEntity.apply {
+        isFavourite = !isFavourite
+    })
+
+    override suspend fun setBookmarkedMovie(movieEntity: MovieEntity) = local.updateMovie(movieEntity.apply {
+        isFavourite = !isFavourite
+    })
+
 }
