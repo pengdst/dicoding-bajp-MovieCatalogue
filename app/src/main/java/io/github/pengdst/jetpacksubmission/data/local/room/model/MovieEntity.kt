@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "movies")
 data class MovieEntity(
     @PrimaryKey(autoGenerate = false)
-    val id: String,
+    val id: Int,
     val title: String,
     val posterPath: String,
     val backdropPath: String,

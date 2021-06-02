@@ -13,7 +13,7 @@ import io.github.pengdst.jetpacksubmission.domain.models.Movie
 object MovieMapper {
 
     fun MovieEntity.toDomain() = Movie(
-        id = id,
+        id = id.toString(),
         title = title,
         posterPath = posterPath,
         backdropPath = backdropPath,
@@ -24,7 +24,7 @@ object MovieMapper {
     )
 
     fun Movie.toEntity() = MovieEntity(
-        id = id,
+        id = id.toInt(),
         title = title,
         posterPath = posterPath,
         backdropPath = backdropPath,

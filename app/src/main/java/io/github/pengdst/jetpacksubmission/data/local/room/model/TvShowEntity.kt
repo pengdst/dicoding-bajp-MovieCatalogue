@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "tv_shows")
 data class TvShowEntity(
     @PrimaryKey(autoGenerate = false)
-    val id: String,
+    val id: Int,
     val title: String,
     val posterPath: String,
     val backdropPath: String,

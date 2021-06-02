@@ -13,7 +13,7 @@ import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 object TvShowMapper {
 
     fun TvShowEntity.toDomain() = TvShow(
-        id = id,
+        id = id.toString(),
         title = title,
         posterPath = posterPath,
         backdropPath = backdropPath,
@@ -24,7 +24,7 @@ object TvShowMapper {
     )
 
     fun TvShow.toEntity() = TvShowEntity(
-        id = id,
+        id = id.toInt(),
         title = title,
         posterPath = posterPath,
         backdropPath = backdropPath,
