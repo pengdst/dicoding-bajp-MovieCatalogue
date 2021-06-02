@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import io.github.pengdst.jetpacksubmission.R
-import io.github.pengdst.jetpacksubmission.base.BaseListAdapter
+import io.github.pengdst.jetpacksubmission.base.BasePagingDataAdapter
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 import io.github.pengdst.jetpacksubmission.databinding.ItemTvShowBinding
 import javax.inject.Inject
@@ -18,7 +18,7 @@ import javax.inject.Inject
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-class TvShowListAdapter @Inject constructor() : BaseListAdapter<TvShow, TvShowListAdapter.ViewHolder>(TvShow.diffCallback) {
+class TvShowListAdapter @Inject constructor() : BasePagingDataAdapter<TvShow, TvShowListAdapter.ViewHolder>(TvShow.diffCallback) {
 
     class ViewHolder(private val binding: ItemTvShowBinding) :
         RecyclerView.ViewHolder(binding.root) {

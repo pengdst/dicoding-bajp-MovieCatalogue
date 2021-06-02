@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import io.github.pengdst.jetpacksubmission.R
-import io.github.pengdst.jetpacksubmission.base.BaseListAdapter
+import io.github.pengdst.jetpacksubmission.base.BasePagingDataAdapter
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.databinding.ItemMovieBinding
 import javax.inject.Inject
@@ -19,7 +19,7 @@ import javax.inject.Inject
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-class MovieListAdapter @Inject constructor()  : BaseListAdapter<Movie, MovieListAdapter.ViewHolder>(Movie.diffCallback) {
+class MovieListAdapter @Inject constructor()  : BasePagingDataAdapter<Movie, MovieListAdapter.ViewHolder>(Movie.diffCallback) {
 
     class ViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
