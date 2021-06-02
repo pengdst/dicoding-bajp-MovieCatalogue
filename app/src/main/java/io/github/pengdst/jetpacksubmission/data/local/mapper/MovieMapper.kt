@@ -20,7 +20,8 @@ object MovieMapper {
         releaseDate = releaseDate,
         language = language,
         genre = genre,
-        storyLine = storyLine
+        storyLine = storyLine,
+        isFavourite = isFavourite
     )
 
     fun Movie.toEntity() = MovieEntity(
@@ -32,7 +33,7 @@ object MovieMapper {
         language = language,
         genre = genre,
         storyLine = storyLine,
-        bookmarked = false
+        isFavourite = isFavourite
     )
 
     fun List<MovieEntity>.toDomain() = map { it.toDomain() }

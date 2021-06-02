@@ -22,5 +22,5 @@ data class MovieEntity(
     val language: String,
     val genre: String,
     val storyLine: String,
-    var bookmarked: Boolean
+    var isFavourite: Boolean
 )

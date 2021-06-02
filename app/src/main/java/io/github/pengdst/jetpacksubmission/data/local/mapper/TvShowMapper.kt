@@ -20,7 +20,8 @@ object TvShowMapper {
         releaseDate = releaseDate,
         language = language,
         genre = genre,
-        storyLine = storyLine
+        storyLine = storyLine,
+        isFavourite = isFavourite
     )
 
     fun TvShow.toEntity() = TvShowEntity(
@@ -32,6 +33,7 @@ object TvShowMapper {
         language = language,
         genre = genre,
         storyLine = storyLine,
+        isFavourite = isFavourite
     )
 
     fun List<TvShowEntity>.toDomain() = map { it.toDomain() }

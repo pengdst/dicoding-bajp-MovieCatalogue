@@ -22,4 +22,5 @@ data class TvShowEntity(
     val language: String,
     val genre: String,
     val storyLine: String,
+    var isFavourite: Boolean
 )

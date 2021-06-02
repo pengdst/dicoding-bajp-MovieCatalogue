@@ -19,6 +19,7 @@ data class TvShow(
     val language: String,
     val genre: String,
     val storyLine: String,
+    val isFavourite: Boolean = false
 ) {
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<TvShow>() {
