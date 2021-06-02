@@ -41,7 +41,6 @@ class DetailActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        binding.ltLoading.isVisible = true
         when (extras?.getString(EXTRA_CONTENT_TYPE)) {
             DataStore.TYPE_MOVIE -> viewModel.getMovie().observe(this){
                 showLoading(false)
@@ -56,7 +55,7 @@ class DetailActivity : AppCompatActivity() {
                         backdropUrl = it.data.imageBackdropUrl
                     )
                     is Resource.Error -> longToast(it.message)
-                    else -> Unit
+                    is Resource.Loading -> showLoading(true)
                 }
             }
             DataStore.TYPE_TV_SHOW -> viewModel.getTvShow().observe(this){
