@@ -1,5 +1,6 @@
 package io.github.pengdst.jetpacksubmission.domain.repository
 
+import androidx.lifecycle.LiveData
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
@@ -13,9 +14,9 @@ import io.github.pengdst.jetpacksubmission.domain.models.TvShow
  */
 interface MovieRepository {
 
-    suspend fun getUpcomingMovies(): Resource<List<Movie>>
-    suspend fun getMovie(movieId: String): Resource<Movie>
-    suspend fun getTvOnAir(): Resource<List<TvShow>>
-    suspend fun getTv(tvId: String): Resource<TvShow>
+    fun getUpcomingMovies(): LiveData<Resource<List<Movie>>>
+    fun getMovie(movieId: String): LiveData<Resource<Movie>>
+    fun getTvOnAir(): LiveData<Resource<List<TvShow>>>
+    fun getTv(tvId: String): LiveData<Resource<TvShow>>
 
 }
