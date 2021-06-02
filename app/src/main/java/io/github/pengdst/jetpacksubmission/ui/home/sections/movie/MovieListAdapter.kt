@@ -47,9 +47,11 @@ class MovieListAdapter @Inject constructor()  : BaseListAdapter<Movie, MovieList
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
-        holder.itemView.setOnClickListener {
-            itemClickCallback?.onItemClick(it, getItem(position), position)
+        getItem(position)?.let { movie ->
+            holder.bind(movie)
+            holder.itemView.setOnClickListener {
+                itemClickCallback?.onItemClick(it, movie, position)
+            }
         }
     }
 }
