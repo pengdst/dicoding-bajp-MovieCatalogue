@@ -66,6 +66,7 @@ dependencies {
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}"
     // Coroutine Android
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutineAndroid}"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutineAndroid}"
@@ -83,6 +84,7 @@ dependencies {
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:${versions.okhttp}"
 
     // Room
+    implementation "androidx.room:room-ktx:${versions.room}"
     implementation "androidx.room:room-runtime:${versions.room}"
     kapt "androidx.room:room-compiler:${versions.room}"
 
