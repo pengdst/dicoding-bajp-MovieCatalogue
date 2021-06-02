@@ -27,24 +27,30 @@ interface MovieDao {
     fun getMovieById(id: String): LiveData<MovieEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovies(courses: List<MovieEntity>)
+    suspend fun insertMovies(movies: List<MovieEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovie(course: MovieEntity)
+    suspend fun insertMovie(movie: MovieEntity)
 
     @Update
-    fun updateMovie(course: MovieEntity)
+    suspend fun updateMovie(movie: MovieEntity)
+
+    @Query("SELECT * FROM tv_shows")
+    fun getTvShows(): LiveData<List<TvShowEntity>>
+
+    @Query("SELECT * FROM tv_shows where 1")
+    fun getBookmarkedTvShow(): LiveData<List<TvShowEntity>>
 
     @Query("SELECT * FROM tv_shows WHERE id = :id")
-    fun getTvShowsBy(id: String): LiveData<List<TvShowEntity>>
-
-    @Query("SELECT * FROM tv_shows WHERE id = :id")
-    fun getTvShowById(id: String): LiveData<TvShowEntity>
+    fun getTvShow(id: String): LiveData<TvShowEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTvShows(module: List<TvShowEntity>)
+    suspend fun insertTvShows(tvShow: List<TvShowEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTvShow(tvShow: TvShowEntity)
 
     @Update
-    fun updateTvShow(module: TvShowEntity)
+    suspend fun updateTvShow(tvShow: TvShowEntity)
 
 }
