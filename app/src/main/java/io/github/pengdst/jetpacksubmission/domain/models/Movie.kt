@@ -24,10 +24,10 @@ data class Movie(
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<Movie>() {
             override fun areItemsTheSame(oldItem: Movie, newItem: Movie) =
-                oldItem.title == newItem.title
+                oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: Movie, newItem: Movie) =
-                oldItem.hashCode() == newItem.hashCode()
+                oldItem == newItem
         }
     }
 

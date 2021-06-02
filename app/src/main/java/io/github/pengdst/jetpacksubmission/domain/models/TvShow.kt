@@ -23,10 +23,10 @@ data class TvShow(
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<TvShow>() {
             override fun areItemsTheSame(oldItem: TvShow, newItem: TvShow) =
-                oldItem.title == newItem.title
+                oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: TvShow, newItem: TvShow) =
-                oldItem.hashCode() == newItem.hashCode()
+                oldItem == newItem
         }
     }
 
