@@ -2,6 +2,8 @@ package io.github.pengdst.jetpacksubmission.domain.repository
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
+import io.github.pengdst.jetpacksubmission.data.local.room.model.MovieEntity
+import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
@@ -21,5 +23,7 @@ interface MovieRepository {
     fun getTvOnAir(): LiveData<Resource<PagingData<TvShow>>>
     fun getBookmarkedTvShows(): LiveData<PagingData<TvShow>>
     fun getTv(tvId: String): LiveData<Resource<TvShow>>
+    fun setBookmarkedTvShow(tvShowEntity: TvShowEntity)
+    fun setBookmarkedMovie(movieEntity: MovieEntity)
 
 }
