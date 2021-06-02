@@ -1,16 +1,13 @@
 package io.github.pengdst.jetpacksubmission.ui.home
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetTvOnAirUsecase
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetUpcomingMoviesUsecase
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -28,25 +25,11 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getMovies(): LiveData<Resource<List<Movie>>> {
-        val result = MutableLiveData<Resource<List<Movie>>>()
-
-        result.postValue(Resource.Loading())
-        viewModelScope.launch {
-            result.postValue(getUpcomingMoviesUsecase.run(GetUpcomingMoviesUsecase.Companion))
-        }
-
-        return result
+        return getUpcomingMoviesUsecase.run(GetUpcomingMoviesUsecase.Companion)
     }
 
     fun getTvShowList(): LiveData<Resource<List<TvShow>>> {
-        val result = MutableLiveData<Resource<List<TvShow>>>()
-
-        result.postValue(Resource.Loading())
-        viewModelScope.launch {
-            result.postValue(getTvOnAirUsecase.run(GetTvOnAirUsecase.Companion))
-        }
-
-        return result
+        return getTvOnAirUsecase.run(GetTvOnAirUsecase.Companion)
     }
 
 }
