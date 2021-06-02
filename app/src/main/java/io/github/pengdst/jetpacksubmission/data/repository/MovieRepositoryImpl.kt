@@ -2,6 +2,8 @@ package io.github.pengdst.jetpacksubmission.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asFlow
+import androidx.paging.PagingData
+import androidx.paging.map
 import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowMapper.toDomain
@@ -40,13 +42,13 @@ class MovieRepositoryImpl @Inject constructor(
     private val local: MovieLocalSource
 ) : SafeRemoteSource(), MovieRepository {
 
-    override fun getUpcomingMovies(): LiveData<Resource<List<Movie>>> {
-        return object : NetworkBoundResource<List<Movie>, List<MovieEntity>, MovieResponse>() {
-            override suspend fun fetchFromLocal(): Flow<List<MovieEntity>> {
+    override fun getUpcomingMovies(): LiveData<Resource<PagingData<Movie>>> {
+        return object : NetworkBoundResource<PagingData<Movie>, PagingData<MovieEntity>, MovieResponse>() {
+            override suspend fun fetchFromLocal(): Flow<PagingData<MovieEntity>> {
                 return local.getAllMovies().asFlow()
             }
 
-            override fun shouldFetchFromRemote(db: List<MovieEntity>?) = true
+            override fun shouldFetchFromRemote(db: PagingData<MovieEntity>?) = true
 
             override suspend fun fetchFromRemote(): Flow<ApiResponse<MovieResponse>?> {
                 val response = remote.getUpcomingMovies()
@@ -65,8 +67,8 @@ class MovieRepositoryImpl @Inject constructor(
                 }
             }
 
-            override fun convertToDomain(db: List<MovieEntity>): List<Movie> {
-                return db.toDomain()
+            override fun convertToDomain(db: PagingData<MovieEntity>): PagingData<Movie> {
+                return db.map { it.toDomain() }
             }
 
             override suspend fun saveRemoteData(remote: MovieResponse) {
@@ -113,14 +115,14 @@ class MovieRepositoryImpl @Inject constructor(
         }.liveData
     }
 
-    override fun getTvOnAir(): LiveData<Resource<List<TvShow>>> {
+    override fun getTvOnAir(): LiveData<Resource<PagingData<TvShow>>> {
 
-        return object : NetworkBoundResource<List<TvShow>, List<TvShowEntity>, TvResponse>() {
-            override suspend fun fetchFromLocal(): Flow<List<TvShowEntity>> {
+        return object : NetworkBoundResource<PagingData<TvShow>, PagingData<TvShowEntity>, TvResponse>() {
+            override suspend fun fetchFromLocal(): Flow<PagingData<TvShowEntity>> {
                 return local.getTvShows().asFlow()
             }
 
-            override fun shouldFetchFromRemote(db: List<TvShowEntity>?) = true
+            override fun shouldFetchFromRemote(db: PagingData<TvShowEntity>?) = true
 
             override suspend fun fetchFromRemote(): Flow<ApiResponse<TvResponse>?> {
                 val response = remote.getTvOnAir()
@@ -139,8 +141,8 @@ class MovieRepositoryImpl @Inject constructor(
                 }
             }
 
-            override fun convertToDomain(db: List<TvShowEntity>): List<TvShow> {
-                return db.toDomain()
+            override fun convertToDomain(db: PagingData<TvShowEntity>): PagingData<TvShow> {
+                return db.map { it.toDomain() }
             }
 
             override suspend fun saveRemoteData(remote: TvResponse) {
