@@ -3,11 +3,15 @@ package io.github.pengdst.jetpacksubmission.ui.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieMapper.toEntity
+import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetDetailMovieUsecase
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetDetailTvUsecase
+import io.github.pengdst.jetpacksubmission.domain.usecase.SetBookmarkedMovieUsecase
+import io.github.pengdst.jetpacksubmission.domain.usecase.SetBookmarkedTvShowUsecase
 import javax.inject.Inject
 
 /**
@@ -21,7 +25,9 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val getDetailMovieUsecase: GetDetailMovieUsecase,
-    private val getDetailTvUsecase: GetDetailTvUsecase
+    private val getDetailTvUsecase: GetDetailTvUsecase,
+    private val setBookmarkedMovieUsecase: SetBookmarkedMovieUsecase,
+    private val setBookmarkedTvShowUsecase: SetBookmarkedTvShowUsecase,
 ) : ViewModel() {
 
     private var contentId: String = ""
@@ -37,4 +43,8 @@ class DetailViewModel @Inject constructor(
     fun setSelectedContent(contentId: String?){
         this.contentId = contentId ?: ""
     }
+
+    fun setBookmark(movie: Movie) = setBookmarkedMovieUsecase.run(SetBookmarkedMovieUsecase.Params(movie.toEntity()))
+
+    fun setBookmark(tvShow: TvShow) = setBookmarkedTvShowUsecase.run(SetBookmarkedTvShowUsecase.Params(tvShow.toEntity()))
 }

@@ -42,35 +42,47 @@ class DetailActivity : AppCompatActivity() {
         super.onResume()
 
         when (extras?.getString(EXTRA_CONTENT_TYPE)) {
-            DataStore.TYPE_MOVIE -> viewModel.getMovie().observe(this){
+            DataStore.TYPE_MOVIE -> viewModel.getMovie().observe(this){ resource ->
                 showLoading(false)
-                when(it){
-                    is Resource.Success -> populateDetail(
-                        title = it.data.title,
-                        genre = it.data.genre,
-                        language = it.data.language,
-                        releaseDate = it.data.releaseDate,
-                        storyLine = it.data.storyLine,
-                        posterUrl = it.data.imagePosterUrl,
-                        backdropUrl = it.data.imageBackdropUrl
-                    )
-                    is Resource.Error -> longToast(it.message)
+                when(resource){
+                    is Resource.Success -> {
+                        binding.fabFavourite.setOnClickListener {
+                            viewModel.setBookmark(resource.data)
+                        }
+                        populateDetail(
+                            title = resource.data.title,
+                            genre = resource.data.genre,
+                            language = resource.data.language,
+                            releaseDate = resource.data.releaseDate,
+                            storyLine = resource.data.storyLine,
+                            posterUrl = resource.data.imagePosterUrl,
+                            backdropUrl = resource.data.imageBackdropUrl,
+                            isFavourite = resource.data.isFavourite
+                        )
+                    }
+                    is Resource.Error -> longToast(resource.message)
                     is Resource.Loading -> showLoading(true)
                 }
             }
-            DataStore.TYPE_TV_SHOW -> viewModel.getTvShow().observe(this){
+            DataStore.TYPE_TV_SHOW -> viewModel.getTvShow().observe(this){ resource ->
                 showLoading(false)
-                when(it){
-                    is Resource.Success -> populateDetail(
-                        title = it.data.title,
-                        genre = it.data.genre,
-                        language = it.data.language,
-                        releaseDate = it.data.releaseDate,
-                        storyLine = it.data.storyLine,
-                        posterUrl = it.data.imagePosterUrl,
-                        backdropUrl = it.data.imageBackdropUrl
-                    )
-                    is Resource.Error -> longToast(it.message)
+                when(resource){
+                    is Resource.Success -> {
+                        binding.fabFavourite.setOnClickListener {
+                            viewModel.setBookmark(resource.data)
+                        }
+                        populateDetail(
+                            title = resource.data.title,
+                            genre = resource.data.genre,
+                            language = resource.data.language,
+                            releaseDate = resource.data.releaseDate,
+                            storyLine = resource.data.storyLine,
+                            posterUrl = resource.data.imagePosterUrl,
+                            backdropUrl = resource.data.imageBackdropUrl,
+                            isFavourite = resource.data.isFavourite
+                        )
+                    }
+                    is Resource.Error -> longToast(resource.message)
                     is Resource.Loading -> showLoading(true)
                 }
             }
@@ -90,7 +102,8 @@ class DetailActivity : AppCompatActivity() {
         releaseDate: String?,
         storyLine: String?,
         posterUrl: String?,
-        backdropUrl: String?
+        backdropUrl: String?,
+        isFavourite: Boolean = false
     ) {
         with(binding) {
             toolbar.title = title
@@ -99,6 +112,7 @@ class DetailActivity : AppCompatActivity() {
             tvLanguage.text = language
             tvReleaseDate.text = releaseDate
             tvStoryline.text = storyLine
+            fabFavourite.setImageResource(if (isFavourite) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24)
 
             Glide.with(applicationContext)
                 .load(backdropUrl)
