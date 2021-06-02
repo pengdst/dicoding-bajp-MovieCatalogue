@@ -10,6 +10,6 @@ import androidx.lifecycle.LiveData
  * - LinkedIn https://linkedin.com/in/pengdst
  */
 
-abstract class UseCase<Type, in Params> where Type : Any {
+abstract class UseCase<Type : Any, in Params> : AbstractUseCase<Type, Params> {
     abstract fun run(params: Params): Type
 }
