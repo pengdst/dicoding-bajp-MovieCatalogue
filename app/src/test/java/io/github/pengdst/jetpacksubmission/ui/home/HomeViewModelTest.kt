@@ -2,9 +2,12 @@ package io.github.pengdst.jetpacksubmission.ui.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import io.github.pengdst.jetpacksubmission.data.repository.MovieRepositoryImpl
+import androidx.paging.PagingData
+import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
+import io.github.pengdst.jetpacksubmission.domain.usecase.GetTvOnAirUsecase
+import io.github.pengdst.jetpacksubmission.domain.usecase.GetUpcomingMoviesUsecase
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.LiveDataTestUtil
 import io.github.pengdst.jetpacksubmission.utils.MainCoroutineRule
@@ -35,45 +38,56 @@ class HomeViewModelTest : TestCase() {
     @get:Rule var instantTaskExecutorRule = InstantTaskExecutorRule()
     @get:Rule var mainCoroutineRule = MainCoroutineRule()
 
-    @Mock private lateinit var repository: MovieRepositoryImpl
-    @Mock private lateinit var movieListObserver: Observer<List<Movie>>
-    @Mock private lateinit var tvListObserver: Observer<List<TvShow>>
+    @Mock private lateinit var getTvOnAirUsecase: GetTvOnAirUsecase
+    @Mock private lateinit var getUpcomingMoviesUsecase: GetUpcomingMoviesUsecase
+    @Mock private lateinit var movieListObserver: Observer<Resource<PagingData<Movie>>>
+    @Mock private lateinit var tvListObserver: Observer<Resource<PagingData<TvShow>>>
 
     private lateinit var viewModel: HomeViewModel
 
-    private val dummyMovieList = DataStore.movies
-    private val dummyTvShowList = DataStore.tvShowList
+    private val dummyMovieList = PagingData.from(DataStore.movies)
+    private val dummyTvShowList = PagingData.from(DataStore.tvShowList)
 
     @Before
     public override fun setUp() {
-        viewModel = HomeViewModel(repository)
+        viewModel = HomeViewModel(getUpcomingMoviesUsecase, getTvOnAirUsecase)
     }
 
     @Test
     fun testGetMovies() = runBlockingTest {
-        Mockito.`when`(repository.getUpcomingMovies()).thenReturn(dummyMovieList)
-        val movies = LiveDataTestUtil.getValue(viewModel.getMovies())
-        Mockito.verify(repository).getUpcomingMovies()
+        val resource: Resource<PagingData<Movie>> = Resource.Success(dummyMovieList)
+        val liveData = LiveDataTestUtil.setValue(resource)
+        Mockito.`when`(getUpcomingMoviesUsecase.run(GetUpcomingMoviesUsecase.Companion)).thenReturn(liveData)
+        val movies = viewModel.getMovies().value
+        Mockito.verify(getUpcomingMoviesUsecase).run(GetUpcomingMoviesUsecase.Companion)
 
         Assert.assertNotNull(movies)
-        Assert.assertNotEquals(0, movies.size)
-        Assert.assertEquals(DataStore.movies.size, movies.size)
+        when(movies){
+            is Resource.Success -> {
+                Assert.assertEquals(dummyMovieList, movies.data)
+            }
+        }
 
         viewModel.getMovies().observeForever(movieListObserver)
-        Mockito.verify(movieListObserver).onChanged(dummyMovieList)
+        Mockito.verify(movieListObserver).onChanged(resource)
     }
 
     @Test
     fun testGetTvShowList() = runBlockingTest {
-        Mockito.`when`(repository.getTvOnAir()).thenReturn(dummyTvShowList)
-        val tvShow = LiveDataTestUtil.getValue(viewModel.getTvShowList())
-        Mockito.verify(repository).getTvOnAir()
+        val resource: Resource<PagingData<TvShow>> = Resource.Success(dummyTvShowList)
+        val liveData = LiveDataTestUtil.setValue(resource)
+        Mockito.`when`(getTvOnAirUsecase.run(GetTvOnAirUsecase.Companion)).thenReturn(liveData)
+        val tvShow = viewModel.getTvShowList().value
+        Mockito.verify(getTvOnAirUsecase).run(GetTvOnAirUsecase.Companion)
 
         Assert.assertNotNull(tvShow)
-        Assert.assertNotEquals(0, tvShow.size)
-        Assert.assertEquals(DataStore.tvShowList.size, tvShow.size)
+        when(tvShow){
+            is Resource.Success -> {
+                Assert.assertEquals(dummyTvShowList, tvShow.data)
+            }
+        }
 
         viewModel.getTvShowList().observeForever(tvListObserver)
-        Mockito.verify(tvListObserver).onChanged(dummyTvShowList)
+        Mockito.verify(tvListObserver).onChanged(resource)
     }
 }
