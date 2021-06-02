@@ -12,5 +12,5 @@ import io.github.pengdst.jetpacksubmission.data.vo.Resource
  */
 
 abstract class UseCase<Type, in Params> where Type : Any {
-    abstract suspend fun run(params: Params): Resource<Type>
+    abstract fun run(params: Params): LiveData<Resource<Type>>
 }
