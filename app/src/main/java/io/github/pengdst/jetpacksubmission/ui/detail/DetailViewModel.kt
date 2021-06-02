@@ -2,6 +2,7 @@ package io.github.pengdst.jetpacksubmission.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowMapper.toEntity
@@ -12,6 +13,7 @@ import io.github.pengdst.jetpacksubmission.domain.usecase.GetDetailMovieUsecase
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetDetailTvUsecase
 import io.github.pengdst.jetpacksubmission.domain.usecase.SetBookmarkedMovieUsecase
 import io.github.pengdst.jetpacksubmission.domain.usecase.SetBookmarkedTvShowUsecase
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -44,7 +46,15 @@ class DetailViewModel @Inject constructor(
         this.contentId = contentId ?: ""
     }
 
-    fun setBookmark(movie: Movie) = setBookmarkedMovieUsecase.run(SetBookmarkedMovieUsecase.Params(movie.toEntity()))
+    fun setBookmark(movie: Movie) {
+        viewModelScope.launch {
+            setBookmarkedMovieUsecase.run(SetBookmarkedMovieUsecase.Params(movie.toEntity()))
+        }
+    }
 
-    fun setBookmark(tvShow: TvShow) = setBookmarkedTvShowUsecase.run(SetBookmarkedTvShowUsecase.Params(tvShow.toEntity()))
+    fun setBookmark(tvShow: TvShow) {
+        viewModelScope.launch {
+            setBookmarkedTvShowUsecase.run(SetBookmarkedTvShowUsecase.Params(tvShow.toEntity()))
+        }
+    }
 }
