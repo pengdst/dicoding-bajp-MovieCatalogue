@@ -1,6 +1,7 @@
 package io.github.pengdst.jetpacksubmission.utils
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -36,5 +37,9 @@ object LiveDataTestUtil {
 
         return data[0] as T
 
+    }
+
+    fun <T> setValue(liveData: T): LiveData<T> {
+        return MutableLiveData(liveData)
     }
 }
