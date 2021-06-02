@@ -14,13 +14,13 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "tv_shows")
 data class TvShowEntity(
     @PrimaryKey(autoGenerate = false)
-    val id: Int,
-    val title: String,
-    val posterPath: String,
-    val backdropPath: String,
-    val releaseDate: String,
-    val language: String,
-    val genre: String,
-    val storyLine: String,
+    var id: Int,
+    var title: String,
+    var posterPath: String,
+    var backdropPath: String,
+    var releaseDate: String,
+    var language: String,
+    var genre: String,
+    var storyLine: String,
     var isFavourite: Boolean
 )
