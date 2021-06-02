@@ -20,7 +20,7 @@ interface MovieDao {
     @Query("SELECT * FROM movies")
     fun getMovies(): DataSource.Factory<Int, MovieEntity>
 
-    @Query("SELECT * FROM movies where bookmarked = 1")
+    @Query("SELECT * FROM movies where isFavourite = 1")
     fun getBookmarkedMovie(): DataSource.Factory<Int, MovieEntity>
 
     @Transaction
@@ -39,7 +39,7 @@ interface MovieDao {
     @Query("SELECT * FROM tv_shows")
     fun getTvShows(): DataSource.Factory<Int, TvShowEntity>
 
-    @Query("SELECT * FROM tv_shows where 1")
+    @Query("SELECT * FROM tv_shows where isFavourite = 1")
     fun getBookmarkedTvShow(): DataSource.Factory<Int, TvShowEntity>
 
     @Query("SELECT * FROM tv_shows WHERE id = :id")
