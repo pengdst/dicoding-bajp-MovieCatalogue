@@ -1,7 +1,7 @@
 package io.github.pengdst.jetpacksubmission.domain.usecase
 
 import androidx.paging.PagingData
-import io.github.pengdst.jetpacksubmission.core.UseCase
+import io.github.pengdst.jetpacksubmission.core.LiveDataUseCase
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 import io.github.pengdst.jetpacksubmission.domain.repository.MovieRepository
 import javax.inject.Inject
@@ -13,7 +13,7 @@ import javax.inject.Inject
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-class GetBookmarkedTvShowsUsecase @Inject constructor(private val repository: MovieRepository): UseCase<PagingData<TvShow>, GetBookmarkedTvShowsUsecase.Companion>() {
+class GetBookmarkedTvShowsUsecase @Inject constructor(private val repository: MovieRepository): LiveDataUseCase<PagingData<TvShow>, GetBookmarkedTvShowsUsecase.Companion>() {
     companion object;
     override fun run(params: Companion) = repository.getBookmarkedTvShows()
 }
