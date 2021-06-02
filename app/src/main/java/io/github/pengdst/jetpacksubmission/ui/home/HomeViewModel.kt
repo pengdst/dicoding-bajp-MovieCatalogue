@@ -24,12 +24,8 @@ class HomeViewModel @Inject constructor(
     private val getTvOnAirUsecase: GetTvOnAirUsecase
 ) : ViewModel() {
 
-    fun getMovies(): LiveData<Resource<List<Movie>>> {
-        return getUpcomingMoviesUsecase.run(GetUpcomingMoviesUsecase.Companion)
-    }
+    fun getMovies() = getUpcomingMoviesUsecase.run(GetUpcomingMoviesUsecase.Companion)
 
-    fun getTvShowList(): LiveData<Resource<List<TvShow>>> {
-        return getTvOnAirUsecase.run(GetTvOnAirUsecase.Companion)
-    }
+    fun getTvShowList() = getTvOnAirUsecase.run(GetTvOnAirUsecase.Companion)
 
 }

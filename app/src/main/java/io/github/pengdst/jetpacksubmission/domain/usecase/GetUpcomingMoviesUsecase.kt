@@ -1,5 +1,6 @@
 package io.github.pengdst.jetpacksubmission.domain.usecase
 
+import androidx.paging.PagingData
 import io.github.pengdst.jetpacksubmission.core.UseCase
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.repository.MovieRepository
@@ -12,7 +13,7 @@ import javax.inject.Inject
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-class GetUpcomingMoviesUsecase @Inject constructor(private val repository: MovieRepository): UseCase<List<Movie>, GetUpcomingMoviesUsecase.Companion>() {
+class GetUpcomingMoviesUsecase @Inject constructor(private val repository: MovieRepository): UseCase<PagingData<Movie>, GetUpcomingMoviesUsecase.Companion>() {
     companion object;
     override fun run(params: Companion) = repository.getUpcomingMovies()
 }
