@@ -13,6 +13,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.github.pengdst.jetpacksubmission.R
 import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvMapper.toDomain
+import io.github.pengdst.jetpacksubmission.ui.main.MainActivity
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.EspressoIdlingResource
 import org.junit.After
@@ -30,10 +31,10 @@ import org.junit.runner.RunWith
  */
 
 @RunWith(AndroidJUnit4::class)
-class HomeActivityTest {
+class MainActivityTest {
 
     @get:Rule
-    var activityRule = ActivityScenarioRule(HomeActivity::class.java)
+    var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     private val dummyMovie = DataStore.moviesResponse.toDomain()
     private val dummyTvShow = DataStore.tvShowListResponse.toDomain()

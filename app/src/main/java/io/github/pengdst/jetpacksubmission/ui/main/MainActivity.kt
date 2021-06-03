@@ -1,13 +1,14 @@
-package io.github.pengdst.jetpacksubmission.ui.home
+package io.github.pengdst.jetpacksubmission.ui.main
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.pengdst.jetpacksubmission.R
+import io.github.pengdst.jetpacksubmission.databinding.ActivityMainBinding
 import io.github.pengdst.jetpacksubmission.domain.models.Section
-import io.github.pengdst.jetpacksubmission.databinding.ActivityHomeBinding
 import io.github.pengdst.jetpacksubmission.ui.detail.DetailActivity
+import io.github.pengdst.jetpacksubmission.ui.home.ContentCallback
 import io.github.pengdst.jetpacksubmission.ui.home.sections.SectionsPagerAdapter
 import io.github.pengdst.jetpacksubmission.ui.home.sections.movie.MovieListFragment
 import io.github.pengdst.jetpacksubmission.ui.home.sections.tv.TvShowListFragment
@@ -15,9 +16,9 @@ import io.github.pengdst.libs.ui.activity.viewbinding.ActivityViewBindingDelegat
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity(), ContentCallback {
+class MainActivity : AppCompatActivity(), ContentCallback {
 
-    private val binding: ActivityHomeBinding by viewBindings()
+    private val binding: ActivityMainBinding by viewBindings()
     @Inject lateinit var sectionsPagerAdapter: SectionsPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
