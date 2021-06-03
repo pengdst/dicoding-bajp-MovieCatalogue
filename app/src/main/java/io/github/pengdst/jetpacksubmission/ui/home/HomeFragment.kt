@@ -33,11 +33,15 @@ class HomeFragment : Fragment(), HasToolbarFragment {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         sectionsPagerAdapter.addSection(Section(getString(R.string.movie), MovieListFragment()))
         sectionsPagerAdapter.addSection(Section(getString(R.string.tv_show), TvShowListFragment()))
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.viewPager.adapter = sectionsPagerAdapter
         binding.tabs.setupWithViewPager(binding.viewPager)
