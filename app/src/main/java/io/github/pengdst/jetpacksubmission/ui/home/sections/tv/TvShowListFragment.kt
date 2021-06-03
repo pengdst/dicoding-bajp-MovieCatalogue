@@ -46,7 +46,7 @@ class TvShowListFragment : Fragment() {
         viewModel.getTvShowList().observe(viewLifecycleOwner){
             showLoading(false)
             when(it){
-                is Resource.Success -> tvShowListAdapter.submitData(lifecycle, it.data)
+                is Resource.Success -> tvShowListAdapter.submitData(it.data)
                 is Resource.Error -> context.longToast(it.message)
                 is Resource.Loading -> showLoading(true)
             }

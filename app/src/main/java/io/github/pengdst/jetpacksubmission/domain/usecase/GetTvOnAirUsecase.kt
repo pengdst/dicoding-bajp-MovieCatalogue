@@ -1,6 +1,5 @@
 package io.github.pengdst.jetpacksubmission.domain.usecase
 
-import androidx.paging.PagingData
 import io.github.pengdst.jetpacksubmission.core.LiveDataUseCase
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
@@ -14,7 +13,7 @@ import javax.inject.Inject
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-class GetTvOnAirUsecase @Inject constructor(private val repository: MovieRepository): LiveDataUseCase<Resource<PagingData<TvShow>>, GetTvOnAirUsecase.Companion>() {
+class GetTvOnAirUsecase @Inject constructor(private val repository: MovieRepository): LiveDataUseCase<Resource<List<TvShow>>, GetTvOnAirUsecase.Companion>() {
     companion object;
     override fun run(params: Companion) = repository.getTvOnAir()
 }

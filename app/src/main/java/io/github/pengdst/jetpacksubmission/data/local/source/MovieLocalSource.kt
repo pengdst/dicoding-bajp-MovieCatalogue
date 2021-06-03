@@ -1,7 +1,6 @@
 package io.github.pengdst.jetpacksubmission.data.local.source
 
 import androidx.lifecycle.LiveData
-import androidx.paging.*
 import io.github.pengdst.jetpacksubmission.data.local.room.dao.MovieDao
 import io.github.pengdst.jetpacksubmission.data.local.room.model.MovieEntity
 import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
@@ -18,24 +17,8 @@ class MovieLocalSource(
     private val movieDao: MovieDao
 ) {
 
-    fun getAllMovies(): LiveData<PagingData<MovieEntity>> {
-        val config = PagingConfig(
-            pageSize = 4,
-            initialLoadSize = 4,
-        )
-        return Pager(
-            config = config, pagingSourceFactory = movieDao.getMovies().asPagingSourceFactory()
-        ).liveData
-    }
-    fun getBookmarkedMovies(): LiveData<PagingData<MovieEntity>> {
-        val config = PagingConfig(
-            pageSize = 4,
-            initialLoadSize = 4,
-        )
-        return Pager(
-            config = config, pagingSourceFactory = movieDao.getBookmarkedMovie().asPagingSourceFactory()
-        ).liveData
-    }
+    fun getAllMovies(): LiveData<List<MovieEntity>> = movieDao.getMovies()
+    fun getBookmarkedMovies(): LiveData<List<MovieEntity>> = movieDao.getBookmarkedMovie()
     fun getMovie(movieId: String) = movieDao.getMovieById(movieId)
     suspend fun saveMovie(movieEntity: MovieEntity) {
         movieDao.insertMovie(movieEntity)
@@ -44,25 +27,9 @@ class MovieLocalSource(
         movieDao.insertMovies(list)
     }
 
-    fun getBookmarkedTvShows(): LiveData<PagingData<TvShowEntity>> {
-        val config = PagingConfig(
-            pageSize = 4,
-            initialLoadSize = 4,
-        )
-        return Pager(
-            config = config, pagingSourceFactory = movieDao.getBookmarkedTvShow().asPagingSourceFactory()
-        ).liveData
-    }
+    fun getBookmarkedTvShows(): LiveData<List<TvShowEntity>> = movieDao.getBookmarkedTvShow()
 
-    fun getTvShows(): LiveData<PagingData<TvShowEntity>> {
-        val config = PagingConfig(
-            pageSize = 4,
-            initialLoadSize = 4,
-        )
-        return Pager(
-            config = config, pagingSourceFactory = movieDao.getTvShows().asPagingSourceFactory()
-        ).liveData
-    }
+    fun getTvShows(): LiveData<List<TvShowEntity>> = movieDao.getTvShows()
     fun getTv(tvId: String) = movieDao.getTvShow(tvId)
     suspend fun saveTvShow(tvShow: TvShowEntity) {
         movieDao.insertTvShow(tvShow)
