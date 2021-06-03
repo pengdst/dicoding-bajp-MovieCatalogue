@@ -1,7 +1,6 @@
 package io.github.pengdst.jetpacksubmission.data.local.room.dao
 
 import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
 import androidx.room.*
 import io.github.pengdst.jetpacksubmission.data.local.room.model.MovieEntity
 import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
@@ -18,10 +17,10 @@ import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
 interface MovieDao {
 
     @Query("SELECT * FROM movies")
-    fun getMovies(): DataSource.Factory<Int, MovieEntity>
+    fun getMovies(): LiveData<List<MovieEntity>>
 
     @Query("SELECT * FROM movies where isFavourite = 1")
-    fun getBookmarkedMovie(): DataSource.Factory<Int, MovieEntity>
+    fun getBookmarkedMovie(): LiveData<List<MovieEntity>>
 
     @Transaction
     @Query("SELECT * FROM movies WHERE id = :id")
@@ -37,10 +36,10 @@ interface MovieDao {
     suspend fun updateMovie(movie: MovieEntity)
 
     @Query("SELECT * FROM tv_shows")
-    fun getTvShows(): DataSource.Factory<Int, TvShowEntity>
+    fun getTvShows(): LiveData<List<TvShowEntity>>
 
     @Query("SELECT * FROM tv_shows where isFavourite = 1")
-    fun getBookmarkedTvShow(): DataSource.Factory<Int, TvShowEntity>
+    fun getBookmarkedTvShow(): LiveData<List<TvShowEntity>>
 
     @Query("SELECT * FROM tv_shows WHERE id = :id")
     fun getTvShow(id: String): LiveData<TvShowEntity>
