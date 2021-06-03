@@ -69,6 +69,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}"
     // Coroutine Android
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutineAndroid}"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutineAndroid}"
 
     // Glide
