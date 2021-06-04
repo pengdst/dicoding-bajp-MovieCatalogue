@@ -3,12 +3,14 @@ package io.github.pengdst.jetpacksubmission.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.pengdst.jetpacksubmission.R
 import io.github.pengdst.jetpacksubmission.databinding.ActivityMainBinding
 import io.github.pengdst.jetpacksubmission.domain.models.Section
 import io.github.pengdst.jetpacksubmission.ui.detail.DetailActivity
+import io.github.pengdst.jetpacksubmission.ui.favorite.FavoriteActivity
 import io.github.pengdst.jetpacksubmission.ui.home.sections.SectionsPagerAdapter
 import io.github.pengdst.jetpacksubmission.ui.home.sections.movie.MovieListFragment
 import io.github.pengdst.jetpacksubmission.ui.home.sections.tv.TvShowListFragment
@@ -37,6 +39,15 @@ class HomeActivity : AppCompatActivity(), ContentCallback {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_favorite -> {
+                startActivity(Intent(this, FavoriteActivity::class.java))
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun moveTo(position: Int, contentId: String, contentType: String) {
