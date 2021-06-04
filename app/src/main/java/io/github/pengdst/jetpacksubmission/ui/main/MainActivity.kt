@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.navigation.NavController
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.pengdst.jetpacksubmission.R
 import io.github.pengdst.jetpacksubmission.core.HasToolbarFragment
@@ -16,17 +17,19 @@ import io.github.pengdst.libs.ui.activity.viewbinding.ActivityViewBindingDelegat
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), ContentCallback {
 
+    private lateinit var navController: NavController
     val binding: ActivityMainBinding by viewBindings()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        findNavController(R.id.fragment_container_view).addOnDestinationChangedListener { _, destination, _ ->
+        setSupportActionBar(binding.toolbar)
+        navController = findNavController(R.id.fragment_container_view)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.toolbar.isVisible = destination is HasToolbarFragment
             if (destination is HasToolbarFragment) setSupportActionBar(destination.toolbar)
         }
-        setSupportActionBar(binding.toolbar)
     }
 
     override fun moveTo(position: Int, contentId: String, contentType: String) {
