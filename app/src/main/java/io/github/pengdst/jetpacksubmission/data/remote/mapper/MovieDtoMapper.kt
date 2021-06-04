@@ -1,7 +1,8 @@
 package io.github.pengdst.jetpacksubmission.data.remote.mapper
 
-import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
-import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.TvDto
+import io.github.pengdst.jetpacksubmission.data.local.room.model.MovieEntity
+import io.github.pengdst.jetpacksubmission.domain.models.Movie
+import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.MovieDto
 
 /**
  * Created on 5/25/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -10,14 +11,14 @@ import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.TvDto
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-object TvMapper {
+object MovieDtoMapper {
 
-    fun TvDto.toEntity() = TvShowEntity(
+    fun MovieDto.toEntity() = MovieEntity(
         id = id ?: 0,
-        title = name.toString(),
+        title = title.toString(),
         backdropPath = backdropPath.toString(),
         posterPath = posterPath.toString(),
-        releaseDate = firstAirDate.toString(),
+        releaseDate = releaseDate.toString(),
         language = spokenLanguages?.map { it.englishName }.toString()
             .replace("[", "").replace("]", ""),
         genre = genres?.map { it.name }.toString().replace("[", "")
@@ -25,7 +26,8 @@ object TvMapper {
         storyLine = overview.toString()
     )
 
-    fun List<TvDto>.toEntity() = map {
+    fun List<MovieDto>.toEntity() = map {
         it.toEntity()
     }
+
 }

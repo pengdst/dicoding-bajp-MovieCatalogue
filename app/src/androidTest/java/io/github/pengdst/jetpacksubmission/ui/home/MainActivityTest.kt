@@ -11,8 +11,8 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.github.pengdst.jetpacksubmission.R
-import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieDtoMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvDtoMapper.toDomain
 import io.github.pengdst.jetpacksubmission.ui.main.MainActivity
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.EspressoIdlingResource

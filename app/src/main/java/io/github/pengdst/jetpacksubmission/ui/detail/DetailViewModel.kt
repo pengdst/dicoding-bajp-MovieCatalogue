@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieMapper.toEntity
-import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowMapper.toEntity
+import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toEntity
+import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowEntityMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow

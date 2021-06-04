@@ -1,10 +1,10 @@
 package io.github.pengdst.jetpacksubmission.utils
 
 import com.google.gson.Gson
-import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieMapper.toEntity
-import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvMapper.toEntity
+import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowEntityMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieDtoMapper.toEntity
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvDtoMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.MovieDto
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.TvDto
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.MovieResponse

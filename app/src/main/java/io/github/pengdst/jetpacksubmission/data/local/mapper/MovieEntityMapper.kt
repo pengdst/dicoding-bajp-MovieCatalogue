@@ -1,7 +1,7 @@
 package io.github.pengdst.jetpacksubmission.data.local.mapper
 
-import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
-import io.github.pengdst.jetpacksubmission.domain.models.TvShow
+import io.github.pengdst.jetpacksubmission.data.local.room.model.MovieEntity
+import io.github.pengdst.jetpacksubmission.domain.models.Movie
 
 /**
 * Created on 6/2/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -10,9 +10,9 @@ import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 * - Gitlab https://gitlab.com/pengdst
 * - LinkedIn https://linkedin.com/in/pengdst
 */
-object TvShowMapper {
+object MovieEntityMapper {
 
-    fun TvShowEntity.toDomain() = TvShow(
+    fun MovieEntity.toDomain() = Movie(
         id = id.toString(),
         title = title,
         posterPath = posterPath,
@@ -24,7 +24,7 @@ object TvShowMapper {
         isFavourite = isFavourite
     )
 
-    fun TvShow.toEntity() = TvShowEntity(
+    fun Movie.toEntity() = MovieEntity(
         id = id.toInt(),
         title = title,
         posterPath = posterPath,
@@ -37,5 +37,6 @@ object TvShowMapper {
         isFavourite = this@toEntity.isFavourite
     }
 
-    fun List<TvShowEntity>.toDomain() = map { it.toDomain() }
+    fun List<MovieEntity>.toDomain() = map { it.toDomain() }
+
 }
