@@ -5,8 +5,7 @@ import androidx.lifecycle.Observer
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
-import io.github.pengdst.jetpacksubmission.domain.usecase.GetDetailMovieUsecase
-import io.github.pengdst.jetpacksubmission.domain.usecase.GetDetailTvUsecase
+import io.github.pengdst.jetpacksubmission.domain.usecase.*
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.LiveDataTestUtil
 import io.github.pengdst.jetpacksubmission.utils.MainCoroutineRule
@@ -39,6 +38,9 @@ class DetailViewModelTest {
 
     @Mock private lateinit var getDetailMovieUsecase: GetDetailMovieUsecase
     @Mock private lateinit var getDetailTvUsecase: GetDetailTvUsecase
+    @Mock private lateinit var setBookmarkedMovieUsecase: SetBookmarkedMovieUsecase
+    @Mock private lateinit var setBookmarkedTvShowsUsecase: SetBookmarkedTvShowUsecase
+
     @Mock private lateinit var movieObserver: Observer<Resource<Movie>>
     @Mock private lateinit var tvObserver: Observer<Resource<TvShow>>
 
@@ -58,7 +60,7 @@ class DetailViewModelTest {
 
     @Before
     fun setUp() {
-        viewModel = DetailViewModel(getDetailMovieUsecase, getDetailTvUsecase)
+        viewModel = DetailViewModel(getDetailMovieUsecase, getDetailTvUsecase, setBookmarkedMovieUsecase, setBookmarkedTvShowsUsecase)
         viewModel.setSelectedContent(movieId)
         viewModel.setSelectedContent(tvShowId)
     }

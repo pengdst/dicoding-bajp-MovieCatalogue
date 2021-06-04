@@ -3,14 +3,16 @@ package io.github.pengdst.jetpacksubmission.data.repository
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingData
 import com.nhaarman.mockitokotlin2.verify
-import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieMapper.toEntity
-import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowMapper.toEntity
+import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toEntity
+import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowEntityMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowEntityMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.local.source.MovieLocalSource
-import io.github.pengdst.jetpacksubmission.data.remote.source.MovieRemoteSource
-import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieDtoMapper.toEntity
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvDtoMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.MovieResponse
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.TvResponse
+import io.github.pengdst.jetpacksubmission.data.remote.source.MovieRemoteSource
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.LiveDataTestUtil
@@ -44,8 +46,8 @@ class MovieRepositoryTest {
     private val dummyTvListResponses = DataStore.tvShowListResponse
     private val dummyMovieResponses = DataStore.moviesResponse
 
-    private val dummyTvList = dummyTvListResponses.toDomain()
-    private val dummyMovieList = dummyMovieResponses.toDomain()
+    private val dummyTvList = dummyTvListResponses.toEntity().toDomain()
+    private val dummyMovieList = dummyMovieResponses.toEntity().toDomain()
 
     private val dummyTvShow = dummyTvList[0]
     private val dummyMovie = dummyMovieList[0]
@@ -55,16 +57,13 @@ class MovieRepositoryTest {
 
     @Test
     fun getUpcomingMovies() = runBlockingTest {
-        val dummyResponseSuccess = Response.success(MovieResponse(results = dummyMovieResponses))
-        val dummyLocalMovies = LiveDataTestUtil.setValue(PagingData.from(dummyMovieList.map { it.toEntity() }))
+        val dummyLocalMovies = LiveDataTestUtil.setValue(dummyMovieList.map { it.toEntity() })
         Mockito.`when`(local.getAllMovies()).thenReturn(dummyLocalMovies)
-        Mockito.`when`(remote.getUpcomingMovies()).thenReturn(dummyResponseSuccess)
         val movieList = LiveDataTestUtil.getValue(repository.getUpcomingMovies())
-        verify(remote).getUpcomingMovies()
 
         Assert.assertNotNull(movieList)
         when(movieList) {
-            is Resource.Success -> Assert.assertEquals(PagingData.from(dummyMovieList), movieList.data)
+            is Resource.Success -> Assert.assertEquals(dummyMovieList.size, movieList.data.size)
         }
     }
 
@@ -92,17 +91,14 @@ class MovieRepositoryTest {
 
     @Test
     fun getTvOnAir() = runBlockingTest {
-        val dummyResponseSuccess = Response.success(TvResponse(results = dummyTvListResponses))
-        val dummyLocalTvShows = LiveDataTestUtil.setValue(PagingData.from(dummyTvList.map { it.toEntity() }))
+        val dummyLocalTvShows = LiveDataTestUtil.setValue(dummyTvList.map { it.toEntity() })
         Mockito.`when`(local.getTvShows()).thenReturn(dummyLocalTvShows)
-        Mockito.`when`(remote.getTvOnAir()).thenReturn(dummyResponseSuccess)
 
         val tvList = LiveDataTestUtil.getValue(repository.getTvOnAir())
-        verify(remote).getTvOnAir()
 
         Assert.assertNotNull(tvList)
         when(tvList) {
-            is Resource.Success -> Assert.assertEquals(PagingData.from(dummyTvList), tvList.data)
+            is Resource.Success -> Assert.assertEquals(dummyTvList.size, tvList.data.size)
         }
     }
 

@@ -2,10 +2,10 @@ package io.github.pengdst.jetpacksubmission.ui.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import androidx.paging.PagingData
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
+import io.github.pengdst.jetpacksubmission.domain.usecase.GetDetailMovieUsecase
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetTvOnAirUsecase
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetUpcomingMoviesUsecase
 import io.github.pengdst.jetpacksubmission.utils.DataStore
@@ -40,13 +40,13 @@ class HomeViewModelTest : TestCase() {
 
     @Mock private lateinit var getTvOnAirUsecase: GetTvOnAirUsecase
     @Mock private lateinit var getUpcomingMoviesUsecase: GetUpcomingMoviesUsecase
-    @Mock private lateinit var movieListObserver: Observer<Resource<PagingData<Movie>>>
-    @Mock private lateinit var tvListObserver: Observer<Resource<PagingData<TvShow>>>
+    @Mock private lateinit var movieListObserver: Observer<Resource<List<Movie>>>
+    @Mock private lateinit var tvListObserver: Observer<Resource<List<TvShow>>>
 
     private lateinit var viewModel: HomeViewModel
 
-    private val dummyMovieList = PagingData.from(DataStore.movies)
-    private val dummyTvShowList = PagingData.from(DataStore.tvShowList)
+    private val dummyMovieList = DataStore.movies
+    private val dummyTvShowList = DataStore.tvShowList
 
     @Before
     public override fun setUp() {
@@ -55,7 +55,7 @@ class HomeViewModelTest : TestCase() {
 
     @Test
     fun testGetMovies() = runBlockingTest {
-        val resource: Resource<PagingData<Movie>> = Resource.Success(dummyMovieList)
+        val resource: Resource<List<Movie>> = Resource.Success(dummyMovieList)
         val liveData = LiveDataTestUtil.setValue(resource)
         Mockito.`when`(getUpcomingMoviesUsecase.run(GetUpcomingMoviesUsecase.Companion)).thenReturn(liveData)
         val movies = viewModel.getMovies().value
@@ -74,7 +74,7 @@ class HomeViewModelTest : TestCase() {
 
     @Test
     fun testGetTvShowList() = runBlockingTest {
-        val resource: Resource<PagingData<TvShow>> = Resource.Success(dummyTvShowList)
+        val resource: Resource<List<TvShow>> = Resource.Success(dummyTvShowList)
         val liveData = LiveDataTestUtil.setValue(resource)
         Mockito.`when`(getTvOnAirUsecase.run(GetTvOnAirUsecase.Companion)).thenReturn(liveData)
         val tvShow = viewModel.getTvShowList().value
