@@ -1,35 +1,42 @@
-package io.github.pengdst.jetpacksubmission.ui.main
+package io.github.pengdst.jetpacksubmission.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.navigation.NavController
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.pengdst.jetpacksubmission.R
-import io.github.pengdst.jetpacksubmission.core.HasToolbarFragment
 import io.github.pengdst.jetpacksubmission.databinding.ActivityMainBinding
+import io.github.pengdst.jetpacksubmission.domain.models.Section
 import io.github.pengdst.jetpacksubmission.ui.detail.DetailActivity
-import io.github.pengdst.jetpacksubmission.ui.home.ContentCallback
-import io.github.pengdst.jetpacksubmission.utils.findNavController
+import io.github.pengdst.jetpacksubmission.ui.home.sections.SectionsPagerAdapter
+import io.github.pengdst.jetpacksubmission.ui.home.sections.movie.MovieListFragment
+import io.github.pengdst.jetpacksubmission.ui.home.sections.tv.TvShowListFragment
 import io.github.pengdst.libs.ui.activity.viewbinding.ActivityViewBindingDelegate.Companion.viewBindings
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), ContentCallback {
+class HomeActivity : AppCompatActivity(), ContentCallback {
 
-    private lateinit var navController: NavController
-    val binding: ActivityMainBinding by viewBindings()
+    private val binding: ActivityMainBinding by viewBindings()
+    @Inject
+    lateinit var sectionsPagerAdapter: SectionsPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-        navController = findNavController(R.id.fragment_container_view)
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            binding.toolbar.isVisible = destination is HasToolbarFragment
-            if (destination is HasToolbarFragment) setSupportActionBar(destination.toolbar)
-        }
+        sectionsPagerAdapter.addSection(Section(getString(R.string.movie), MovieListFragment()))
+        sectionsPagerAdapter.addSection(Section(getString(R.string.tv_show), TvShowListFragment()))
+
+        binding.viewPager.adapter = sectionsPagerAdapter
+        binding.tabs.setupWithViewPager(binding.viewPager)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun moveTo(position: Int, contentId: String, contentType: String) {
