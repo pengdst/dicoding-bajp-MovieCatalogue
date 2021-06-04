@@ -24,32 +24,36 @@ class MovieRemoteSource(
     suspend fun getUpcomingMovies(): Response<MovieResponse> {
         EspressoIdlingResource.increment()
         return withContext(Dispatchers.IO){
-            EspressoIdlingResource.decrement()
-            movieRoute.getUpcomingMovies()
+            movieRoute.getUpcomingMovies().also {
+                EspressoIdlingResource.decrement()
+            }
         }
     }
 
     suspend fun getMovie(movieId: String): Response<MovieDto> {
         EspressoIdlingResource.increment()
         return withContext(Dispatchers.IO){
-            EspressoIdlingResource.decrement()
-            movieRoute.getMovie(movieId)
+            movieRoute.getMovie(movieId).also {
+                EspressoIdlingResource.decrement()
+            }
         }
     }
 
     suspend fun getTvOnAir(): Response<TvResponse> {
         EspressoIdlingResource.increment()
         return withContext(Dispatchers.IO){
-            EspressoIdlingResource.decrement()
-            movieRoute.getTvOnAir()
+            movieRoute.getTvOnAir().also {
+                EspressoIdlingResource.decrement()
+            }
         }
     }
 
     suspend fun getTv(tvId: String): Response<TvDto> {
         EspressoIdlingResource.increment()
         return withContext(Dispatchers.IO){
-            EspressoIdlingResource.decrement()
-            movieRoute.getTv(tvId)
+            movieRoute.getTv(tvId).also {
+                EspressoIdlingResource.decrement()
+            }
         }
     }
 }
