@@ -4,15 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asFlow
 import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.local.room.model.MovieEntity
 import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
 import io.github.pengdst.jetpacksubmission.data.local.source.MovieLocalSource
 import io.github.pengdst.jetpacksubmission.data.remote.helpers.ApiResponse
-import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieMapper.toEntity
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.MovieDto
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.TvDto
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.MovieResponse
@@ -71,7 +69,7 @@ class MovieRepositoryImpl @Inject constructor(
             }
 
             override suspend fun saveRemoteData(remote: MovieResponse) {
-                remote.results?.toDomain()?.map { it.toEntity() }?.let {
+                remote.results?.toEntity()?.let {
                     local.saveMovies(it)
                 }
             }
@@ -89,7 +87,7 @@ class MovieRepositoryImpl @Inject constructor(
                 return local.getMovie(movieId).asFlow()
             }
 
-            override fun shouldFetchFromRemote(db: MovieEntity?) = db == null
+            override fun shouldFetchFromRemote(db: MovieEntity?) = db == null || !db.isFavourite
 
             override suspend fun fetchFromRemote(): Flow<ApiResponse<MovieDto>?> {
                 val response = remote.getMovie(movieId)
@@ -113,7 +111,7 @@ class MovieRepositoryImpl @Inject constructor(
             }
 
             override suspend fun saveRemoteData(remote: MovieDto) {
-                local.saveMovie(remote.toDomain().toEntity())
+                local.saveMovie(remote.toEntity())
             }
         }.liveData
     }
@@ -149,7 +147,7 @@ class MovieRepositoryImpl @Inject constructor(
             }
 
             override suspend fun saveRemoteData(remote: TvResponse) {
-                remote.results?.toDomain()?.map { it.toEntity() }?.let {
+                remote.results?.toEntity()?.let {
                     local.saveTvShows(it)
                 }
             }
@@ -167,7 +165,7 @@ class MovieRepositoryImpl @Inject constructor(
                 return local.getTv(tvId).asFlow()
             }
 
-            override fun shouldFetchFromRemote(db: TvShowEntity?) = db == null
+            override fun shouldFetchFromRemote(db: TvShowEntity?) = db == null || !db.isFavourite
 
             override suspend fun fetchFromRemote(): Flow<ApiResponse<TvDto>?> {
                 val response = remote.getTv(tvId)
@@ -191,7 +189,7 @@ class MovieRepositoryImpl @Inject constructor(
             }
 
             override suspend fun saveRemoteData(remote: TvDto) {
-                local.saveTvShow(remote.toDomain().toEntity())
+                local.saveTvShow(remote.toEntity())
             }
         }.liveData
     }

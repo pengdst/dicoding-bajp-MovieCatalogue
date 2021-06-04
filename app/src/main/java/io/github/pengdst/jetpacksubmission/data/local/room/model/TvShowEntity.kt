@@ -22,5 +22,6 @@ data class TvShowEntity(
     var language: String,
     var genre: String,
     var storyLine: String,
-    var isFavourite: Boolean
-)
+){
+    var isFavourite: Boolean = false
+}

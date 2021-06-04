@@ -33,8 +33,10 @@ object MovieMapper {
         language = language,
         genre = genre,
         storyLine = storyLine,
-        isFavourite = isFavourite
-    )
+    ).apply {
+        isFavourite = this@toEntity.isFavourite
+    }
 
     fun List<MovieEntity>.toDomain() = map { it.toDomain() }
+
 }

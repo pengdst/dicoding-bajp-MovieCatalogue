@@ -1,6 +1,6 @@
 package io.github.pengdst.jetpacksubmission.data.remote.mapper
 
-import io.github.pengdst.jetpacksubmission.domain.models.TvShow
+import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.TvDto
 
 /**
@@ -12,8 +12,8 @@ import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.TvDto
  */
 object TvMapper {
 
-    fun TvDto.toDomain() = TvShow(
-        id = id.toString(),
+    fun TvDto.toEntity() = TvShowEntity(
+        id = id ?: 0,
         title = name.toString(),
         backdropPath = backdropPath.toString(),
         posterPath = posterPath.toString(),
@@ -25,7 +25,7 @@ object TvMapper {
         storyLine = overview.toString()
     )
 
-    fun List<TvDto>.toDomain() = map {
-        it.toDomain()
+    fun List<TvDto>.toEntity() = map {
+        it.toEntity()
     }
 }

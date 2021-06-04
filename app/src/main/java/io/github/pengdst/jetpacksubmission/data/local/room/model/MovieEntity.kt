@@ -21,6 +21,9 @@ data class MovieEntity(
     var releaseDate: String,
     var language: String,
     var genre: String,
-    var storyLine: String,
-    var isFavourite: Boolean
-)
+    var storyLine: String
+){
+
+    var isFavourite: Boolean = false
+
+}

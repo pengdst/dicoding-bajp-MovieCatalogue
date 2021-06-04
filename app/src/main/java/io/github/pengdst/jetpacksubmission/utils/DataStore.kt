@@ -1,14 +1,16 @@
 package io.github.pengdst.jetpacksubmission.utils
 
 import com.google.gson.Gson
-import io.github.pengdst.jetpacksubmission.domain.models.Movie
-import io.github.pengdst.jetpacksubmission.domain.models.TvShow
-import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieMapper.toEntity
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.MovieDto
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.TvDto
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.MovieResponse
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.TvResponse
+import io.github.pengdst.jetpacksubmission.domain.models.Movie
+import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -451,9 +453,9 @@ object DataStore {
 
     val tvShowListResponse: List<TvDto> = Gson().fromJson(tvOnAirResponseBody, TvResponse::class.java).results!!
 
-    val movies: List<Movie> = moviesResponse.toDomain()
+    val movies: List<Movie> = moviesResponse.toEntity().toDomain()
 
-    val tvShowList: List<TvShow> = tvShowListResponse.toDomain()
+    val tvShowList: List<TvShow> = tvShowListResponse.toEntity().toDomain()
 
     val movieResponseBody: String = Gson().toJson(moviesResponse[0])
     val tvShowResponseBody: String = Gson().toJson(tvShowListResponse[0])

@@ -1,5 +1,6 @@
 package io.github.pengdst.jetpacksubmission.data.remote.mapper
 
+import io.github.pengdst.jetpacksubmission.data.local.room.model.MovieEntity
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.MovieDto
 
@@ -12,8 +13,8 @@ import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.MovieDto
  */
 object MovieMapper {
 
-    fun MovieDto.toDomain() = Movie(
-        id = id.toString(),
+    fun MovieDto.toEntity() = MovieEntity(
+        id = id ?: 0,
         title = title.toString(),
         backdropPath = backdropPath.toString(),
         posterPath = posterPath.toString(),
@@ -25,7 +26,8 @@ object MovieMapper {
         storyLine = overview.toString()
     )
 
-    fun List<MovieDto>.toDomain() = map {
-        it.toDomain()
+    fun List<MovieDto>.toEntity() = map {
+        it.toEntity()
     }
+
 }
