@@ -11,9 +11,10 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.github.pengdst.jetpacksubmission.R
-import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieDtoMapper.toDomain
-import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvDtoMapper.toDomain
-import io.github.pengdst.jetpacksubmission.ui.main.MainActivity
+import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowEntityMapper.toDomain
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieDtoMapper.toEntity
+import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvDtoMapper.toEntity
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.EspressoIdlingResource
 import org.junit.After
@@ -31,13 +32,13 @@ import org.junit.runner.RunWith
  */
 
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest {
+class HomeActivityTest {
 
     @get:Rule
-    var activityRule = ActivityScenarioRule(MainActivity::class.java)
+    var activityRule = ActivityScenarioRule(HomeActivity::class.java)
 
-    private val dummyMovie = DataStore.moviesResponse.toDomain()
-    private val dummyTvShow = DataStore.tvShowListResponse.toDomain()
+    private val dummyMovie = DataStore.moviesResponse.toEntity().toDomain()
+    private val dummyTvShow = DataStore.tvShowListResponse.toEntity().toDomain()
 
     @Before
     fun setUp(){
