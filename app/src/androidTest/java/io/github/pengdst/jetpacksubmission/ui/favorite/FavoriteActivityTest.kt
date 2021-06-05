@@ -97,6 +97,4 @@ class FavoriteActivityTest {
         onView(isRoot()).perform(pressBack())
     }
 
-    private fun checkDisplayed(resId: Int) {
-    }
 }
