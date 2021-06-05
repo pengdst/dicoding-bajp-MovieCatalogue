@@ -8,7 +8,6 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.pressBack
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
-import androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import io.github.pengdst.jetpacksubmission.R
@@ -26,6 +25,7 @@ import org.junit.Test
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
+
 class FavoriteActivityTest {
 
     @get:Rule
@@ -42,15 +42,9 @@ class FavoriteActivityTest {
     }
 
     @Test
-    fun loadMovie() {
-        onView(withText("Movie")).perform(click())
-        checkDisplayed(R.id.rv_movies)
-        checkScrollToPosition(R.id.rv_movies, 5)
-    }
-
-    @Test
     fun testFavoriteMovie(){
-        loadMovie()
+        onView(withText("Movie")).perform(click())
+        onView(withId(R.id.rv_movies)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movies)).perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.fab_favourite)).perform(click())
         onView(isRoot()).perform(pressBack())
@@ -76,15 +70,9 @@ class FavoriteActivityTest {
     }
 
     @Test
-    fun loadTvShow() {
-        onView(withText("Tv Show")).perform(click())
-        checkDisplayed(R.id.rv_tv_shows)
-        checkScrollToPosition(R.id.rv_tv_shows, 5)
-    }
-
-    @Test
     fun testFavoriteTvShow(){
-        loadTvShow()
+        onView(withText("Tv Show")).perform(click())
+        onView(withId(R.id.rv_tv_shows)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_tv_shows)).perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.fab_favourite)).perform(click())
         onView(isRoot()).perform(pressBack())
@@ -109,13 +97,6 @@ class FavoriteActivityTest {
         onView(isRoot()).perform(pressBack())
     }
 
-    private fun checkScrollToPosition(resId: Int, size: Int) {
-        onView(withId(resId))
-            .perform(scrollToPosition<RecyclerView.ViewHolder>(size))
-    }
-
     private fun checkDisplayed(resId: Int) {
-        onView(withId(resId))
-            .check(matches(isDisplayed()))
     }
 }
