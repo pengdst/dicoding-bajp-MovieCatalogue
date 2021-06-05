@@ -1,50 +1,31 @@
-package io.github.pengdst.jetpacksubmission.ui.favorite
+package io.github.pengdst.jetpacksubmission.ui.favorite.sections.tv
 
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.pengdst.jetpacksubmission.databinding.FragmentMovieListBinding
+import io.github.pengdst.jetpacksubmission.databinding.FragmentTvShowListBinding
+import io.github.pengdst.jetpacksubmission.ui.favorite.FavoriteAdapter
+import io.github.pengdst.jetpacksubmission.ui.favorite.FavoriteViewModel
 import io.github.pengdst.jetpacksubmission.ui.home.ContentCallback
+import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.libs.ui.fragment.viewbinding.FragmentViewBindingDelegate.Companion.viewBindings
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavoriteFragment : Fragment() {
+class TvShowFavoriteFragment : Fragment() {
 
-    private val binding: FragmentMovieListBinding by viewBindings()
+    private val binding: FragmentTvShowListBinding by viewBindings()
     private val viewModel: FavoriteViewModel by viewModels()
-    @Inject
-    lateinit var favoriteAdapter: FavoriteAdapter
+    @Inject lateinit var favoriteAdapter: FavoriteAdapter
     private var contentCallback: ContentCallback? = null
-    private var type: String? = null
-
-    companion object {
-        fun newInstance(type: String): FavoriteFragment {
-            val args = bundleOf(
-                "type" to type
-            )
-            val fragment = FavoriteFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            type = it.getString("type")
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,26 +44,23 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-        type?.let {
-            viewModel.getFavoriteData(it).observe(viewLifecycleOwner) {
-                favoriteAdapter.submitData(it)
-                showLoading(false)
-            }
+        viewModel.getFavoriteData(DataStore.TYPE_TV_SHOW).observe(viewLifecycleOwner){
+            showLoading(false)
+            favoriteAdapter.submitData(it)
         }
-
     }
 
     private fun showLoading(isLoading: Boolean) {
         binding.ltLoading.isVisible = isLoading
     }
 
-    private fun setupRecyclerView() {
-        favoriteAdapter.setOnItemClickListener { _, favirute, position ->
-            contentCallback?.moveTo(position, favirute.id, favirute.type)
+    private fun setupRecyclerView(){
+        favoriteAdapter.setOnItemClickListener { _, tv, position ->
+            contentCallback?.moveTo(position, tv.id, tv.type)
         }
-        binding.rvMovies.apply {
+        binding.rvTvShows.apply {
             adapter = favoriteAdapter
-            layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+            layoutManager = StaggeredGridLayoutManager(3, RecyclerView.VERTICAL)
         }
     }
 }
