@@ -1,7 +1,6 @@
 package io.github.pengdst.jetpacksubmission.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.paging.PagingData
 import com.nhaarman.mockitokotlin2.verify
 import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toEntity
@@ -10,8 +9,6 @@ import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowEntityMapper.
 import io.github.pengdst.jetpacksubmission.data.local.source.MovieLocalSource
 import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieDtoMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvDtoMapper.toEntity
-import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.MovieResponse
-import io.github.pengdst.jetpacksubmission.data.remote.retrofit.response.TvResponse
 import io.github.pengdst.jetpacksubmission.data.remote.source.MovieRemoteSource
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.utils.DataStore

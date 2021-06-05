@@ -14,7 +14,7 @@
         android:theme="@style/Theme.JetpackSubmission"
         android:usesCleartextTraffic="true"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".ui.favorite.FavoriteActivity"></activity>
+        <activity android:name=".ui.favorite.FavoriteActivity" />
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

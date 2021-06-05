@@ -1,7 +1,5 @@
 package io.github.pengdst.jetpacksubmission.core
 
-import androidx.lifecycle.LiveData
-
 /**
  * Created on 6/1/21 by Pengkuh Dwi Septiandi (@pengdst)
  *

@@ -32,7 +32,9 @@ data class Movie(
         }
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     var posterBaseUrl = IMAGE_URL_W500
+    @Suppress("MemberVisibilityCanBePrivate")
     var backdropBaseUrl = IMAGE_URL_ORIGINAL
     val imagePosterUrl: String get() = posterBaseUrl + posterPath
     val imageBackdropUrl: String get() = backdropBaseUrl + backdropPath

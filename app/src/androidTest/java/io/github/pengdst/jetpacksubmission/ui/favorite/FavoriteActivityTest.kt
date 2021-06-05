@@ -114,11 +114,6 @@ class FavoriteActivityTest {
             .perform(scrollToPosition<RecyclerView.ViewHolder>(size))
     }
 
-    private fun performRecyclerViewClick(resId: Int, position: Int) {
-        onView(withId(resId))
-            .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(position, click()))
-    }
-
     private fun checkDisplayed(resId: Int) {
         onView(withId(resId))
             .check(matches(isDisplayed()))

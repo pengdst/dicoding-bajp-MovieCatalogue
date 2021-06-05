@@ -10,6 +10,8 @@ import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.TvDto
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
+
+@Suppress("unused")
 object TvDtoMapper {
 
     fun TvDto.toEntity() = TvShowEntity(

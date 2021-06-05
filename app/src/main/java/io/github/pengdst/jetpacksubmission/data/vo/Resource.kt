@@ -1,3 +1,5 @@
+@file:Suppress("unused", "unused", "unused")
+
 package io.github.pengdst.jetpacksubmission.data.vo
 
 /**

@@ -11,5 +11,6 @@ import android.widget.Toast
  * - LinkedIn https://linkedin.com/in/pengdst
  */
 
+@Suppress("unused")
 fun Context?.shortToast(message: String?) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 fun Context?.longToast(message: String?) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()

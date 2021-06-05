@@ -1,11 +1,7 @@
 package io.github.pengdst.jetpacksubmission.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.github.pengdst.jetpacksubmission.data.vo.Resource
-import io.github.pengdst.jetpacksubmission.domain.models.Movie
-import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetTvOnAirUsecase
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetUpcomingMoviesUsecase
 import javax.inject.Inject

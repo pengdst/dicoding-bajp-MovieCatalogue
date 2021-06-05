@@ -31,7 +31,9 @@ data class TvShow(
         }
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     var posterBaseUrl = ApiConst.IMAGE_URL_W500
+    @Suppress("MemberVisibilityCanBePrivate")
     var backdropBaseUrl = ApiConst.IMAGE_URL_ORIGINAL
     val imagePosterUrl: String get() = posterBaseUrl + posterPath
     val imageBackdropUrl: String get() = backdropBaseUrl + backdropPath

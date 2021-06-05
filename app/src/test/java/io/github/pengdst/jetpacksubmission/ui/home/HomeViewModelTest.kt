@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
-import io.github.pengdst.jetpacksubmission.domain.usecase.GetDetailMovieUsecase
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetTvOnAirUsecase
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetUpcomingMoviesUsecase
 import io.github.pengdst.jetpacksubmission.utils.DataStore

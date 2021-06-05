@@ -4,12 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import io.github.pengdst.jetpacksubmission.R
 import io.github.pengdst.jetpacksubmission.base.BasePagingDataAdapter
 import io.github.pengdst.jetpacksubmission.databinding.ItemFavoriteBoxBinding
-import io.github.pengdst.jetpacksubmission.domain.models.TvShow
-import io.github.pengdst.jetpacksubmission.databinding.ItemTvShowBinding
 import javax.inject.Inject
 
 /**

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.favorite.FavoriteActivity">
+    tools:context=".ui.favorite.FavoriteActivity"
+    tools:keep="@layout/activity_favorite">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"

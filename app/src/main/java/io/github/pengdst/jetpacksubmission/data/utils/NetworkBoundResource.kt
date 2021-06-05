@@ -25,9 +25,11 @@ abstract class NetworkBoundResource<Domain, Db, Remote> {
     abstract suspend fun fetchFromLocal(): Flow<Db>
     abstract fun shouldFetchFromRemote(db: Db?): Boolean
     abstract suspend fun fetchFromRemote(): Flow<ApiResponse<Remote>?>
+    @Suppress("MemberVisibilityCanBePrivate")
     fun processRemoteResponse(response: ApiResponse<Remote>) {}
     abstract fun convertToDomain(db: Db): Domain
     abstract suspend fun saveRemoteData(remote: Remote)
+    @Suppress("MemberVisibilityCanBePrivate")
     fun onFetchFailed(errorBody: String?, throwable: Throwable? = null) {
         Log.e(TAG, "onFetchFailed: ", throwable)
     }

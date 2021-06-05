@@ -1,7 +1,6 @@
 package io.github.pengdst.jetpacksubmission.data.remote.mapper
 
 import io.github.pengdst.jetpacksubmission.data.local.room.model.MovieEntity
-import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.MovieDto
 
 /**
@@ -11,6 +10,7 @@ import io.github.pengdst.jetpacksubmission.data.remote.retrofit.models.MovieDto
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
+@Suppress("unused")
 object MovieDtoMapper {
 
     fun MovieDto.toEntity() = MovieEntity(
