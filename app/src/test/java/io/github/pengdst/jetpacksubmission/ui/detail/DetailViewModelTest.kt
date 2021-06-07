@@ -2,17 +2,19 @@ package io.github.pengdst.jetpacksubmission.ui.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.google.common.truth.Truth
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
-import io.github.pengdst.jetpacksubmission.domain.usecase.*
+import io.github.pengdst.jetpacksubmission.domain.usecase.GetDetailMovieUsecase
+import io.github.pengdst.jetpacksubmission.domain.usecase.GetDetailTvUsecase
+import io.github.pengdst.jetpacksubmission.domain.usecase.SetBookmarkedMovieUsecase
+import io.github.pengdst.jetpacksubmission.domain.usecase.SetBookmarkedTvShowUsecase
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.LiveDataTestUtil
 import io.github.pengdst.jetpacksubmission.utils.MainCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -70,21 +72,21 @@ class DetailViewModelTest {
         viewModel.setSelectedContent(movieId)
         val resource: Resource<Movie> = Resource.Success(dummyMovie)
         val liveData = LiveDataTestUtil.setValue(resource)
+
         Mockito.`when`(getDetailMovieUsecase.run(GetDetailMovieUsecase.Params(movieId))).thenReturn(liveData)
         val movie = viewModel.getMovie().value
         Mockito.verify(getDetailMovieUsecase).run(GetDetailMovieUsecase.Params(movieId))
 
-        assertNotNull(movie)
-        when(movie) {
-            is Resource.Success -> {
-                assertEquals(dummyMovie.id, movie.data.id)
-                assertEquals(dummyMovie.title, movie.data.title)
-                assertEquals(dummyMovie.storyLine, movie.data.storyLine)
-                assertEquals(dummyMovie.genre, movie.data.genre)
-                assertEquals(dummyMovie.releaseDate, movie.data.releaseDate)
-                assertEquals(dummyMovie.imagePosterUrl, movie.data.imagePosterUrl)
-            }
-        }
+        Truth.assertThat(movie).isNotNull()
+        Truth.assertThat(movie).isInstanceOf(Resource.Success::class.java)
+
+        movie as Resource.Success
+        Truth.assertThat(movie.data.id).isEqualTo(dummyMovie.id)
+        Truth.assertThat(movie.data.title).isEqualTo(dummyMovie.title)
+        Truth.assertThat(movie.data.storyLine).isEqualTo(dummyMovie.storyLine)
+        Truth.assertThat(movie.data.genre).isEqualTo(dummyMovie.genre)
+        Truth.assertThat(movie.data.releaseDate).isEqualTo(dummyMovie.releaseDate)
+        Truth.assertThat(movie.data.imagePosterUrl).isEqualTo(dummyMovie.imagePosterUrl)
 
         viewModel.getMovie().observeForever(movieObserver)
         Mockito.verify(movieObserver).onChanged(resource)
@@ -95,21 +97,21 @@ class DetailViewModelTest {
         viewModel.setSelectedContent(tvShowId)
         val resource: Resource<TvShow> = Resource.Success(dummyTvShow)
         val liveData = LiveDataTestUtil.setValue(resource)
+
         Mockito.`when`(getDetailTvUsecase.run(GetDetailTvUsecase.Params(tvShowId))).thenReturn(liveData)
         val tvShow = viewModel.getTvShow().value
         Mockito.verify(getDetailTvUsecase).run(GetDetailTvUsecase.Params(tvShowId))
 
-        assertNotNull(tvShow)
-        when(tvShow) {
-            is Resource.Success -> {
-                assertEquals(dummyTvShow.id, tvShow.data.id)
-                assertEquals(dummyTvShow.title, tvShow.data.title)
-                assertEquals(dummyTvShow.storyLine, tvShow.data.storyLine)
-                assertEquals(dummyTvShow.genre, tvShow.data.genre)
-                assertEquals(dummyTvShow.releaseDate, tvShow.data.releaseDate)
-                assertEquals(dummyTvShow.imagePosterUrl, tvShow.data.imagePosterUrl)
-            }
-        }
+        Truth.assertThat(tvShow).isNotNull()
+        Truth.assertThat(tvShow).isInstanceOf(Resource.Success::class.java)
+
+        tvShow as Resource.Success
+        Truth.assertThat(tvShow.data.id).isEqualTo(dummyTvShow.id)
+        Truth.assertThat(tvShow.data.title).isEqualTo(dummyTvShow.title)
+        Truth.assertThat(tvShow.data.storyLine).isEqualTo(dummyTvShow.storyLine)
+        Truth.assertThat(tvShow.data.genre).isEqualTo(dummyTvShow.genre)
+        Truth.assertThat(tvShow.data.releaseDate).isEqualTo(dummyTvShow.releaseDate)
+        Truth.assertThat(tvShow.data.imagePosterUrl).isEqualTo(dummyTvShow.imagePosterUrl)
 
         viewModel.getTvShow().observeForever(tvObserver)
         Mockito.verify(tvObserver).onChanged(resource)

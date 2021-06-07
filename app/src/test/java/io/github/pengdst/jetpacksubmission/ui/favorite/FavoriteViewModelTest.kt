@@ -2,17 +2,17 @@ package io.github.pengdst.jetpacksubmission.ui.favorite
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.google.common.truth.Truth
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
-import io.github.pengdst.jetpacksubmission.domain.usecase.*
+import io.github.pengdst.jetpacksubmission.domain.usecase.GetBookmarkedMoviesUsecase
+import io.github.pengdst.jetpacksubmission.domain.usecase.GetBookmarkedTvShowsUsecase
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.LiveDataTestUtil
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
@@ -47,28 +47,32 @@ class FavoriteViewModelTest {
     }
 
     @Test
-    fun getMovies() {
+    fun getBookmarkedMovies() {
         val liveData = LiveDataTestUtil.setValue(dummyMovieList)
         Mockito.`when`(getBookmarkedMovieUsecase.run(GetBookmarkedMoviesUsecase.Companion)).thenReturn(liveData)
         val movies = viewModel.getMovies().value
         Mockito.verify(getBookmarkedMovieUsecase).run(GetBookmarkedMoviesUsecase.Companion)
 
-        Assert.assertNotNull(movies)
-        Assert.assertEquals(dummyMovieList.size, movies?.size)
+        Truth.assertThat(movies).isNotNull()
+        Truth.assertThat(movies).isNotEmpty()
+        Truth.assertThat(movies).hasSize(dummyMovieList.size)
+        Truth.assertThat(movies).isEqualTo(dummyMovieList)
 
         viewModel.getMovies().observeForever(movieListObserver)
         Mockito.verify(movieListObserver).onChanged(dummyMovieList)
     }
 
     @Test
-    fun getTvShowList() {
+    fun getBookmarkedTvShowList() {
         val liveData = LiveDataTestUtil.setValue(dummyTvShowList)
         Mockito.`when`(getBookmarkedTvShowsUsecase.run(GetBookmarkedTvShowsUsecase.Companion)).thenReturn(liveData)
         val tvShow = viewModel.getTvShowList().value
         Mockito.verify(getBookmarkedTvShowsUsecase).run(GetBookmarkedTvShowsUsecase.Companion)
 
-        Assert.assertNotNull(tvShow)
-        Assert.assertEquals(dummyTvShowList.size, tvShow?.size)
+        Truth.assertThat(tvShow).isNotNull()
+        Truth.assertThat(tvShow).isNotEmpty()
+        Truth.assertThat(tvShow).hasSize(dummyTvShowList.size)
+        Truth.assertThat(tvShow).isEqualTo(dummyTvShowList)
 
         viewModel.getTvShowList().observeForever(tvListObserver)
         Mockito.verify(tvListObserver).onChanged(dummyTvShowList)
