@@ -43,7 +43,7 @@ class MovieRepositoryImpl @Inject constructor(
     private val local: MovieLocalSource
 ) : SafeRemoteSource(), MovieRepository {
 
-    val pagingConfig = PagingConfig(
+    private val pagingConfig = PagingConfig(
         pageSize = 10,
         enablePlaceholders = true,
         initialLoadSize = 10,

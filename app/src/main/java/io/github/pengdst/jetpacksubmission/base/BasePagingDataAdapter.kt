@@ -3,7 +3,6 @@ package io.github.pengdst.jetpacksubmission.base
 import android.view.View
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.github.pengdst.jetpacksubmission.utils.RecyclerViewCallback
 

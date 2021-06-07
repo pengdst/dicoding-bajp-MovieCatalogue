@@ -1,6 +1,5 @@
 package io.github.pengdst.jetpacksubmission.data.local.mapper
 
-import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 
