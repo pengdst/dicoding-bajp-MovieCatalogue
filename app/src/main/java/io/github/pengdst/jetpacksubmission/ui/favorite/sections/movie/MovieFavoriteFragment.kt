@@ -45,7 +45,7 @@ class MovieFavoriteFragment : Fragment() {
 
         setupRecyclerView()
         viewModel.getFavoriteData(DataStore.TYPE_MOVIE).observe(viewLifecycleOwner) {
-            favoriteAdapter.submitData(it)
+            favoriteAdapter.submitData(lifecycle, it)
             showLoading(false)
         }
     }

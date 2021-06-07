@@ -46,7 +46,7 @@ class TvShowFavoriteFragment : Fragment() {
         setupRecyclerView()
         viewModel.getFavoriteData(DataStore.TYPE_TV_SHOW).observe(viewLifecycleOwner){
             showLoading(false)
-            favoriteAdapter.submitData(it)
+            favoriteAdapter.submitData(lifecycle, it)
         }
     }
 

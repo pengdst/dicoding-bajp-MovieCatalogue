@@ -1,7 +1,6 @@
 package io.github.pengdst.jetpacksubmission.base
 
 import android.view.View
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,13 +13,14 @@ import io.github.pengdst.jetpacksubmission.utils.RecyclerViewCallback
  * - Gitlab https://gitlab.com/pengdst
  * - LinkedIn https://linkedin.com/in/pengdst
  */
-abstract class BasePagingDataAdapter<Data : Any, ViewHolder : RecyclerView.ViewHolder>(differ: DiffUtil.ItemCallback<Data>) :
-    PagingDataAdapter<Data, ViewHolder>(differ) {
+abstract class BaseListAdapter<Data : Any, ViewHolder : RecyclerView.ViewHolder>(differ: DiffUtil.ItemCallback<Data>) : ListAdapter<Data, ViewHolder>(differ) {
 
     protected var itemClickCallback: RecyclerViewCallback.OnItemClick<Data>? = null
 
-    fun setOnItemClickListener(onClick: (View, Data, Int) -> Unit) {
-        itemClickCallback = object : RecyclerViewCallback.OnItemClick<Data> {
+    fun submitData(list: List<Data>) = submitList(list)
+
+    fun setOnItemClickListener(onClick: (View, Data, Int)->Unit){
+        itemClickCallback = object : RecyclerViewCallback.OnItemClick<Data>{
             override fun onItemClick(view: View, data: Data, position: Int) {
                 onClick(view, data, position)
             }

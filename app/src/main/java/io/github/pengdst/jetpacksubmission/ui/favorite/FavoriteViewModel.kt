@@ -2,6 +2,7 @@ package io.github.pengdst.jetpacksubmission.ui.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
+import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetBookmarkedMoviesUsecase
 import io.github.pengdst.jetpacksubmission.domain.usecase.GetBookmarkedTvShowsUsecase
