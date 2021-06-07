@@ -63,7 +63,7 @@ class MovieRepositoryTest {
         Truth.assertThat(movieList).isInstanceOf(Resource.Success::class.java)
 
         movieList as Resource.Success
-        Truth.assertThat(movieList.data.size).isEqualTo(dummyMovieList.size)
+        Truth.assertThat(movieList.data).hasSize(dummyMovieList.size)
         Truth.assertThat(movieList.data).isEqualTo(dummyMovieList)
     }
 
@@ -101,7 +101,7 @@ class MovieRepositoryTest {
         Truth.assertThat(tvList).isInstanceOf(Resource.Success::class.java)
 
         tvList as Resource.Success
-        Truth.assertThat(tvList.data.size).isEqualTo(dummyTvList.size)
+        Truth.assertThat(tvList.data).hasSize(dummyTvList.size)
         Truth.assertThat(tvList.data).isEqualTo(dummyTvList)
     }
 
