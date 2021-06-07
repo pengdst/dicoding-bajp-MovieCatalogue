@@ -1,6 +1,7 @@
 package io.github.pengdst.jetpacksubmission.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.google.common.truth.Truth
 import com.nhaarman.mockitokotlin2.verify
 import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toEntity
@@ -13,10 +14,10 @@ import io.github.pengdst.jetpacksubmission.data.remote.source.MovieRemoteSource
 import io.github.pengdst.jetpacksubmission.data.vo.Resource
 import io.github.pengdst.jetpacksubmission.utils.DataStore
 import io.github.pengdst.jetpacksubmission.utils.LiveDataTestUtil
+import io.github.pengdst.jetpacksubmission.utils.LiveDataTestUtil.getOrAwaitValue
 import io.github.pengdst.jetpacksubmission.utils.MainCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito
@@ -32,8 +33,7 @@ import retrofit2.Response
 @ExperimentalCoroutinesApi
 class MovieRepositoryTest {
 
-    @get:Rule
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
+    @get:Rule var instantTaskExecutorRule = InstantTaskExecutorRule()
     @get:Rule var mainCoroutineRule = MainCoroutineRule()
 
     private val remote = Mockito.mock(MovieRemoteSource::class.java)
@@ -57,34 +57,37 @@ class MovieRepositoryTest {
         val entityLiveData = LiveDataTestUtil.setValue(dummyMovieList.map { it.toEntity() })
         Mockito.`when`(local.getAllMovies()).thenReturn(entityLiveData)
 
-        val movieList = LiveDataTestUtil.getValue(repository.getUpcomingMovies())
+        val movieList = repository.getUpcomingMovies().getOrAwaitValue(waitUntilFinished = true)
 
-        Assert.assertNotNull(movieList)
-        when(movieList) {
-            is Resource.Success -> Assert.assertEquals(dummyMovieList.size, movieList.data.size)
-        }
+        Truth.assertThat(movieList).isNotNull()
+        Truth.assertThat(movieList).isInstanceOf(Resource.Success::class.java)
+
+        movieList as Resource.Success
+        Truth.assertThat(movieList.data.size).isEqualTo(dummyMovieList.size)
+        Truth.assertThat(movieList.data).isEqualTo(dummyMovieList)
     }
 
     @Test
     fun getMovie() = runBlockingTest {
         val dummyResponseSuccess = Response.success(dummyMovieResponses[0])
         val entityLiveData = LiveDataTestUtil.setValue(dummyMovie.toEntity())
+
         Mockito.`when`(local.getMovie(movieId)).thenReturn(entityLiveData)
         Mockito.`when`(remote.getMovie(movieId)).thenReturn(dummyResponseSuccess)
-        val movie = LiveDataTestUtil.getValue(repository.getMovie(movieId))
+
+        val movie = repository.getMovie(movieId).getOrAwaitValue(waitUntilFinished = true)
         verify(remote).getMovie(movieId)
 
-        Assert.assertNotNull(movie)
-        when(movie) {
-            is Resource.Success -> {
-                Assert.assertEquals(dummyMovie.id, movie.data.id)
-                Assert.assertEquals(dummyMovie.title, movie.data.title)
-                Assert.assertEquals(dummyMovie.storyLine, movie.data.storyLine)
-                Assert.assertEquals(dummyMovie.genre, movie.data.genre)
-                Assert.assertEquals(dummyMovie.releaseDate, movie.data.releaseDate)
-                Assert.assertEquals(dummyMovie.imagePosterUrl, movie.data.imagePosterUrl)
-            }
-        }
+        Truth.assertThat(movie).isNotNull()
+        Truth.assertThat(movie).isInstanceOf(Resource.Success::class.java)
+
+        movie as Resource.Success
+        Truth.assertThat(movie.data.id).isEqualTo(dummyMovie.id)
+        Truth.assertThat(movie.data.title).isEqualTo(dummyMovie.title)
+        Truth.assertThat(movie.data.storyLine).isEqualTo(dummyMovie.storyLine)
+        Truth.assertThat(movie.data.genre).isEqualTo(dummyMovie.genre)
+        Truth.assertThat(movie.data.releaseDate).isEqualTo(dummyMovie.releaseDate)
+        Truth.assertThat(movie.data.imagePosterUrl).isEqualTo(dummyMovie.imagePosterUrl)
     }
 
     @Test
@@ -92,33 +95,36 @@ class MovieRepositoryTest {
         val entityLiveData = LiveDataTestUtil.setValue(dummyTvList.map { it.toEntity() })
         Mockito.`when`(local.getTvShows()).thenReturn(entityLiveData)
 
-        val tvList = LiveDataTestUtil.getValue(repository.getTvOnAir())
+        val tvList = repository.getTvOnAir().getOrAwaitValue(waitUntilFinished = true)
 
-        Assert.assertNotNull(tvList)
-        when(tvList) {
-            is Resource.Success -> Assert.assertEquals(dummyTvList.size, tvList.data.size)
-        }
+        Truth.assertThat(tvList).isNotNull()
+        Truth.assertThat(tvList).isInstanceOf(Resource.Success::class.java)
+
+        tvList as Resource.Success
+        Truth.assertThat(tvList.data.size).isEqualTo(dummyTvList.size)
+        Truth.assertThat(tvList.data).isEqualTo(dummyTvList)
     }
 
     @Test
     fun getTv() = runBlockingTest {
         val dummyResponseSuccess = Response.success(dummyTvListResponses[0])
         val entityLiveData = LiveDataTestUtil.setValue(dummyTvShow.toEntity())
+
         Mockito.`when`(local.getTv(tvId)).thenReturn(entityLiveData)
         Mockito.`when`(remote.getTv(tvId)).thenReturn(dummyResponseSuccess)
-        val tvShow = LiveDataTestUtil.getValue(repository.getTv(tvId))
+
+        val tvShow = repository.getTv(tvId).getOrAwaitValue(waitUntilFinished = true)
         verify(remote).getTv(tvId)
 
-        Assert.assertNotNull(tvShow)
-        when(tvShow) {
-            is Resource.Success -> {
-                Assert.assertEquals(dummyTvShow.id, tvShow.data.id)
-                Assert.assertEquals(dummyTvShow.title, tvShow.data.title)
-                Assert.assertEquals(dummyTvShow.storyLine, tvShow.data.storyLine)
-                Assert.assertEquals(dummyTvShow.genre, tvShow.data.genre)
-                Assert.assertEquals(dummyTvShow.releaseDate, tvShow.data.releaseDate)
-                Assert.assertEquals(dummyTvShow.imagePosterUrl, tvShow.data.imagePosterUrl)
-            }
-        }
+        Truth.assertThat(tvShow).isNotNull()
+        Truth.assertThat(tvShow).isInstanceOf(Resource.Success::class.java)
+
+        tvShow as Resource.Success
+        Truth.assertThat(tvShow.data.id).isEqualTo(dummyTvShow.id)
+        Truth.assertThat(tvShow.data.title).isEqualTo(dummyTvShow.title)
+        Truth.assertThat(tvShow.data.storyLine).isEqualTo(dummyTvShow.storyLine)
+        Truth.assertThat(tvShow.data.genre).isEqualTo(dummyTvShow.genre)
+        Truth.assertThat(tvShow.data.releaseDate).isEqualTo(dummyTvShow.releaseDate)
+        Truth.assertThat(tvShow.data.imagePosterUrl).isEqualTo(dummyTvShow.imagePosterUrl)
     }
 }
