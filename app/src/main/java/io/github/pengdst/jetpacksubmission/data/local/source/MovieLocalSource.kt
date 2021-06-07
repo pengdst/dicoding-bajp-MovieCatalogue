@@ -18,7 +18,7 @@ class MovieLocalSource(
 ) {
 
     fun getAllMovies(): LiveData<List<MovieEntity>> = movieDao.getMovies()
-    fun getBookmarkedMovies(): LiveData<List<MovieEntity>> = movieDao.getBookmarkedMovie()
+    fun getBookmarkedMovies() = movieDao.getBookmarkedMovie()
     fun getMovie(movieId: String) = movieDao.getMovieById(movieId)
     suspend fun saveMovie(movieEntity: MovieEntity) {
         movieDao.insertMovie(movieEntity)
@@ -27,7 +27,7 @@ class MovieLocalSource(
         movieDao.insertMovies(list)
     }
 
-    fun getBookmarkedTvShows(): LiveData<List<TvShowEntity>> = movieDao.getBookmarkedTvShow()
+    fun getBookmarkedTvShows() = movieDao.getBookmarkedTvShow()
 
     fun getTvShows(): LiveData<List<TvShowEntity>> = movieDao.getTvShows()
     fun getTv(tvId: String) = movieDao.getTvShow(tvId)
