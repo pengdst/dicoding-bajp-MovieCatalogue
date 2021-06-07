@@ -1,12 +1,15 @@
 package io.github.pengdst.jetpacksubmission.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.paging.PagingSource
 import com.google.common.truth.Truth
 import com.nhaarman.mockitokotlin2.verify
 import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowEntityMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowEntityMapper.toEntity
+import io.github.pengdst.jetpacksubmission.data.local.room.model.MovieEntity
+import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
 import io.github.pengdst.jetpacksubmission.data.local.source.MovieLocalSource
 import io.github.pengdst.jetpacksubmission.data.remote.mapper.MovieDtoMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.remote.mapper.TvDtoMapper.toEntity
@@ -126,5 +129,27 @@ class MovieRepositoryTest {
         Truth.assertThat(tvShow.data.genre).isEqualTo(dummyTvShow.genre)
         Truth.assertThat(tvShow.data.releaseDate).isEqualTo(dummyTvShow.releaseDate)
         Truth.assertThat(tvShow.data.imagePosterUrl).isEqualTo(dummyTvShow.imagePosterUrl)
+    }
+
+    @Test
+    fun getBookmarkedMovies() = runBlockingTest {
+        @Suppress("UNCHECKED_CAST")
+        val pagingSource = Mockito.mock(PagingSource::class.java) as PagingSource<Int, MovieEntity>
+        Mockito.`when`(local.getBookmarkedMovies()).thenReturn(pagingSource)
+
+        val movieList = repository.getBookmarkedMovies().getOrAwaitValue()
+
+        Truth.assertThat(movieList).isNotNull()
+    }
+
+    @Test
+    fun getBookmarkedTvShows() = runBlockingTest {
+        @Suppress("UNCHECKED_CAST")
+        val pagingSource = Mockito.mock(PagingSource::class.java) as PagingSource<Int, TvShowEntity>
+        Mockito.`when`(local.getBookmarkedTvShows()).thenReturn(pagingSource)
+
+        val movieList = repository.getBookmarkedTvShows().getOrAwaitValue()
+
+        Truth.assertThat(movieList).isNotNull()
     }
 }
