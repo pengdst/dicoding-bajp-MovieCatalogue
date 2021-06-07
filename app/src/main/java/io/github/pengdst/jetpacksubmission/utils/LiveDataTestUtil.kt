@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
 /**
  * Created on 5/18/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -15,7 +16,14 @@ import java.util.concurrent.TimeUnit
  */
 
 object LiveDataTestUtil {
-    fun <T> getValue(liveData: LiveData<T>): T {
+
+    fun <T> LiveData<T>.getOrAwaitValue(
+        time: Long = 2,
+        timeUnit: TimeUnit = TimeUnit.SECONDS,
+        waitUntilFinished: Boolean = false,
+        afterObserve: () -> Unit = {}
+    ): T {
+
         val data = arrayOfNulls<Any>(1)
         val latch = CountDownLatch(1)
 
@@ -23,18 +31,19 @@ object LiveDataTestUtil {
             override fun onChanged(o: T) {
                 data[0] = o
                 latch.countDown()
-                liveData.removeObserver(this)
+                if (!waitUntilFinished) this@getOrAwaitValue.removeObserver(this)
             }
         }
+        this.observeForever(observer)
 
-        liveData.observeForever(observer)
+        afterObserve.invoke()
 
-        try {
-            latch.await(2, TimeUnit.SECONDS)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
+        if (!latch.await(time, timeUnit)) {
+            this.removeObserver(observer)
+            throw TimeoutException("LiveData value was never set.")
         }
 
+        @Suppress("UNCHECKED_CAST")
         return data[0] as T
 
     }
