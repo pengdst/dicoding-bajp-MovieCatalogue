@@ -16,7 +16,7 @@ import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
  * - LinkedIn https://linkedin.com/in/pengdst
  */
 
-@Database(entities = [TvShowEntity::class, MovieEntity::class], version = 1)
+@Database(entities = [TvShowEntity::class, MovieEntity::class], version = 2)
 abstract class MovieRoomDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
 
