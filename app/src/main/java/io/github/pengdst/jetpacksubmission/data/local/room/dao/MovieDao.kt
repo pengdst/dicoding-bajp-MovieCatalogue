@@ -16,7 +16,7 @@ import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
 @Dao
 interface MovieDao {
 
-    @Query("SELECT * FROM movies")
+    @Query("SELECT * FROM movies ORDER BY createdAt")
     fun getMovies(): LiveData<List<MovieEntity>>
 
     @Query("SELECT * FROM movies where isFavourite = 1")
@@ -35,7 +35,7 @@ interface MovieDao {
     @Update
     suspend fun updateMovie(movie: MovieEntity)
 
-    @Query("SELECT * FROM tv_shows")
+    @Query("SELECT * FROM tv_shows ORDER BY createdAt")
     fun getTvShows(): LiveData<List<TvShowEntity>>
 
     @Query("SELECT * FROM tv_shows where isFavourite = 1")
