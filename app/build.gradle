@@ -113,6 +113,9 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:${versions.androidCoreTest}"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockitoKotlin}"
 
+    // Truth
+    testImplementation "com.google.truth:truth:${versions.truth}"
+
     testImplementation "junit:junit:${versions.junit}"
     androidTestImplementation "junit:junit:${versions.junit}"
     androidTestImplementation "androidx.test.ext:junit:${versions.junitExt}"
