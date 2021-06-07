@@ -66,6 +66,8 @@ class MovieRepositoryTest {
         Truth.assertThat(movieList).isInstanceOf(Resource.Success::class.java)
 
         movieList as Resource.Success
+        Truth.assertThat(movieList.data).isNotNull()
+        Truth.assertThat(movieList.data).isNotEmpty()
         Truth.assertThat(movieList.data).hasSize(dummyMovieList.size)
         Truth.assertThat(movieList.data).isEqualTo(dummyMovieList)
     }
@@ -85,6 +87,7 @@ class MovieRepositoryTest {
         Truth.assertThat(movie).isInstanceOf(Resource.Success::class.java)
 
         movie as Resource.Success
+        Truth.assertThat(movie.data).isNotNull()
         Truth.assertThat(movie.data.id).isEqualTo(dummyMovie.id)
         Truth.assertThat(movie.data.title).isEqualTo(dummyMovie.title)
         Truth.assertThat(movie.data.storyLine).isEqualTo(dummyMovie.storyLine)
@@ -104,6 +107,8 @@ class MovieRepositoryTest {
         Truth.assertThat(tvList).isInstanceOf(Resource.Success::class.java)
 
         tvList as Resource.Success
+        Truth.assertThat(tvList.data).isNotNull()
+        Truth.assertThat(tvList.data).isNotEmpty()
         Truth.assertThat(tvList.data).hasSize(dummyTvList.size)
         Truth.assertThat(tvList.data).isEqualTo(dummyTvList)
     }
@@ -123,6 +128,7 @@ class MovieRepositoryTest {
         Truth.assertThat(tvShow).isInstanceOf(Resource.Success::class.java)
 
         tvShow as Resource.Success
+        Truth.assertThat(tvShow.data).isNotNull()
         Truth.assertThat(tvShow.data.id).isEqualTo(dummyTvShow.id)
         Truth.assertThat(tvShow.data.title).isEqualTo(dummyTvShow.title)
         Truth.assertThat(tvShow.data.storyLine).isEqualTo(dummyTvShow.storyLine)
