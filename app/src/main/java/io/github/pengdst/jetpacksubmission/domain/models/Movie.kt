@@ -3,6 +3,7 @@ package io.github.pengdst.jetpacksubmission.domain.models
 import androidx.recyclerview.widget.DiffUtil
 import io.github.pengdst.jetpacksubmission.data.constants.ApiConst.IMAGE_URL_ORIGINAL
 import io.github.pengdst.jetpacksubmission.data.constants.ApiConst.IMAGE_URL_W500
+import java.util.*
 
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -20,7 +21,9 @@ data class Movie(
     val language: String,
     val genre: String,
     val storyLine: String,
-    val isFavourite: Boolean = false
+    val isFavourite: Boolean = false,
+    var createdAt: Long = Date().time,
+    var updatedAt: Long = Date().time
 ) {
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<Movie>() {

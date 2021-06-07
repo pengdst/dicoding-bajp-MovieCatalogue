@@ -1,5 +1,6 @@
 package io.github.pengdst.jetpacksubmission.data.local.mapper
 
+import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toEntity
 import io.github.pengdst.jetpacksubmission.data.local.room.model.TvShowEntity
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
 
@@ -21,7 +22,9 @@ object TvShowEntityMapper {
         language = language,
         genre = genre,
         storyLine = storyLine,
-        isFavourite = isFavourite
+        isFavourite = isFavourite,
+        createdAt = createdAt,
+        updatedAt = updatedAt
     )
 
     fun TvShow.toEntity() = TvShowEntity(
@@ -35,6 +38,8 @@ object TvShowEntityMapper {
         storyLine = storyLine,
     ).apply {
         isFavourite = this@toEntity.isFavourite
+        createdAt = this@toEntity.createdAt
+        updatedAt = this@toEntity.updatedAt
     }
 
     fun List<TvShowEntity>.toDomain() = map { it.toDomain() }

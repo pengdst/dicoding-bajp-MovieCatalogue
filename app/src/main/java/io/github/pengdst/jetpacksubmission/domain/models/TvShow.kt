@@ -2,6 +2,7 @@ package io.github.pengdst.jetpacksubmission.domain.models
 
 import androidx.recyclerview.widget.DiffUtil
 import io.github.pengdst.jetpacksubmission.data.constants.ApiConst
+import java.util.*
 
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -19,7 +20,9 @@ data class TvShow(
     val language: String,
     val genre: String,
     val storyLine: String,
-    val isFavourite: Boolean = false
+    val isFavourite: Boolean = false,
+    var createdAt: Long = Date().time,
+    var updatedAt: Long = Date().time
 ) {
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<TvShow>() {

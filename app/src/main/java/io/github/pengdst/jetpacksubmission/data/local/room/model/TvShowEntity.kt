@@ -2,6 +2,7 @@ package io.github.pengdst.jetpacksubmission.data.local.room.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
 
 /**
  * Created on 5/11/21 by Pengkuh Dwi Septiandi (@pengdst)
@@ -22,6 +23,8 @@ data class TvShowEntity(
     var language: String,
     var genre: String,
     var storyLine: String,
+    var updatedAt: Long = Date().time
 ){
     var isFavourite: Boolean = false
+    var createdAt: Long = Date().time
 }
