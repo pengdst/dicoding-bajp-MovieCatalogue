@@ -2,6 +2,7 @@ package io.github.pengdst.jetpacksubmission.ui.favorite
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import androidx.paging.PagingData
 import com.google.common.truth.Truth
 import io.github.pengdst.jetpacksubmission.domain.models.Movie
 import io.github.pengdst.jetpacksubmission.domain.models.TvShow
@@ -35,11 +36,11 @@ class FavoriteViewModelTest {
     @Mock private lateinit var getBookmarkedMovieUsecase: GetBookmarkedMoviesUsecase
     @Mock private lateinit var getBookmarkedTvShowsUsecase: GetBookmarkedTvShowsUsecase
 
-    @Mock private lateinit var movieListObserver: Observer<List<Movie>>
-    @Mock private lateinit var tvListObserver: Observer<List<TvShow>>
+    @Mock private lateinit var movieListObserver: Observer<PagingData<Movie>>
+    @Mock private lateinit var tvListObserver: Observer<PagingData<TvShow>>
 
-    private val dummyMovieList = DataStore.movies
-    private val dummyTvShowList = DataStore.tvShowList
+    private val dummyMovieList = PagingData.from(DataStore.movies)
+    private val dummyTvShowList = PagingData.from(DataStore.tvShowList)
 
     @Before
     fun setUp() {
@@ -54,8 +55,6 @@ class FavoriteViewModelTest {
         Mockito.verify(getBookmarkedMovieUsecase).run(GetBookmarkedMoviesUsecase.Companion)
 
         Truth.assertThat(movies).isNotNull()
-        Truth.assertThat(movies).isNotEmpty()
-        Truth.assertThat(movies).hasSize(dummyMovieList.size)
         Truth.assertThat(movies).isEqualTo(dummyMovieList)
 
         viewModel.getMovies().observeForever(movieListObserver)
@@ -70,8 +69,6 @@ class FavoriteViewModelTest {
         Mockito.verify(getBookmarkedTvShowsUsecase).run(GetBookmarkedTvShowsUsecase.Companion)
 
         Truth.assertThat(tvShow).isNotNull()
-        Truth.assertThat(tvShow).isNotEmpty()
-        Truth.assertThat(tvShow).hasSize(dummyTvShowList.size)
         Truth.assertThat(tvShow).isEqualTo(dummyTvShowList)
 
         viewModel.getTvShowList().observeForever(tvListObserver)
