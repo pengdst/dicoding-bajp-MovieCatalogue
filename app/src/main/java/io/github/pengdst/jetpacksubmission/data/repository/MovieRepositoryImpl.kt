@@ -3,6 +3,10 @@ package io.github.pengdst.jetpacksubmission.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asFlow
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.liveData
+import androidx.paging.map
 import io.github.pengdst.jetpacksubmission.data.local.mapper.MovieEntityMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.local.mapper.TvShowEntityMapper.toDomain
 import io.github.pengdst.jetpacksubmission.data.local.room.model.MovieEntity
@@ -38,6 +42,12 @@ class MovieRepositoryImpl @Inject constructor(
     private val remote: MovieRemoteSource,
     private val local: MovieLocalSource
 ) : SafeRemoteSource(), MovieRepository {
+
+    val pagingConfig = PagingConfig(
+        pageSize = 10,
+        enablePlaceholders = true,
+        initialLoadSize = 10,
+    )
 
     override fun getUpcomingMovies(): LiveData<Resource<List<Movie>>> {
         return object : NetworkBoundResource<List<Movie>, List<MovieEntity>, MovieResponse>() {
@@ -76,8 +86,13 @@ class MovieRepositoryImpl @Inject constructor(
         }.liveData
     }
 
-    override fun getBookmarkedMovies() = Transformations.map(local.getBookmarkedMovies()) { pagingData ->
-        pagingData.toDomain()
+    override fun getBookmarkedMovies() = Transformations.map(
+        Pager(
+            config = pagingConfig,
+            pagingSourceFactory = { local.getBookmarkedMovies() }
+        ).liveData
+    ) { pagingData ->
+        pagingData.map { it.toDomain() }
     }
 
     override fun getMovie(movieId: String): LiveData<Resource<Movie>> {
@@ -154,8 +169,13 @@ class MovieRepositoryImpl @Inject constructor(
         }.liveData
     }
 
-    override fun getBookmarkedTvShows() = Transformations.map(local.getBookmarkedTvShows()) { pagingData ->
-        pagingData.toDomain()
+    override fun getBookmarkedTvShows() = Transformations.map(
+        Pager(
+            config = pagingConfig,
+            pagingSourceFactory = { local.getBookmarkedTvShows() }
+        ).liveData
+    ) { pagingData ->
+        pagingData.map { it.toDomain() }
     }
 
     override fun getTv(tvId: String): LiveData<Resource<TvShow>> {
