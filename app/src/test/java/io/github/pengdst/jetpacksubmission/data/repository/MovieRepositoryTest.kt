@@ -54,8 +54,9 @@ class MovieRepositoryTest {
 
     @Test
     fun getUpcomingMovies() = runBlockingTest {
-        val dummyLocalMovies = LiveDataTestUtil.setValue(dummyMovieList.map { it.toEntity() })
-        Mockito.`when`(local.getAllMovies()).thenReturn(dummyLocalMovies)
+        val entityLiveData = LiveDataTestUtil.setValue(dummyMovieList.map { it.toEntity() })
+        Mockito.`when`(local.getAllMovies()).thenReturn(entityLiveData)
+
         val movieList = LiveDataTestUtil.getValue(repository.getUpcomingMovies())
 
         Assert.assertNotNull(movieList)
@@ -67,8 +68,8 @@ class MovieRepositoryTest {
     @Test
     fun getMovie() = runBlockingTest {
         val dummyResponseSuccess = Response.success(dummyMovieResponses[0])
-        val dummyLocalMovie = LiveDataTestUtil.setValue(dummyMovie.toEntity())
-        Mockito.`when`(local.getMovie(movieId)).thenReturn(dummyLocalMovie)
+        val entityLiveData = LiveDataTestUtil.setValue(dummyMovie.toEntity())
+        Mockito.`when`(local.getMovie(movieId)).thenReturn(entityLiveData)
         Mockito.`when`(remote.getMovie(movieId)).thenReturn(dummyResponseSuccess)
         val movie = LiveDataTestUtil.getValue(repository.getMovie(movieId))
         verify(remote).getMovie(movieId)
@@ -88,8 +89,8 @@ class MovieRepositoryTest {
 
     @Test
     fun getTvOnAir() = runBlockingTest {
-        val dummyLocalTvShows = LiveDataTestUtil.setValue(dummyTvList.map { it.toEntity() })
-        Mockito.`when`(local.getTvShows()).thenReturn(dummyLocalTvShows)
+        val entityLiveData = LiveDataTestUtil.setValue(dummyTvList.map { it.toEntity() })
+        Mockito.`when`(local.getTvShows()).thenReturn(entityLiveData)
 
         val tvList = LiveDataTestUtil.getValue(repository.getTvOnAir())
 
@@ -102,8 +103,8 @@ class MovieRepositoryTest {
     @Test
     fun getTv() = runBlockingTest {
         val dummyResponseSuccess = Response.success(dummyTvListResponses[0])
-        val dummyLocalTvShow = LiveDataTestUtil.setValue(dummyTvShow.toEntity())
-        Mockito.`when`(local.getTv(tvId)).thenReturn(dummyLocalTvShow)
+        val entityLiveData = LiveDataTestUtil.setValue(dummyTvShow.toEntity())
+        Mockito.`when`(local.getTv(tvId)).thenReturn(entityLiveData)
         Mockito.`when`(remote.getTv(tvId)).thenReturn(dummyResponseSuccess)
         val tvShow = LiveDataTestUtil.getValue(repository.getTv(tvId))
         verify(remote).getTv(tvId)
