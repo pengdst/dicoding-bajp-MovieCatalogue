@@ -60,9 +60,6 @@ class HomeViewModelTest : TestCase() {
         val movies = viewModel.getMovies().value
         Mockito.verify(getUpcomingMoviesUsecase).run(GetUpcomingMoviesUsecase.Companion)
 
-        viewModel.getMovies().observeForever(movieListObserver)
-        Mockito.verify(movieListObserver).onChanged(resource)
-
         Truth.assertThat(movies).isNotNull()
         Truth.assertThat(movies).isInstanceOf(Resource.Success::class.java)
         Truth.assertThat(movies).isEqualTo(resource)
@@ -70,6 +67,9 @@ class HomeViewModelTest : TestCase() {
         movies as Resource.Success
         Truth.assertThat(movies.data.size).isEqualTo(dummyMovieList.size)
         Truth.assertThat(movies.data).isEqualTo(dummyMovieList)
+
+        viewModel.getMovies().observeForever(movieListObserver)
+        Mockito.verify(movieListObserver).onChanged(resource)
     }
 
     @Test
@@ -80,8 +80,6 @@ class HomeViewModelTest : TestCase() {
         val tvShow = viewModel.getTvShowList().value
         Mockito.verify(getTvOnAirUsecase).run(GetTvOnAirUsecase.Companion)
 
-        viewModel.getTvShowList().observeForever(tvListObserver)
-        Mockito.verify(tvListObserver).onChanged(resource)
         Truth.assertThat(tvShow).isNotNull()
         Truth.assertThat(tvShow).isInstanceOf(Resource.Success::class.java)
         Truth.assertThat(tvShow).isEqualTo(resource)
@@ -90,5 +88,7 @@ class HomeViewModelTest : TestCase() {
         Truth.assertThat(tvShow.data.size).isEqualTo(dummyTvShowList.size)
         Truth.assertThat(tvShow.data).isEqualTo(dummyTvShowList)
 
+        viewModel.getTvShowList().observeForever(tvListObserver)
+        Mockito.verify(tvListObserver).onChanged(resource)
     }
 }
