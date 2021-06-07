@@ -65,6 +65,8 @@ class HomeViewModelTest : TestCase() {
         Truth.assertThat(movies).isEqualTo(resource)
 
         movies as Resource.Success
+        Truth.assertThat(movies.data).isNotNull()
+        Truth.assertThat(movies.data).isNotEmpty()
         Truth.assertThat(movies.data.size).isEqualTo(dummyMovieList.size)
         Truth.assertThat(movies.data).isEqualTo(dummyMovieList)
 
@@ -85,6 +87,8 @@ class HomeViewModelTest : TestCase() {
         Truth.assertThat(tvShow).isEqualTo(resource)
 
         tvShow as Resource.Success
+        Truth.assertThat(tvShow.data).isNotNull()
+        Truth.assertThat(tvShow.data).isNotEmpty()
         Truth.assertThat(tvShow.data.size).isEqualTo(dummyTvShowList.size)
         Truth.assertThat(tvShow.data).isEqualTo(dummyTvShowList)
 

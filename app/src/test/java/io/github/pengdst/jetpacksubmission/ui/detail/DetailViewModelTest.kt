@@ -81,6 +81,7 @@ class DetailViewModelTest {
         Truth.assertThat(movie).isInstanceOf(Resource.Success::class.java)
 
         movie as Resource.Success
+        Truth.assertThat(movie.data).isNotNull()
         Truth.assertThat(movie.data.id).isEqualTo(dummyMovie.id)
         Truth.assertThat(movie.data.title).isEqualTo(dummyMovie.title)
         Truth.assertThat(movie.data.storyLine).isEqualTo(dummyMovie.storyLine)
@@ -106,6 +107,7 @@ class DetailViewModelTest {
         Truth.assertThat(tvShow).isInstanceOf(Resource.Success::class.java)
 
         tvShow as Resource.Success
+        Truth.assertThat(tvShow.data).isNotNull()
         Truth.assertThat(tvShow.data.id).isEqualTo(dummyTvShow.id)
         Truth.assertThat(tvShow.data.title).isEqualTo(dummyTvShow.title)
         Truth.assertThat(tvShow.data.storyLine).isEqualTo(dummyTvShow.storyLine)
