@@ -1,6 +1,12 @@
 Dicoding - Belajar Android Jetpack Pro
 
-Library used:
+## Screenshots
+<img src="./screenshots/tab-movie.jpg" width="40%" height="auto">
+<img src="./screenshots/tab-tvshow.jpg" width="40%" height="auto">
+<img src="./screenshots/movie-detail.jpg" width="40%" height="auto">
+<img src="./screenshots/favourites.jpg" width="40%" height="auto">
+
+## Library used:
 - Material Android
 - Constraint Layout
 - Viewbinding Delegate
